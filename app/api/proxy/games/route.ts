@@ -1,8 +1,8 @@
-import { NextResponse , NextRequest} from "next/server";
+import { NextResponse } from "next/server";
 import { iocContainer } from "@ioc/index";
 import {IGamesGateway} from '@infra/gateways/contracts/games'
 
-export async function GET(req: Request, ) {
+export async function GET() {
   const gamesProxy = iocContainer.get<IGamesGateway>('GamesProxy');
   const games = await gamesProxy.getGames();
  

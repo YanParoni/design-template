@@ -1,7 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { IGamesGateway } from '@infra/gateways/contracts/games';
 import type { IHttpClient } from '@infra/http/contracts';
-import { Game } from '@entities/games';
 
 import IQueryParams from '@infra/gateways/contracts/query';
 
