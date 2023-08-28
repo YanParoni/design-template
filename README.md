@@ -1,5 +1,5 @@
 # My Project
-
+npm run build && npm start to launch 
 ## Preface
 
 I usually work on private repositories and don't get the chance to commit much of the stuff I'm learning. But here I am, unveiling this project to showcase some of the architectural models and techniques I've gained from my experience in the industry. This project is like a sandbox for me to try out a blend of technologies that are not entirely smooth in terms of integration—yet. 
