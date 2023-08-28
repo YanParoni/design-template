@@ -1,7 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { IStoreInfoGateway } from '@infra/gateways/contracts/store';
 import type { IHttpClient } from '@infra/http/contracts';
-import { Game } from '@entities/games';
 import IQueryParams from '@infra/gateways/contracts/query';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL

@@ -2,7 +2,6 @@ import { inject, injectable } from 'inversify';
 import IQueryParams from './contracts/query';
 import type { IHttpClient } from '../http/contracts';
 import { IStoreInfoGateway } from './contracts/store';
-import { Game } from '@entities/games';
 
 const BASE_URL = 'api/proxy'
 

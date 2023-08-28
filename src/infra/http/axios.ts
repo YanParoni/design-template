@@ -18,6 +18,7 @@ export class AxiosHttpClient implements IHttpClient {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
   private async thrower (callback: Function) {
     try {
       return (await callback())

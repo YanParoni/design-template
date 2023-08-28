@@ -7,9 +7,11 @@ import Card from '@ui/components/card';
 export interface IListProps {
 }
 
-export function List(props: IListProps) {
-  const { data, isSuccess } = useGetGames()
+export function List() {
+  const { data } = useGetGames()
+
   return (
+    <Suspense fallback={<div>loading</div>}>
     <div style={{ display: 'flex', flexDirection: 'row', gap: '5rem', justifyContent: 'center', flexWrap: 'wrap', width: '80%' }}>
 
           {data && data.games.map((item: any) => (
@@ -17,5 +19,6 @@ export function List(props: IListProps) {
           ))}
 
         </div>
+        </Suspense>
   );
 }
