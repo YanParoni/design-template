@@ -1,34 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# My Project
 
-## Getting Started
+## Preface
 
-First, run the development server:
+I usually work on private repositories and don't get the chance to commit much of the stuff I'm learning. But here I am, unveiling this project to showcase some of the architectural models and techniques I've gained from my experience in the industry. This project is like a sandbox for me to try out a blend of technologies that are not entirely smooth in terms of integration—yet. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Design Philosophy
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+When it comes to design, this project is a melting pot. I've drawn inspiration from several architectural styles, such as Ports and Adapters, DDD (Domain-Driven Design), and so on. The idea is to keep the UI as pure as possible while the entities take care of the heavy lifting. 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Here's what I'm working with:
 
-## Learn More
+- **Inversify**: For dependency inversion.
+- **React Query**: To handle client-side caching.
+- **Next.js**: Mostly because  React, but also for its handy API proxy feature.
 
-To learn more about Next.js, take a look at the following resources:
+## API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+I'm using the RAWG Games API for now. Currently, the project architecture is quite general and is gradually going to be spiced up with new features. Right now, there's just a simple "Get All Games" listing.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Why Proxy with Next.js?
 
-## Deploy on Vercel
+Good question! The RAWG Games API key is exposed on the client side, which is a no-go. So I've set up a Next.js API proxy to keep that safely tucked away.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Code Example: Simple UI Structuring with Hooks
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Here's a snippet showing how I'm using hooks like `useMutableEntity` to simplify UI structuring.
+
+```jsx
+<Input
+  type="text"
+  value={name}
+  onChange={(e) => {
+    user.changeName(e.target.value);
+    mutate();
+  }}
+/>
+
+In this example, path is an entity that has its tests separate from the UI layer.
+
+## Testing
+The project structure is highly testable. I've made sure that everything from entities to UI components can be tested in isolation.
+What's Next?
+
+I'll be incrementally adding more features.
+
