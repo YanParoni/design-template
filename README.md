@@ -6,7 +6,7 @@ I usually work on private repositories and don't get the chance to commit much o
 
 ## Design Philosophy
 
-When it comes to design, this project is a melting pot. I've drawn inspiration from several architectural styles, such as Ports and Adapters, DDD (Domain-Driven Design), and so on. The idea is to keep the UI as pure as possible while the entities take care of the heavy lifting. 
+When it comes to design I've drawn inspiration from several architectural styles, such as Ports and Adapters, DDD (Domain-Driven Design), and so on. The idea is to keep the UI as pure as possible while the entities take care of the heavy lifting. 
 
 ## Tech Stack
 
