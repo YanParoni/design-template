@@ -7,7 +7,6 @@ export const useGetGames = (params?: IQueryParams) => {
     const gamesGateway = useDeps<IGamesGateway>('GamesGateway');
 
     const { data, isLoading, isError, error, refetch, isSuccess } = useQuery({
-        suspense: true,
         staleTime: 1000 * 60 * 5, 
         cacheTime: 1000 * 60 * 30,
         refetchOnWindowFocus: false,
