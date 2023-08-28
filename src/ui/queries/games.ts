@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useDeps } from "../hooks/use-deps";
-import IQueryParams from "../../infra/gateways/contracts/query";
 import { IGamesGateway } from "../../infra/gateways/contracts/games";
 
-export const useGetGames = (params?: IQueryParams) => {
+export const useGetGames = () => {
     const gamesGateway = useDeps<IGamesGateway>('GamesGateway');
 
     const { data, isLoading, isError, error, refetch, isSuccess } = useQuery({
@@ -12,9 +11,9 @@ export const useGetGames = (params?: IQueryParams) => {
         refetchOnWindowFocus: false,
         refetchOnMount: false,
         refetchOnReconnect: false,
-        queryKey: ['getGames', params],
+        queryKey: ['getGames'],
         queryFn: async () => {
-            return await gamesGateway.getGames(params);
+            return await gamesGateway.getGames();
         },
     });
     return {

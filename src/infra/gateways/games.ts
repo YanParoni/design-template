@@ -15,15 +15,9 @@ export class GamesGateway implements IGamesGateway {
   ) {
   }
 
-  async getGames(params?: IQueryParams): Promise<any> {
+  async getGames(): Promise<any> {
     const url = `${BASE_URL}/games`;
     const requestParams: IRequestParams = { url };
-  
-    if (params) {
-      requestParams.params = params;
-      const response = await this.httpClient.get(requestParams);
-      return response;
-    }
     const response = await this.httpClient.get(requestParams);
     return response
   }

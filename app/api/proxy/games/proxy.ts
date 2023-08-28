@@ -13,14 +13,7 @@ export class GamesProxy implements IGamesGateway {
   ) {
   }
 
-  async getGames(params?: IQueryParams): Promise<any> {
-    if (params) {
-      const url = `${BASE_URL}/games/${params}`;
-      const response = this.httpClient.get({
-        url
-      })
-      return response;
-    }
+  async getGames(): Promise<any> {
     const url = `${BASE_URL}/games`;
     const response = await this.httpClient.get({
       url
