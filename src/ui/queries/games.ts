@@ -7,10 +7,10 @@ export const useGetGames = () => {
 
     const { data, isLoading, isError, error, refetch, isSuccess } = useQuery({
         staleTime: 1000 * 60 * 5, 
-        cacheTime: 1000 * 60 * 30,
         refetchOnWindowFocus: false,
         refetchOnMount: false,
         refetchOnReconnect: false,
+        suspense:true,
         queryKey: ['getGames'],
         queryFn: async () => {
             return await gamesGateway.getGames();

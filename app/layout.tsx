@@ -1,7 +1,7 @@
-'use client'
-import Providers from "client";
+import 'reflect-metadata';
+import '../global.css'
+import Providers from "@app/provider";
 import React from "react";
-
 
 export default function RootLayout({
   children,
@@ -9,14 +9,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body style={{backgroundColor: '#121212'}}>
-        <div >
-      <Providers>
-        {children}
+    <html lang="en" >
+      <body className='bg-bkg' >
+        <Providers>
+          {children}
         </Providers>
-        </div>
-        </body>
+      </body>
     </html>
+
   );
 }

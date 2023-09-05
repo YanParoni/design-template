@@ -23,21 +23,19 @@ export class AxiosHttpClient implements IHttpClient {
     try {
       return (await callback())
     } catch (error: any) {
-      throw new Error(error.response?.data.message)
+      console.log(error.response?.data.message)
     }
   }
 
   async get ({ url, headers, params }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
     const fullParams = { ...params, key: RAWG_KEY };
-   const result = await this.thrower(async () => {
-      return await axios.request({
+    const result = await this.axiosInstance.request({
         url,
         headers,
         params: fullParams,
         method: 'get'
       })
-    })
-    return result.data;
+    return result;
   }
 
   async post ({ url, data, headers, params }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {

@@ -1,4 +1,5 @@
 import { inject, injectable } from 'inversify';
+import TYPES from '@infra/http/types';
 import IQueryParams from './contracts/query';
 import type { IHttpClient } from '../http/contracts';
 import { IGamesGateway } from './contracts/games';
@@ -8,17 +9,17 @@ interface IRequestParams {
   url: string;
   params?: IQueryParams;
 }
+
 @injectable()
 export class GamesGateway implements IGamesGateway {
   constructor(
-    @inject('HttpClient') private readonly httpClient: IHttpClient,
-  ) {
+    @inject(TYPES.FetchHttpClient) private readonly fetchHttpClient: IHttpClient,  ) {
   }
 
   async getGames(): Promise<any> {
     const url = `${BASE_URL}/games`;
     const requestParams: IRequestParams = { url };
-    const response = await this.httpClient.get(requestParams);
+    const response = await this.fetchHttpClient.get(requestParams);
     return response
   }
-}
+}   

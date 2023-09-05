@@ -1,14 +1,16 @@
-'use client'
-import { List } from "./list";
+import { List } from "../src/ui/components/organisms/list";
 import { Suspense } from "react";
-import Loading from "./loading";
+import ThemeButton from "@ui/components/molecules/theme-button";
 
 export default function Home() {
   return (
-    <div>
-      <Suspense fallback={<Loading/>}>
-        <List />
+    <main className="bg-bkg">
+      <Suspense fallback={<div style={{color: 'white'}}>loading...</div>}>
+      <ThemeButton />
       </Suspense>
-    </div>
+      <Suspense fallback={<div style={{color: 'white'}}>loading...</div>}>
+        <List/>
+        </Suspense>
+  </main>
   );
 }
