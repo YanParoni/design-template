@@ -1,6 +1,5 @@
 'use client'
 import * as React from 'react';
-import {motion} from 'framer-motion'
 import { useGameStore } from 'client/store';
 interface IAppProps {
     params:any
@@ -9,7 +8,7 @@ interface IAppProps {
 
 const GameProfile = ({params, searchParams}:IAppProps) => {
   const {getGameById }= useGameStore()
-  const game = getGameById(+params.profile)
+  console.log(params, searchParams, getGameById)
   return <div   style={{color: 'white'}}>oi</div>;
 };
 
