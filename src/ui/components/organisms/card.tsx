@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import ScoreDisplay from '../molecules/score';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Label } from '../atoms/label';
 import { Subheading } from '../atoms/subheading';
 import CardInfoContainer from '../atoms/card-info-container';
 import ShadowEffect from '../atoms/shadow-effect';
+import Metacritic from '../../../../public/metacritic.svg'
 interface ICard {
   id: string;
   imageUrl: string;
   percentage: number;
   name: string;
+  height: string;
+  width: string;
+  dir: string
 }
 
-const Card = ({ id, imageUrl, percentage, name }: ICard) => {
-  const [isHovered, setIsHovered] = useState(false);
-
+const Card = ({ id, imageUrl, percentage, name ,width, height,dir}: ICard) => {
   return (
-    <div className="basis-1/5">
+    <div className={`flex flex-${dir} gap-2`}>
       <Link
         href={{
           pathname: `profile/${id}`,
@@ -25,9 +26,13 @@ const Card = ({ id, imageUrl, percentage, name }: ICard) => {
         }}
       >
         <div 
-          className="relative w-56 h-72 flex flex-col justify-center overflow-hidden rounded cursor-pointer bg-gray-900 hover:scale-105 transition-transform duration-200 ease-in-out shadow-md hover:shadow-lg"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          className={`relative ${width} ${height} flex
+           flex-row  justify-center 
+           overflow-hidden rounded 
+           cursor-pointer bg-gray-900 
+           hover:scale-105 transition-transform
+           duration-200 ease-in-out
+           shadow-md hover:shadow-lg`}
         >
           <Image
             src={imageUrl}
@@ -36,12 +41,18 @@ const Card = ({ id, imageUrl, percentage, name }: ICard) => {
             objectFit='cover'
           />
           <ShadowEffect/>
-          {isHovered && <ScoreDisplay percentage={percentage} />}
         </div>
       </Link>
-      <CardInfoContainer>
-        <Label text='Title'/>
+      <CardInfoContainer width={width} dir={dir}>
+  
         <Subheading text={name} />
+        <div className='flex shrink-0 justify-between'>
+        <Image src={Metacritic} alt="Card"
+            width={30}
+            height={30}
+             />
+        <ScoreDisplay percentage={percentage} />
+        </div>
       </CardInfoContainer>
     </div>
   );

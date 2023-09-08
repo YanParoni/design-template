@@ -2,14 +2,14 @@
 import * as React from 'react';
 import { useGameStore } from 'client/store';
 interface IAppProps {
-    params:any
     searchParams: any
 }
 
-const GameProfile = ({params, searchParams}:IAppProps) => {
-  const {getGameById }= useGameStore()
-  console.log(params, searchParams, getGameById)
-  return <div   style={{color: 'white'}}>oi</div>;
+const GameProfile = ({ searchParams }:IAppProps) => {
+  const {getGameById,games }= useGameStore()
+  const game = getGameById(+searchParams.id)
+  console.log(game, searchParams,games)
+  return <div  className='text-primary-color'>{JSON.stringify(game)}</div>;
 };
 
 export default GameProfile;

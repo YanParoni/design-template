@@ -4,14 +4,20 @@
 
 @layer base {
     :root {
-    --color-bkg: 210deg 40% 98%;       
-    --primary-color: 0deg 0% 3%; 
-    --secondary-color: 0deg 0% 16%;  
+    --color-bkg: 237 237 237;      
+    --color-bkg-chat: 250 250 250; 
+    --color-shadow: 51 65 85;
+    --primary-color: 0deg 0% 0%; 
+    --secondary-color: 0deg 0% 16%;
+    --transparent: 76 175 80 0;  
     }
     :root[data-theme="dark"] {
-        --color-bkg: 0deg 0% 0%;  
-        --primary-color: 0deg 0% 78%;  
+        --color-bkg: 0 0 0;  
+        --color-bkg-chat: 38 38 38; 
+        --primary-color: 0deg 0% 100%;
+        --color-shadow: 204 190 170;  
         --secondary-color: 0deg 0% 38%;
+        --transparent: 76 175 80 0;
         }
       }
    

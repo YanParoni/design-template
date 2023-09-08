@@ -23,4 +23,20 @@ export class GamesProxy implements IGamesGateway {
     const response = await this.fetchHttpClient.get(requestParams);
     return response.results
   }
+
+  async searchGame(search: string): Promise<any>{
+    const url = `${BASE_URL}/games`;
+    const requestParams = {
+      url,
+      params: {
+        key: process.env.RAWG_API_KEY!,
+        search,
+        search_precise: true,
+        search_exact: true,
+        page_size: 1,
+      }
+    };
+    const response = await this.fetchHttpClient.get(requestParams);
+    return response.results
+  }
 }

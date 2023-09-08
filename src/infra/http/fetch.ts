@@ -31,15 +31,14 @@ export class FetchHttpClient implements IHttpClient {
   
 
   async post({ url, data, headers}: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
-    return await this.thrower(() =>
-      this.fetchRequest(url, { body: JSON.stringify(data), headers, method: 'POST' })
+    return await this.thrower(() =>this.fetchRequest(url, { body: JSON.stringify(data), headers, method: 'POST' })
     );
   }
 
   async put({ url, data, headers }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
     return await this.thrower(() =>
       this.fetchRequest(url, { body: JSON.stringify(data), headers, method: 'PUT' })
-    );
+      );
   }
 
   async patch({ url, data, headers }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {

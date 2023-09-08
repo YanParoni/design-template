@@ -4,7 +4,7 @@ import IQueryParams from './contracts/query';
 import type { IHttpClient } from '../http/contracts';
 import { IGamesGateway } from './contracts/games';
 
-const BASE_URL = 'api/proxy'
+const BASE_URL  = 'api/proxy'
 interface IRequestParams {
   url: string;
   params?: IQueryParams;
@@ -22,4 +22,20 @@ export class GamesGateway implements IGamesGateway {
     const response = await this.fetchHttpClient.get(requestParams);
     return response
   }
-}   
+
+  async searchGame(game: string): Promise<any>{
+    const url = `${BASE_URL}/games/search`;
+    const params = {
+      search:game
+    }
+    const requestParams: IRequestParams = { url, params };
+    try {
+      const response = await this.fetchHttpClient.get(requestParams);
+      console.log(response)
+      return response
+    } catch (error) {
+      console.error(error);
+  }
+
+  }   
+}

@@ -1,24 +1,32 @@
 import { create } from 'zustand';
-import { Game } from '@entities/games';
 
 type GameState = {
-  games: any,
-  setGames: (games: any) => void,
-  addGame: (game: Game) => void,
-  getGameById: (id: number) => any | undefined  
-}
+  games: any[],
+  setGames: (games: any[]) => void,
+  getGameById: (id: number) => any| undefined,
+  addGame: (game: any) => void;
+};
 
 const useGameStore = create<GameState>((set, get) => {
-  const getGameById = (id: number): any | undefined  => { 
+  const getGameById = (id: number): any | undefined => {
     const { games } = get();
-    return games?.games?.filter((game: any) => game.id === id);
+    return games.find((game) => game.id === id);
+  };
+
+  const addGame = (game: any): void => {
+    set((state) => {
+        //@ts-ignore
+      const updatedGames = [...state?.games, game];
+      return { games: updatedGames };
+    });
   };
 
   return {
     games: [],
-    setGames: (games) => set({ games }),
-    addGame: (game) => set((state) => ({ games: [...state.games, game] })),
+    // @ts-ignore
+    setGames: (games) => set(games),
     getGameById,
+    addGame,
   };
 });
 

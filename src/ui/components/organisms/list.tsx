@@ -19,12 +19,19 @@ export function List() {
   const {  data, isLoading, error } = useQuery({
     queryKey: ["getGames"],
     queryFn: () => getGames(),
+    refetchOnWindowFocus:false,
+    refetchOnMount:false
   });
   if (isLoading) return "Loading...";
   if (error) return "An error has occurred: " + error.message;
 
   return (
-    <motion.div initial={{opacity: 0, y: 30}} animate={{opacity: 1, y:0}} exit={{opacity: 0, y: 30}} id='oi' className='flex flex-wrap justify-center content-center flex-col gap-10 md:flex-row p-20'>
+    <motion.div 
+    className='flex flex-wrap w-100 justify-center content-center flex-col gap-7 gap-y-12 md:flex-row p-20'
+    initial={{opacity: 0, y: 30}} 
+    animate={{opacity: 1, y:0}} 
+    exit={{opacity: 0, y: 30}}
+    >
        {data  && data.games.map((item: any)=> { 
         return(
           <Card
@@ -33,6 +40,9 @@ export function List() {
           imageUrl={item.background_image}
           name={item.name}
           percentage={item.metacritic}
+          width='w-56'
+          height='h-64'
+          dir='col'
           {...item}
           />
       )})} 

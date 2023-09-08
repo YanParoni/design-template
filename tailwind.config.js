@@ -10,9 +10,12 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        'bkg': "hsl(var(--color-bkg) / <alpha-value>)",
+        'bkg': "rgb(var(--color-bkg) / <alpha-value>)",
+        'bkg-chat': "rgb(var(--color-bkg-chat) / <alpha-value>)",
         'primary-color': "hsl(var(--primary-color) / <alpha-value>)",
         'secondary-color': "hsl(var(--secondary-color) / <alpha-value>)",
+        'shadow': "rgb(var(--color-shadow) / <alpha-value>)",
+        'transparent': 'rgba(var(--transparent)) / <alpha-value>'
       }
     },
   },

@@ -6,6 +6,6 @@ export interface ILabelProps {
 
 export function Label ({text}:ILabelProps ) {
   return (
-    <label className="text-secondary-color cursor-pointer font-normal">{text}</label>
+    <label className="text-secondary-color text-lg cursor-pointer font-bold">{text}</label>
   );
 }
