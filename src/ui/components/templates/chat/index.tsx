@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { useChatGpt } from "@ui/queries/chat";
 import { ChatTitle } from "@ui/components/atoms/chat/chat-title";
 import { ChatLayout } from "@ui/components/atoms/chat/chat-layout";
@@ -10,22 +10,24 @@ import ChatMessages from "@ui/components/organisms/chat/chat-messages";
 import { AnimatePresence, motion } from "framer-motion";
 import useDeviceDetect from "@ui/hooks/use-device-detect";
 
+const defaultMessage = {type: 'system', message: "Hello, how can I help you today?"}
 export default function Chat() {
     const [inputValue, setInputValue] = useState('');
-    const [chatLog, setChatLog] = useState<any>([]);
+    const [chatLog, setChatLog] = useState<any>([defaultMessage]);
     const [ open, setOpen] = useState(true);
     const { mutateAsync, isPending } = useChatGpt();
     const {isMobile} = useDeviceDetect()
-    const handleSubmit = (event) => {
+
+    const handleSubmit = (event:FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setChatLog((prevChatLog) => [...prevChatLog, { type: 'user', message: inputValue }]);
+        setChatLog((prevChatLog:any) => [...prevChatLog, { type: 'user', message: inputValue }]);
         sendMessage(inputValue);
         setInputValue('');
     }
 
     const sendMessage = async (message: string) => {
         const res = await mutateAsync(message)
-        setChatLog((prevChatLog) => [...prevChatLog, { type: 'system', message: res.games.choices[0].message.content }]);
+        setChatLog((prevChatLog: any) => [...prevChatLog, { type: 'system', message: res.games.choices[0].message.content }]);
     }
 
     const chatContentVariants = {
