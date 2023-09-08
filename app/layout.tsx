@@ -3,6 +3,32 @@ import '../global.css'
 import Providers from "@app/provider";
 import React from "react";
 import Chat from '@ui/components/templates/chat';
+import type { Metadata } from 'next'
+import thumb from '../public/thumbnail.png'
+ 
+export const metadata = {
+  openGraph: {
+    title: 'Portfolio project',
+    description: 'Yan Paroni portfolio project ',
+    url: 'https://design-template-ivory.vercel.app/',
+    images: [
+      {
+        url: require('../public/thumbnail.png'), 
+        width: 800,
+        height: 600,
+      },
+      {
+        url: require('../public/thumbnail.png'), 
+        width: 1800,
+        height: 1600,
+        alt: 'Portfolio project',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+};
+
 export default function RootLayout({
   children,
 }: {
