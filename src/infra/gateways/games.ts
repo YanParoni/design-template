@@ -31,11 +31,9 @@ export class GamesGateway implements IGamesGateway {
     const requestParams: IRequestParams = { url, params };
     try {
       const response = await this.fetchHttpClient.get(requestParams);
-      console.log(response)
       return response
     } catch (error) {
       console.error(error);
-  }
-
+    }
   }   
 }
