@@ -3,8 +3,6 @@ import '../global.css'
 import Providers from "@app/provider";
 import React from "react";
 import Chat from '@ui/components/templates/chat';
-import type { Metadata } from 'next'
-import thumb from '../public/thumbnail.png'
  
 export const metadata = {
   openGraph: {
