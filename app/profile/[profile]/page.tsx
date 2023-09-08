@@ -6,7 +6,7 @@ interface IAppProps {
 }
 
 const GameProfile = ({ searchParams }:IAppProps) => {
-  const {getGameById,games }= useGameStore()
+  const {getGameById}= useGameStore()
   const game = getGameById(+searchParams.id)
   return <div  className='text-primary-color'>{JSON.stringify(game)}</div>;
 };
