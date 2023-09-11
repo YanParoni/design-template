@@ -4,13 +4,8 @@ import { ArrowPaginationContainer } from '../atoms/pagination/arrow-pagination-c
 import { BtnNumberPagination } from '../atoms/pagination/button-number-pagination';
 import { useSearchParams } from 'next/navigation'
 import { usePaginationStore } from 'client/store';
-interface PaginationProps {
-  hasNextPage?: boolean
-  hasPrevPage?: boolean
-}
 
-
-const Pagination = ({ hasNextPage, hasPrevPage }: PaginationProps) => {
+const Pagination = () => {
   const searchParams = useSearchParams()
 
   const page = searchParams.get('page') ?? '1'

@@ -15,7 +15,7 @@ export default function Chat() {
     const [inputValue, setInputValue] = useState('');
     const [chatLog, setChatLog] = useState<any>([defaultMessage]);
     const [ open, setOpen] = useState(true);
-    const { mutateAsync, isPending } = useChatGpt();
+    const { mutateAsync } = useChatGpt();
     const {isMobile} = useDeviceDetect()
     const [isLoading, setIsLoading] = useState<boolean>(false)
 

@@ -6,10 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import Card from '@ui/components/organisms/card/card';
 import { motion } from 'framer-motion';
 import { useGameStore, usePaginationStore } from 'client/store';
-import Pagination from './pagination';
 import { useSearchParams } from 'next/navigation';
-import CardLoadingSkeleton from './card/card-loading-skeleton';
 import SkeletonContainer from '@app/loading';
+
 async function getGames(currentPage: string) {
   const gateway = iocContainer.get<IGamesGateway>('GamesGateway');
    const response = await gateway.getGames(currentPage)
