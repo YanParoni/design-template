@@ -1,5 +1,5 @@
 
 export interface IGamesGateway {
-  getGames: () => Promise<any>
+  getGames: (page: string) => Promise<any>
   searchGame: (game: string) => Promise<any>
 }

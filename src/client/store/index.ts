@@ -3,7 +3,7 @@ import { create } from 'zustand';
 type GameState = {
   games: any[],
   setGames: (games: any[]) => void,
-  getGameById: (id: number) => any| undefined,
+  getGameById: (id: number) => any | undefined,
   addGame: (game: any) => void;
 };
 
@@ -15,7 +15,7 @@ const useGameStore = create<GameState>((set, get) => {
 
   const addGame = (game: any): void => {
     set((state) => {
-        //@ts-ignore
+      //@ts-ignore
       const updatedGames = [...state?.games, game];
       return { games: updatedGames };
     });
@@ -30,4 +30,14 @@ const useGameStore = create<GameState>((set, get) => {
   };
 });
 
-export { useGameStore };
+type PaginationState = {
+  currentPage: number
+  setCurrentPage: (page: number) => void;
+}
+
+const usePaginationStore = create<PaginationState>((set) => ({
+    currentPage:2,
+    setCurrentPage:(page)=>set(() => ({ currentPage: page }))
+}))
+
+export { useGameStore, usePaginationStore };

@@ -17,9 +17,11 @@ export default function Chat() {
     const [ open, setOpen] = useState(true);
     const { mutateAsync, isPending } = useChatGpt();
     const {isMobile} = useDeviceDetect()
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const handleSubmit = (event:FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setIsLoading(true)
         setChatLog((prevChatLog:any) => [...prevChatLog, { type: 'user', message: inputValue }]);
         sendMessage(inputValue);
         setInputValue('');
@@ -63,10 +65,10 @@ export default function Chat() {
               },
         }
       };
+
     return (
       <AnimatePresence>
         <motion.div 
-        key='modal1'
         className="fixed bottom-0 shadow-shadow shadow z-30 h-screen right-1 "
         variants={chatContentVariants}
         animate={isMobile? (open ?"openMobile":"closedMobile") : (open ? "open":"closed") }
@@ -81,7 +83,7 @@ export default function Chat() {
                 </ChatHeader>
                 {open && 
                 <ChatContent>
-                    <ChatMessages chatLog={chatLog} isPending={isPending}/>
+                    <ChatMessages chatLog={chatLog} isPending={isLoading} setIsLoading={setIsLoading}/>
                     <form onSubmit={handleSubmit} className="flex absolute bottom-0 p-2 mt-3 ">
                         <div className="flex rounded-lg border border-gray-700 bg-primary-color shadow-shadow shadow-lg">
                             <input type="text" className="flex-grow px-2  bg-transparent text-bkg focus:outline-none" placeholder="Type your message..." value={inputValue} onChange={(e) => setInputValue(e.target.value)} />

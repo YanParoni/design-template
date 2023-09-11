@@ -4,9 +4,11 @@ import GameNameSpan from "@ui/components/molecules/chat/game-name";
 interface IAppProps {
     chatLog: any[]
     isPending: boolean
+    setIsLoading: (params:any) => void
 }
 
-const ChatMessages = ({ chatLog, isPending }: IAppProps) => {
+const ChatMessages = ({ chatLog, isPending, setIsLoading }: IAppProps) => {
+    
     function findGameNames(message:string) {
         const gameNameRegex = /<([^<>]+)>/g;
         const gameNames = message.match(gameNameRegex);
@@ -34,10 +36,11 @@ const ChatMessages = ({ chatLog, isPending }: IAppProps) => {
         });
 
         formattedMessage.push(message.slice(startIndex));
-
+        setIsLoading(false)
         return formattedMessage;
     }
 
+    
     return <div  className="flex flex-col space-y-4 rounded  pt-12 pb-16   ">
         {
             chatLog.map((message, index) => (

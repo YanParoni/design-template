@@ -1,5 +1,5 @@
 export default interface IQueryParams {
-    page?: number;
+    page?: string;
     page_size?: number;
     search?: string;
     search_precise?: boolean;

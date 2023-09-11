@@ -1,6 +1,6 @@
 import { useState, createRef, useEffect } from "react";
 import { useSearchGames } from "@ui/queries/games";
-import Card from "@ui/components/organisms/card";
+import Card from "@ui/components/organisms/card/card";
 import { useClickOutside } from '@ui/hooks/use-click-outside';
 import { useGameStore } from 'client/store';
 

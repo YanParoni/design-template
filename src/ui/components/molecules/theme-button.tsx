@@ -13,31 +13,46 @@ const ThemeButton = () => {
   if (!mounted) {
     return null;
   }
+  const themeVariants = {
+    dark: {
+      x: 17,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        type: "tween",
+      },
+    },
+    light: {
+     x: -17,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        type: "tween",
+      },
+    },
+  };
+
 
   return (
-    <motion.button
+    <motion.div
       aria-label='Toggle Dark Mode'
-      type='button'
-      className='flex items-center justify-center rounded-lg p-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-700'
+      className='flex items-center justify-around m-4 rounded-full bg-gray-400 transition-colors w-10 hover:bg-zinc-100 dark:hover:bg-zinc-700'
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-      whileTap={{ scale: 0.9 }}
     >
-      {/* Renderizar ambos os ícones, mas controlar a visibilidade com opacity */}
-      <motion.div
-        initial={{ opacity: resolvedTheme === 'dark' ? 1 : 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: resolvedTheme === 'dark' ? 0 : 1 }}
+      <motion.div className='bg-bkg rounded-full shadow-md '
+      variants={themeVariants}
+      animate={resolvedTheme === 'dark'? 'dark':'light'}
       >
-        <SunIcon className='h-5 w-5 text-orange-300' />
+        {resolvedTheme ==='light' ?
+          <motion.div initial={{opacity:0, y:-20}} animate={{opacity:1, y:0 , transition: {duration:1}}} exit={{opacity:0, y:20, transition: {duration:1}}}>
+            <SunIcon  className='h-5 w-5 fill-amber-300 stroke-amber-300' />
+          </motion.div>
+          : <motion.div initial={{opacity:0, y:-20}} animate={{opacity:1, y:0, transition: {duration:1}}} exit={{opacity:0, y:20, transition: {duration:1}}}>
+            <MoonIcon className='h-5 w-5 fill-purple-500 stroke-purple-500' />
+          </motion.div>
+        }
       </motion.div>
-      <motion.div
-        initial={{ opacity: resolvedTheme === 'dark' ? 0 : 1 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: resolvedTheme === 'dark' ? 1 : 0 }}
-      >
-        <MoonIcon className='h-5 w-5 text-slate-800' />
-      </motion.div>
-    </motion.button>
+    </motion.div>
   );
 };
 

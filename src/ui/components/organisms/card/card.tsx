@@ -1,11 +1,11 @@
 import React  from 'react';
-import ScoreDisplay from '../molecules/score';
+import ScoreDisplay from '../../molecules/score';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Subheading } from '../atoms/subheading';
-import CardInfoContainer from '../atoms/card-info-container';
-import ShadowEffect from '../atoms/shadow-effect';
-import Metacritic from '../../../../public/metacritic.svg'
+import { Subheading } from '../../atoms/subheading';
+import CardInfoContainer from '../../atoms/card-info-container';
+import ShadowEffect from '../../atoms/shadow-effect';
+import Metacritic from '../../../../../public/metacritic.svg'
 interface ICard {
   id: string;
   imageUrl: string;

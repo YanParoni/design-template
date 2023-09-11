@@ -16,9 +16,9 @@ export class GamesGateway implements IGamesGateway {
     @inject(TYPES.FetchHttpClient) private readonly fetchHttpClient: IHttpClient,  ) {
   }
 
-  async getGames(): Promise<any> {
-    const url = `${BASE_URL}/games`;
-    const requestParams: IRequestParams = { url };
+  async getGames(page: string): Promise<any> {
+    const baseUrl = `${BASE_URL}/games`;
+    const requestParams: IRequestParams = { url:baseUrl, params:{page}};
     const response = await this.fetchHttpClient.get(requestParams);
     return response
   }

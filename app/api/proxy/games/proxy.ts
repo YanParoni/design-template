@@ -12,16 +12,20 @@ export class GamesProxy implements IGamesGateway {
     @inject(TYPES.FetchHttpClient) private readonly fetchHttpClient: IHttpClient  ) {
   }
 
-  async getGames(): Promise<any> {
+  async getGames(page: string): Promise<any> {
     const url = `${BASE_URL}/games`;
     const requestParams = {
       url,
       params: {
-        key: process.env.RAWG_API_KEY!
+        key: process.env.RAWG_API_KEY!,
+        page
       }
     };
     const response = await this.fetchHttpClient.get(requestParams);
-    return response.results
+    const nextPageUrl = new URL(response.next);
+    const pageValue = nextPageUrl.searchParams.get('page');
+  
+    return [response.results, pageValue];
   }
 
   async searchGame(search: string): Promise<any>{
