@@ -25,8 +25,9 @@ export function BtnNumberPagination ({title}: BtnNumberPaginationProps) {
     className={selected}
     whileHover="hover"
     variants={hoverVariants}
+    onClick={()=>router.push(`/?page=${Number(title)}`)}
     >
-      <button onClick={()=>router.push(`/?page=${Number(title)}`)} className='text-primary-color text-center text-md font-medium'>
+      <button  className='text-primary-color text-center text-md font-medium'>
       {title}
       </button>
     </motion.div>
