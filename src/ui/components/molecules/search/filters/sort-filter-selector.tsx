@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 enum Options {
@@ -15,7 +15,7 @@ const SortFilterSelector = ({selectedOption, select}:ISortFilterSelector) => {
 
 
     return (
-        <div className='flex flex-col w-full relative'>
+        <div className='relative flex flex-col w-full'>
             <div className='flex flex-row w-full'>
                 <div
                     className={`w-1/2 text-base text-center font-bold px-4 py-2 cursor-pointer ${selectedOption === Options.Sort ? 'text-purple-500' : ''

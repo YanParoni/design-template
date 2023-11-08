@@ -30,20 +30,4 @@ export class GamesGateway implements IGamesGateway {
       console.error(error);
     }
   }   
-
-  async platforms(): Promise<any>{
-    const url = `${BASE}/`;
-    const requestParams = {
-      url:'https://api.rawg.io/api/platforms/lists/parents',
-      params: {
-        key: '75c5b1db3d7e4caf99462d5df662c9c5', 
-    }
-    };
-    try {
-      const response = await this.fetchHttpClient.get(requestParams);
-      return response
-    } catch (error) {
-      console.error(error);
-    }
-  }
 }

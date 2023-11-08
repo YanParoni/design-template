@@ -33,6 +33,7 @@ export const useSearchGames = (name?:string) => {
                 search:search
             };
             if(name){obj.search = name}
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const filteredObj = Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== null && v !== undefined && v !== ''));
             return getGames(filteredObj)
         },
