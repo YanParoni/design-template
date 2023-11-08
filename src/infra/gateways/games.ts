@@ -9,7 +9,6 @@ interface IRequestParams {
   params?: IQueryParams;
   data?: IQueryParams
 }
-const BASE = process.env.NEXT_PUBLIC_API_URL
 
 const BASE_URL = process.env.NEXT_PUBLIC_REACT_APP === 'production' ?'https://design-template-ivory.vercel.app':'http://localhost:3000'
 @injectable()
@@ -17,8 +16,6 @@ export class GamesGateway implements IGamesGateway {
   constructor(
     @inject(TYPES.FetchHttpClient) private readonly fetchHttpClient: IHttpClient,  ) {
   }
-
-
 
   async searchGame(args: IQueryParams): Promise<any>{
     const url = `${BASE_URL}/api/proxy/games/search`;
