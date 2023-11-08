@@ -1,18 +1,19 @@
 import * as React from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import {  useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
 interface BtnNumberPaginationProps {
-    title: number;
+  title: number;
+  isActive: boolean;
 }
 
-export function BtnNumberPagination ({title}: BtnNumberPaginationProps) {
-  const searchParams = useSearchParams()
+export function BtnNumberPagination({ title, isActive }: BtnNumberPaginationProps) {
   const router = useRouter()
 
-  const page = searchParams.get('page') ?? '1'
-  const selected = +page === title ? 'rounded-full  bg-purple-500 w-8 h-8 cursor-pointer text-center': 'rounded-full hover:bg-gray-400 w-8 h-8 cursor-pointer text-center '
-  
+  const selected = isActive
+    ? 'rounded-full bg-purple-500 w-8 h-8 cursor-pointer text-center'
+    : 'rounded-full hover:bg-gray-400 w-8 h-8 cursor-pointer text-center '
+
   const hoverVariants = {
     hover: {
       y: -5, 
@@ -22,13 +23,13 @@ export function BtnNumberPagination ({title}: BtnNumberPaginationProps) {
 
   return (
     <motion.div 
-    className={selected}
-    whileHover="hover"
-    variants={hoverVariants}
-    onClick={()=>router.push(`/?page=${Number(title)}`)}
+      className={selected}
+      whileHover="hover"
+      variants={hoverVariants}
+      onClick={() => router.push(`/?page=${Number(title)}`)}
     >
-      <button  className='text-primary-color text-center text-md font-medium'>
-      {title}
+      <button className='font-medium text-center text-primary-color text-md'>
+        {title}
       </button>
     </motion.div>
   );

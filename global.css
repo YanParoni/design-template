@@ -19,5 +19,43 @@
         --secondary-color: 0deg 0% 38%;
         --transparent: 76 175 80 0;
         }
+       
+        input[type="range"] {
+          @apply bg-transparent
+
+        }
+        input[type="range"]::-webkit-slider-thumb {
+          @apply rounded-full;
+          @apply w-4;
+          @apply h-4;
+          @apply appearance-none;
+          @apply bg-primary-color;
+        }
+        input[type="range"]::-moz-slider-thumb {
+          @apply rounded-full;
+          @apply w-4;
+          @apply h-4;
+          @apply appearance-none;
+          @apply bg-primary-color;
+        }
+        input[type="range"]::-o-slider-thumb {
+          @apply rounded-full;
+          @apply w-4;
+          @apply h-4;
+          @apply appearance-none;
+          @apply bg-primary-color;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+          @apply w-0;
+          @apply h-0;
+          @apply appearance-none;
+          
+        }
+        input[type="checkbox"] {
+          @apply rounded-full;
+          @apply appearance-none;
+          @apply w-4;
+          @apply h-4
+        }
       }
    

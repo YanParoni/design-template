@@ -1,11 +1,29 @@
+import { motion } from "framer-motion";
+import React from "react";
+
 const TypingAnimation = () => {
-    return (
-      <div className="flex items-center space-x-2">
-        <div className="w-4 h-4 rounded-full bg-gradient-to-r from-gray-400 to-gray-600 animate-pulse"></div>
-        <div className="w-4 h-4 rounded-full bg-gradient-to-r from-gray-400 to-gray-600 animate-pulse delay-75"></div>
-        <div className="w-4 h-4 rounded-full bg-gradient-to-r from-gray-400 to-gray-600 animate-pulse delay-150"></div>
-      </div>
-    );
-  };
-  
-  export default TypingAnimation;
+  const delay = 0.3; 
+  return (
+    <div className="flex items-center space-x-2">
+      {[...Array(3)].map((_, index) => (
+        <motion.div
+          key={index}
+          className="w-3 h-3 rounded-full bg-gradient-to-r from-gray-400 to-gray-600"
+          initial={{ y: 0, opacity: 1 }}
+          animate={{
+            y: [0, 10, 0],
+            opacity: [1, 0.5, 1],
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: index * delay, 
+          }}
+        ></motion.div>
+      ))}
+    </div>
+  );
+};
+
+export default TypingAnimation;

@@ -3,35 +3,41 @@ import * as React from 'react';
 import { ArrowPaginationContainer } from '../atoms/pagination/arrow-pagination-container';
 import { BtnNumberPagination } from '../atoms/pagination/button-number-pagination';
 import { useSearchParams } from 'next/navigation'
-import { usePaginationStore } from 'client/store';
+import { useGameStore } from 'client/store';
 
 const Pagination = () => {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
+  const count = useGameStore().games.count;
+  const page = parseInt(searchParams.get('page') || '1', 10); 
+  const itemsPerPage = 20; 
 
-  const page = searchParams.get('page') ?? '1'
-  const nextPage = usePaginationStore.getState().currentPage
+  const totalPages = Math.ceil(count / itemsPerPage);
 
-  const pagesToRender = [];
+  let startPage = 1;
+  let endPage = totalPages;
 
-  const start = +page;
-  let end = +page + 3;
-
-  if (nextPage === +page) {
-    end = nextPage;
+  if (page > 2) {
+    startPage = page - 1;
   }
 
-  for (let i = start; i < end; i++) {
-    if (i > 0) {
-      pagesToRender.push(i);
-    }
+  if (page < totalPages - 1) {
+    endPage = page + 1;
   }
+
+  const pagesToRender = Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
 
   return (
     <div className='flex flex-row justify-center pb-12'>
-      {pagesToRender &&
-        <ArrowPaginationContainer >
-          {pagesToRender.map((page) => {
-            return <BtnNumberPagination key={`page=${page}`} title={page} />
+      {totalPages > 1 && 
+        <ArrowPaginationContainer>
+          {pagesToRender.map((pageNumber) => {
+            return (
+              <BtnNumberPagination
+                key={`page=${pageNumber}`}
+                title={pageNumber}
+                isActive={pageNumber === page} 
+              />
+            );
           })}
         </ArrowPaginationContainer>
       }

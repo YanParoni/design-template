@@ -3,7 +3,7 @@ import TYPES from '@infra/http/types';
 import type { IHttpClient } from '../http/contracts';
 import { IChatGateway } from './contracts/chat';
 
-const BASE_URL = 'api/proxy'
+const BASE_URL = process.env.NEXT_PUBLIC_REACT_APP === 'production' ?'https://design-template-ivory.vercel.app/api/proxy':'http://localhost:3000/api/proxy'
 
 @injectable()
 export class ChatGateway implements IChatGateway {

@@ -35,7 +35,8 @@ const ThemeButton = () => {
 
   return (
     <motion.div
-      aria-label='Toggle Dark Mode'
+      role="switch"
+      aria-label='Toggle Theme Mode'
       className='flex items-center justify-around m-4 rounded-full bg-gray-400 transition-colors w-10 hover:bg-zinc-100 dark:hover:bg-zinc-700'
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
     >

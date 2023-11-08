@@ -6,6 +6,6 @@ export interface ISubheadingProps {
 
 export function Subheading({ text }: ISubheadingProps) {
     return (
-        <h3 className="text-primary-color cursor-pointer text-md font-semibold">{text}</h3>
+        <h3 className="text-primary-color cursor-pointer text-lg font-semibold">{text}</h3>
     );
 }

@@ -4,36 +4,46 @@ import IQueryParams from './contracts/query';
 import type { IHttpClient } from '../http/contracts';
 import { IGamesGateway } from './contracts/games';
 
-const BASE_URL  = 'api/proxy'
 interface IRequestParams {
   url: string;
   params?: IQueryParams;
+  data?: IQueryParams
 }
+const BASE = process.env.NEXT_PUBLIC_API_URL
 
+const BASE_URL = process.env.NEXT_PUBLIC_REACT_APP === 'production' ?'https://design-template-ivory.vercel.app':'http://localhost:3000'
 @injectable()
 export class GamesGateway implements IGamesGateway {
   constructor(
     @inject(TYPES.FetchHttpClient) private readonly fetchHttpClient: IHttpClient,  ) {
   }
 
-  async getGames(page: string): Promise<any> {
-    const baseUrl = `${BASE_URL}/games`;
-    const requestParams: IRequestParams = { url:baseUrl, params:{page}};
-    const response = await this.fetchHttpClient.get(requestParams);
-    return response
-  }
 
-  async searchGame(game: string): Promise<any>{
-    const url = `${BASE_URL}/games/search`;
-    const params = {
-      search:game
+
+  async searchGame(args: IQueryParams): Promise<any>{
+    const url = `${BASE_URL}/api/proxy/games/search`;
+    const requestParams: IRequestParams = { url, data: args };
+    try {
+      const response = await this.fetchHttpClient.put(requestParams);
+      return response
+    } catch (error) {
+      console.error(error);
     }
-    const requestParams: IRequestParams = { url, params };
+  }   
+
+  async platforms(): Promise<any>{
+    const url = `${BASE}/`;
+    const requestParams = {
+      url:'https://api.rawg.io/api/platforms/lists/parents',
+      params: {
+        key: '75c5b1db3d7e4caf99462d5df662c9c5', 
+    }
+    };
     try {
       const response = await this.fetchHttpClient.get(requestParams);
       return response
     } catch (error) {
       console.error(error);
     }
-  }   
+  }
 }

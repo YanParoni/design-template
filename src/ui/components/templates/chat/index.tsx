@@ -14,7 +14,7 @@ const defaultMessage = {type: 'system', message: "Hello, how can I help you toda
 export default function Chat() {
     const [inputValue, setInputValue] = useState('');
     const [chatLog, setChatLog] = useState<any>([defaultMessage]);
-    const [ open, setOpen] = useState(true);
+    const [ open, setOpen] = useState(false);
     const { mutateAsync } = useChatGpt();
     const {isMobile} = useDeviceDetect()
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -37,7 +37,7 @@ export default function Chat() {
           height: 400,
           opacity: 1,
           transition: {
-            duration: 0.3,
+            duration: .4,
             type: "tween",
           },
         },
@@ -52,15 +52,15 @@ export default function Chat() {
         openMobile:{
             opacity:1,
             transition: {
-                duration: 0.3,
+                duration: .4,
                 type: "tween",
               },
         },
         closedMobile:{
             opacity:1,
-            width:40,
+            width:30,
             transition: {
-                duration: 0.3,
+                duration: .4,
                 type: "tween",
               },
         }
@@ -69,7 +69,7 @@ export default function Chat() {
     return (
       <AnimatePresence>
         <motion.div 
-        className="fixed bottom-0 shadow-shadow shadow z-30 h-screen right-1 "
+        className="fixed bottom-0 z-30 h-screen right-1 "
         variants={chatContentVariants}
         animate={isMobile? (open ?"openMobile":"closedMobile") : (open ? "open":"closed") }
         >
@@ -84,10 +84,10 @@ export default function Chat() {
                 {open && 
                 <ChatContent>
                     <ChatMessages chatLog={chatLog} isPending={isLoading} setIsLoading={setIsLoading}/>
-                    <form onSubmit={handleSubmit} className="flex absolute bottom-0 p-2 mt-3 ">
-                        <div className="flex rounded-lg border border-gray-700 bg-primary-color shadow-shadow shadow-lg">
-                            <input type="text" className="flex-grow px-2  bg-transparent text-bkg focus:outline-none" placeholder="Type your message..." value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-                            <button type="submit" className="bg-purple-500 rounded-lg px-2 py-2  text-white font-semibold focus:outline-none hover:bg-purple-600 transition-colors duration-300">🚀</button>
+                    <form onSubmit={handleSubmit} className="absolute bottom-0 flex p-2 mt-3 ">
+                        <div className="flex border border-gray-700 rounded-lg shadow-lg bg-primary-color shadow-shadow">
+                            <input type="text" className="flex-grow px-2 bg-transparent text-bkg focus:outline-none" placeholder="Type your message..." value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+                            <button type="submit" className="px-2 py-2 font-semibold text-white transition-colors duration-300 bg-purple-500 rounded-lg focus:outline-none hover:bg-purple-600">🚀</button>
                         </div>
                     </form>
                 </ChatContent>

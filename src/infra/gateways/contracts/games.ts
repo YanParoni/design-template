@@ -1,5 +1,5 @@
-
+import IQueryParams from "./query"
 export interface IGamesGateway {
-  getGames: (page: string) => Promise<any>
-  searchGame: (game: string) => Promise<any>
+  searchGame: (args:IQueryParams) => Promise<any>
+  platforms: ()=>Promise<any>
 }

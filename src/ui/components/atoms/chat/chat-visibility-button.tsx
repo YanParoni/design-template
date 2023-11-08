@@ -26,7 +26,7 @@ export function ChatVisibilityBtn({ open, setOpen }: IChatVisibilityBtn) {
     <div className='absolute top-[300px]  items-center justify-center md:top-[10px]  md:flex md:right-[10px]'>
       <motion.div 
       animate={controls} 
-      className="relative md:col-span-1 animate-bounce cursor-pointer bg-bkg-chat rounded-full  z-50  border-l-2 border-r-2 md:border-0 border-l-purple-500 border-[#515151]  "
+      className="relative md:col-span-1 animate-bounce cursor-pointer bg-bkg-chat rounded-full  z-50  border-2  md:border-0 border-purple-500  "
       onClick={() => setOpen(!open)}>
         {isMobile ?
           <>

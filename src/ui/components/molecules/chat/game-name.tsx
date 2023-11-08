@@ -1,43 +1,43 @@
 import { useState, createRef, useEffect } from "react";
-import { useSearchGames } from "@ui/queries/games";
+import { useSearchChatGames } from "@ui/queries/games";
 import Card from "@ui/components/organisms/card/card";
 import { useClickOutside } from '@ui/hooks/use-click-outside';
-import { useGameStore } from 'client/store';
-
+import filterGamesByLevenshtein from "utils";
 interface IName {
     name: string
 }
 
 const GameNameSpan = ({ name }: IName) => {
-    const { data, isLoading,isSuccess } = useSearchGames(name);
+    const { data, isSuccess } = useSearchChatGames({search:name, search_exact:true,search_precise:true,page_size:3});
     const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [game, setGame] = useState<any>(null)
     const dialogRef = createRef<HTMLDivElement>()
-    const { addGame } = useGameStore()
+
     useClickOutside(dialogRef, () => {
         setIsOpen(false)
     })
 
-   useEffect(() => {
-        if (isSuccess && data) {
-            addGame(data.games[0]);
+    useEffect(() => {
+        if ( isSuccess && data) {
+            const filtered = filterGamesByLevenshtein(data.results, name)
+            setGame(filtered);
         }
-    }, [isSuccess, data, addGame]);
+    }, [data]);
 
     return (
         <>
             <span
-                className="cursor-pointer font-bold underline color-primary-color  text-sm antialiased text-left "
+                className="text-sm antialiased font-bold text-left underline cursor-pointer color-primary-color "
                 onClick={() => {
                     setIsOpen(!isOpen)
-                    addGame(data.games)
                 }}
             >
                 {name.trim()}
             </span>
             <div className='absolute ' ref={dialogRef}>
                 {isOpen && (
-                    <div className="absolute w-56 z-60 h-44 bottom-24 right-12 mt-10 ml-2 p-2 bg-bkg border-2 border-purple-500  text-black shadow-md rounded-lg z-10">
-                        {isLoading ? <div>Loading...</div> : <Card id={data.games[0].id} dir='col' width="w-full" height="h-24  " imageUrl={data.games[0].background_image} name={data.games[0].name} percentage={data.games[0].metacritic} />
+                    <div className="absolute z-10 w-56 p-2 mt-10 ml-2 text-black border-2 border-purple-500 rounded-lg shadow-md z-60 bottom-24 right-12 bg-bkg">
+                        {!game ? <div>Loading...</div> : <Card id={game.id} dir='col' width="w-full" height="h-24  " imageUrl={game.background_image} name={game.name} percentage={game.metacritic} />
                         }
                     </div>
                 )}

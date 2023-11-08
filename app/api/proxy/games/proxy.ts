@@ -2,6 +2,7 @@ import { inject, injectable } from 'inversify';
 import TYPES from '@infra/http/types';
 import { IGamesGateway } from '@infra/gateways/contracts/games';
 import type { IHttpClient } from '@infra/http/contracts';
+import IQueryParams from '@infra/gateways/contracts/query';
 
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL
@@ -12,35 +13,20 @@ export class GamesProxy implements IGamesGateway {
     @inject(TYPES.FetchHttpClient) private readonly fetchHttpClient: IHttpClient  ) {
   }
 
-  async getGames(page: string): Promise<any> {
+  async searchGame(args: IQueryParams): Promise<any>{
     const url = `${BASE_URL}/games`;
     const requestParams = {
       url,
       params: {
         key: process.env.RAWG_API_KEY!,
-        page
+        ...args
       }
     };
     const response = await this.fetchHttpClient.get(requestParams);
-    const nextPageUrl = new URL(response.next);
-    const pageValue = nextPageUrl.searchParams.get('page');
-  
-    return [response.results, pageValue];
+    return response
   }
 
-  async searchGame(search: string): Promise<any>{
-    const url = `${BASE_URL}/games`;
-    const requestParams = {
-      url,
-      params: {
-        key: process.env.RAWG_API_KEY!,
-        search,
-        search_precise: true,
-        search_exact: true,
-        page_size: 1,
-      }
-    };
-    const response = await this.fetchHttpClient.get(requestParams);
-    return response.results
+  async platforms():Promise<any>{
+    return 'hello'
   }
 }

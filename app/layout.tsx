@@ -3,7 +3,7 @@ import '../global.css'
 import Providers from "@app/provider";
 import React from "react";
 import Chat from '@ui/components/templates/chat';
- 
+
 export default function RootLayout({
   children,
 }: {
@@ -11,7 +11,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" >
-      <body className='bg-bkg' >
+      <body className='bg-bkg'  >
         <Providers>
           {children}
         <Chat/>

@@ -1,12 +1,15 @@
-import { NextResponse,NextRequest } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { iocContainer } from "@ioc/index";
-import {IGamesGateway} from '@infra/gateways/contracts/games'
+import { IGamesGateway } from '@infra/gateways/contracts/games'
+import { GameResponse } from "client/store";
 
-export async function GET(req:NextRequest) {
-    const url = new URL(req.url)
-    const criteria = url.searchParams.get('search')
-    if(!criteria) return
+export async function PUT(req: NextRequest) {
+    const parsedReq = await req.json();
+    const games: GameResponse = { count: 0, results: [] }
+    if (!parsedReq) return;
     const gamesProxy = iocContainer.get<IGamesGateway>('GamesProxy');
-   const games = await gamesProxy.searchGame(criteria);
-    return NextResponse.json({games})    
+    const obj = await gamesProxy.searchGame(parsedReq);
+    games.count = obj.count;
+    games.results = obj.results;
+    return NextResponse.json({ games });
 }
