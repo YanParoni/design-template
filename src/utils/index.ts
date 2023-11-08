@@ -1,4 +1,4 @@
-function levenshteinDistance(a, b) {
+function levenshteinDistance(a:any, b:any) {
     const matrix = [];
 
     for (let i = 0; i <= b.length; i++) {
@@ -26,11 +26,11 @@ function levenshteinDistance(a, b) {
     return matrix[b.length][a.length];
 }
 
-function findClosestGame(data, criteria) {
+function findClosestGame(data:any, criteria:any) {
     let closestGame = null;
     let minDistance = Infinity;
 
-    data.forEach(game => {
+    data.forEach((game:any) => {
         const distance = levenshteinDistance(criteria.toLowerCase(), game.slug.toLowerCase());
         if (distance < minDistance) {
             minDistance = distance;
