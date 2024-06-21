@@ -2,23 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
+
 @layer base {
     :root {
-    --color-bkg: 237 237 237;      
-    --color-bkg-chat: 250 250 250; 
+    --color-bkg: 12 0 18;
+    --color-title: 255 255 255 ; 
+    --color-subtitle: 75 77 91;
+    --color-description: 260 27 41;  
+    --accent-font: 243 221 255;
+    --sub-info: 114 102 135;
+    --accent-theme:0 221 248;
+    --hover: 122 0 170;
+    --color-bkg-chat: 84 67 135 ; 
     --color-shadow: 51 65 85;
     --primary-color: 0deg 0% 0%; 
     --secondary-color: 0deg 0% 16%;
     --transparent: 76 175 80 0;  
     }
-    :root[data-theme="dark"] {
-        --color-bkg: 0 0 0;  
-        --color-bkg-chat: 38 38 38; 
-        --primary-color: 0deg 0% 100%;
-        --color-shadow: 204 190 170;  
-        --secondary-color: 0deg 0% 38%;
-        --transparent: 76 175 80 0;
-        }
+ 
        
         input[type="range"] {
           @apply bg-transparent
@@ -57,5 +60,5 @@
           @apply w-4;
           @apply h-4
         }
-      }
+}
    

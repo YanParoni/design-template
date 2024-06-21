@@ -8,7 +8,7 @@ import { useSearchGames } from "@ui/queries/games";
 export function List() {
   const {isLoading,data} = useSearchGames()
   if (isLoading) return <SkeletonContainer/>;
-  
+
   return (
     <div className='flex flex-col justify-center'>
     <motion.div 
@@ -17,7 +17,7 @@ export function List() {
     animate={{opacity: 1, y:0}} 
     exit={{opacity: 0, y: 30}}
     >
-       {data.results && data.results.map((item: any)=> { 
+       {data?.results && data?.results.map((item: any)=> { 
         return(
           <Card
           key={item.id}
@@ -25,8 +25,8 @@ export function List() {
           imageUrl={item.background_image}
           name={item.name}
           percentage={item.metacritic}
-          width='w-72'
-          height='h-60'
+          width='w-[156px]'
+          height='h-[60px]'
           dir='col'
           {...item}
           />

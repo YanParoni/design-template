@@ -40,19 +40,13 @@ const Card = ({ id, imageUrl, percentage, name, width, height, dir }: ICard) => 
             style={{objectFit: 'cover'}}
             src={imageUrl}
             alt={`${name}-thumb`}
-            sizes="((max-width: 600px) 300px, 700px)"
             fill={true}
             priority
           />
           <ShadowEffect />
         </div>
       </Link>
-      <CardInfoContainer width={width} dir='col'>
-        <Subheading text={name} />
-        <div className='flex justify-between shrink-0'>
-          <ScoreDisplay percentage={percentage} />
-        </div>
-      </CardInfoContainer>
+  
     </div>
   );
 };

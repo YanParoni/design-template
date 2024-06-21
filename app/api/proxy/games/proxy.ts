@@ -5,7 +5,9 @@ import type { IHttpClient } from '@infra/http/contracts';
 import IQueryParams from '@infra/gateways/contracts/query';
 
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL
+const BASE_URL = process.env.NEXT_PUBLIC_RAWG_API
+
+const KEY = process.env.NEXT_PUBLIC_RAWG_KEY
 
 @injectable()
 export class GamesProxy implements IGamesGateway {
@@ -18,7 +20,7 @@ export class GamesProxy implements IGamesGateway {
     const requestParams = {
       url,
       params: {
-        key: process.env.RAWG_API_KEY!,
+        key: KEY,
         ...args
       }
     };
@@ -27,3 +29,5 @@ export class GamesProxy implements IGamesGateway {
   }
  
 }
+
+

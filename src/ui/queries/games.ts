@@ -9,6 +9,7 @@ import { useGameStore } from "client/store";
 
 export async function getGames(params: IQueryParams) {
     const gateway = iocContainer.get<IGamesGateway>('GamesGateway');
+    console.log(params)
     const response = await gateway.searchGame(params)
     useGameStore.getState().setGames(response.games)
     return response.games

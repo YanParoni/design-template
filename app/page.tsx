@@ -7,7 +7,7 @@ import SearchInput from "@ui/components/organisms/search";
 
 export default function Home() {
   return (
-    <main className="bg-bkg">
+    <main>
         <ThemeButton />
         <SearchInput/>
       <Suspense fallback={<CardLoadingSkeleton />}>
