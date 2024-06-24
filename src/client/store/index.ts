@@ -1,16 +1,5 @@
 import { create } from 'zustand';
-
-export type GameResponse = {
-  count: number;
-  results: any[];
-};
-
-type GameState = {
-  games: GameResponse;
-  setGames: (games: GameResponse) => void;
-  getGameByName: (name: string) => any | undefined;
-  addGame: (game: any) => void;
-};
+import { FiltersState, PaginationState, GameState, GameResponse } from './types';
 
 const useGameStore = create<GameState>((set, get) => {
   const initialState: GameResponse = {
@@ -41,78 +30,58 @@ const useGameStore = create<GameState>((set, get) => {
   };
 });
 
-type PaginationState = {
-  currentPage: number
-  setCurrentPage: (page: number) => void;
-}
-
 const usePaginationStore = create<PaginationState>((set) => ({
-    currentPage:2,
-    setCurrentPage:(page)=>set(() => ({ currentPage: page }))
-}))
+  currentPage: 1,
+  pageSize: 40,
+  setCurrentPage: (page) => set(() => ({ currentPage: page })),
+  setPageSize: (size) => set(() => ({ pageSize: size })),
+}));
 
-type FiltersState = {
-  genres: string[];
-  platforms: string[];
-  search:string
-  rating: {
-    min: string;
-    max: string;
-  };
-  addGenre: (genre: string) => void;
-  addPlatform: (platform: string) => void;
-  removePlatform: (platform: string) => void;
-  addRating: (min: string, max: string) => void;
-  resetFilters: () => void;
-  setSearch: (search: string) => void;
-
-};
 
 const useFilterStore = create<FiltersState>((set) => ({
   genres: [],
   platforms: [],
-  search:'',
-  rating: { min: '0', max: '100' },
+  stores: [],
+  search: '',
   addGenre: (genre: string) => {
     set((state) => ({
       genres: state.genres.includes(genre) ? state.genres : [...state.genres, genre],
-      platforms: state.platforms,
-      rating: state.rating,
-      search: state.search
     }));
   },
- addPlatform: (platform: string) => {
+  setGenres: (genres: string[]) => {
+    set({ genres });
+  },
+  addPlatform: (platform: string) => {
     set((state) => ({
-      genres: state.genres,
       platforms: state.platforms.includes(platform) ? state.platforms : [...state.platforms, platform],
-      rating: state.rating,
-      search: state.search
     }));
   },
- removePlatform: (platform: string) => {
+  setPlatforms: (platforms: string[]) => {
+    set({ platforms });
+  },
+  removePlatform: (platform: string) => {
     set((state) => ({
-      genres: state.genres,
-      platforms: state.platforms.filter(item => item !== platform),
-      rating: state.rating,
-      search: state.search
+      platforms: state.platforms.filter((item) => item !== platform),
     }));
   },
-  addRating: (min: string, max: string) => {
+  addStore: (store: string) => {
     set((state) => ({
-      genres: state.genres,
-      platforms: state.platforms,
-      rating: {
-        min: min,
-        max: max,
-      },
-      search: state.search
+      stores: state.stores.includes(store) ? state.stores : [...state.stores, store],
+    }));
+  },
+  setStores: (stores: string[]) => {
+    set({ stores });
+  },
+  removeStore: (store: string) => {
+    set((state) => ({
+      stores: state.stores.filter((item) => item !== store),
     }));
   },
   resetFilters: () => {
     set({
       genres: [],
       platforms: [],
-      rating: { min: '0', max: '100' },
+      stores: [],
     });
   },
   setSearch: (search: string) => {
@@ -120,4 +89,6 @@ const useFilterStore = create<FiltersState>((set) => ({
   },
 }));
 
-export { useGameStore, usePaginationStore,useFilterStore };
+
+
+export { useGameStore, usePaginationStore, useFilterStore };

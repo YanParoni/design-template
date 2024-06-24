@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { iocContainer } from "@ioc/index";
 import { IGamesGateway } from '@infra/gateways/contracts/games'
-import { GameResponse } from "client/store";
+import { GameResponse } from "client/store/types";
 
 export async function PUT(req: NextRequest) {
     const parsedReq = await req.json();

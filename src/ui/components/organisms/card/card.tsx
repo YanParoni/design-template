@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Subheading } from '../../atoms/subheading';
 import CardInfoContainer from '../../atoms/card-info-container';
 import ShadowEffect from '../../atoms/shadow-effect';
+
 interface ICard {
   id: string;
   imageUrl: string;
@@ -12,13 +13,14 @@ interface ICard {
   name: string;
   height: string;
   width: string;
-  dir: string
+  dir: string;
 }
-const BASE_URL = process.env.NEXT_PUBLIC_REACT_APP === 'production' ? 'https://design-template-ivory.vercel.app' : 'http://localhost:3000'
+
+const BASE_URL = process.env.NEXT_PUBLIC_REACT_APP === 'production' ? 'https://design-template-ivory.vercel.app' : 'http://localhost:3000';
 
 const Card = ({ id, imageUrl, percentage, name, width, height, dir }: ICard) => {
   return (
-    <div className={`flex flex-${dir} cursor-pointer gap-2  bg-bkg-chat/70  rounded-lg  backdrop-blur-sm  shadow-md hover:shadow-lg   hover:scale-105 transition-transform duration-200 ease-in-out `}>
+    <div className={`flex flex-${dir} cursor-pointer gap-2 rounded-[2px] border-2 border-[transparent] hover:border-[#dd00da] `}>
       <Link
         as={{
           pathname: `${BASE_URL}/profile/${id}`,
@@ -29,24 +31,17 @@ const Card = ({ id, imageUrl, percentage, name, width, height, dir }: ICard) => 
           query: { name },
         }}
       >
-        <div
-          className={`relative ${width} ${height} flex
-           flex-row  justify-center 
-           overflow-hidden 
-           rounded-t-lg
-          `}
-        >
-          <Image
-            style={{objectFit: 'cover'}}
+        <div className={`relative ${width} ${height} rounded-[2px] flex flex-row justify-center overflow-hidden `}>
+        <Image
             src={imageUrl}
             alt={`${name}-thumb`}
-            fill={true}
-            priority
-          />
-          <ShadowEffect />
+            layout="fill"
+            objectFit="cover"
+            quality={100}
+            className=""
+          />          <ShadowEffect />
         </div>
       </Link>
-  
     </div>
   );
 };

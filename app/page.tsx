@@ -1,19 +1,14 @@
-import { List } from "../src/ui/components/organisms/list";
-import { Suspense } from "react";
-import ThemeButton from "@ui/components/molecules/theme-button";
-import Pagination from "@ui/components/organisms/pagination";
-import CardLoadingSkeleton from "@ui/components/organisms/card/card-loading-skeleton";
-import SearchInput from "@ui/components/organisms/search";
+import { List } from '../src/ui/components/organisms/list';
+import { Suspense } from 'react';
+import CardLoadingSkeleton from '@ui/components/organisms/card/card-loading-skeleton';
+import FiltersAndVisualization from '@ui/components/organisms/filters';
 
 export default function Home() {
   return (
     <main>
-        <ThemeButton />
-        <SearchInput/>
+      <FiltersAndVisualization />
       <Suspense fallback={<CardLoadingSkeleton />}>
         <List />
-        <Pagination
-        />
       </Suspense>
     </main>
   );

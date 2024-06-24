@@ -23,8 +23,8 @@ module.exports = {
         'transparent': 'rgba(var(--transparent)) / <alpha-value>)',
       },
       fontFamily: {
-        sans: ['Source Serif 4', 'serif'],
-        montserrat: ['Montserrat', 'sans-serif'],
+        cursive: "'Source Serif 4', serif",
+        montserrat: "'Montserrat', sans-serif",
       },
     },
   },
