@@ -2,7 +2,7 @@ const mockedStores = [
   {
       label: 'Any Store',
       value: null,
-      alias:'any'
+      alias:'any-store'
   },
   {
       label: 'Steam',
