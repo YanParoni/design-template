@@ -31,23 +31,23 @@ const Pagination: React.FC<PaginationProps> = ({ next, previous }) => {
     <div className="flex justify-between items-center pt-[10px]">
       {previous ? (
         <button
-          className="bg-[#44384f] text-[#ab96b7] font-montserrat text-[12px] w-[78px] h-[29px] rounded shadow-[inset_0_1px_0_hsla(0,0%,100%,.05)] hover:bg-[#493d55] hover:text-[#e4ddff]"
+          className="bg-secondary-bkg hover:bg-secondary-comp text-description hover:text-comp-description font-montserrat text-[12px] w-[57px] h-[29px] rounded-[3px] shadow-[inset_0_1px_0_hsla(0,0%,100%,.05)]"
           onClick={handlePrevious}
         >
           Previous
         </button>
       ) : (
-        <div className="w-[78px] h-[29px]"></div>
+        <div className="w-[57px] h-[29px]"></div>
       )}
       {next ? (
         <button
-          className="bg-[#44384f] text-[#ab96b7] font-montserrat text-[12px] w-[78px] h-[29px] rounded shadow-[inset_0_1px_0_hsla(0,0%,100%,.05)] hover:bg-[#493d55] hover:text-[#e4ddff]"
+          className="bg-secondary-bkg hover:bg-secondary-comp text-description hover:text-comp-description font-montserrat text-[12px] w-[57px] h-[29px] rounded-[3px] shadow-[inset_0_1px_0_hsla(0,0%,100%,.05)]"
           onClick={handleNext}
         >
           Next
         </button>
       ) : (
-        <div className="w-[78px] h-[29px]"></div>
+        <div className="w-[57px] h-[29px]"></div>
       )}
     </div>
   );

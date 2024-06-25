@@ -18,7 +18,7 @@
 }
 
 .dropdown-button-closed {
-  @apply text-[#ab96b7] hover:text-white;
+  @apply text-description hover:text-white;
 }
 
 .dropdown-list {

@@ -17,7 +17,6 @@ export async function getGames(params: IQueryParams) {
 export const useSearchGames = (name?: string) => {
   const filter = useFilterStore();
   const pagination = usePaginationStore();
-  console.log(filter,pagination, 'query')
   const { genre, platform, store, search } = filter;
   const { currentPage, pageSize } = pagination;
 

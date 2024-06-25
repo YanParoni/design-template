@@ -1,0 +1,30 @@
+.speech {
+  font-size: 11px;
+  color: rgb(228 221 255);
+  background: rgb(98 68 102);
+
+  padding: 5px;
+  border-radius: 5px;
+  width: fit-content;
+  white-space: nowrap;
+  position: absolute;
+  top:-30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.speech::after {
+  display: block;
+  width: 0;
+  content: "";
+  border: 10px solid transparent;
+}
+
+.speech.down::after {
+  border-top-color: rgb(98 68 102);
+  top: 90%;
+  left: calc(50% - 3px);
+  transform: translateX(-50%);
+  position: absolute;
+}

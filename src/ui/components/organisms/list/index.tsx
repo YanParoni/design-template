@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useSearchGames } from '@ui/queries/games';
 import Card from '@ui/components/organisms/card/card';
-import Spinner from '@ui/components/atoms/loading-spinner';
+import Spinner from '@ui/components/atoms/spinner';
 import Pagination from '@ui/components/molecules/pagination';
 import { usePaginationStore } from 'client/store';
 
@@ -26,6 +26,7 @@ function List() {
   }
 
   const isLarge = pageSize === 12;
+
   return (
     <div className="flex flex-col mt-[.76923077rem]">
       <motion.div
@@ -43,6 +44,7 @@ function List() {
               id={game.id}
               imageUrl={game.background_image}
               percentage={game.percentage}
+              rating={game.rating}
               name={game.name}
               width="w-full"
               height={isLarge ? 'h-[261px]' : 'h-[150px]'}

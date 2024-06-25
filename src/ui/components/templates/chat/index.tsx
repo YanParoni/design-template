@@ -11,6 +11,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import useDeviceDetect from "@ui/hooks/use-device-detect";
 
 const defaultMessage = {type: 'system', message: "Hello, how can I help you today?"}
+
 export default function Chat() {
     const [inputValue, setInputValue] = useState('');
     const [chatLog, setChatLog] = useState<any>([defaultMessage]);

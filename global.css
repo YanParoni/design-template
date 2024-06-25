@@ -7,23 +7,26 @@
 @tailwind components;
 
 @layer base {
-    :root {
-    --color-bkg: 31 25 36;
-    --color-title: 255 255 255 ; 
-    --color-subtitle: 75 77 91;
-    --color-description: 260 27 41;  
-    --accent-font: 243 221 255;
-    --sub-info: 114 102 135;
-    --accent-theme:0 221 248;
-    --hover: 122 0 170;
-    --color-bkg-chat: 84 67 135 ; 
-    --color-shadow: 51 65 85;
-    --primary-color: 0deg 0% 0%; 
-    --secondary-color: 0deg 0% 16%;
-    --transparent: 76 175 80 0;  
-    }
- 
-       
+  :root {
+      --color-bkg: 31 25 36;
+      --color-title: 255 255 255 ; 
+      --color-description: 171 150 183;  
+      --color-comp-description: 228 221 255;
+      --color-comp-muted: 83 82 117;
+      --color-secondary-bkg: 68 56 79;
+      --color-secondary-comp-bkg: 73 61 85;
+      --color-tertiary-bkg: 98 68 102;
+      --accent-theme: 221 0 218;
+      --accent-secondary: 0 221 248;
+      --hover: 122 0 170;
+      --color-bkg-chat: 84 67 135 ; 
+      --color-shadow: 51 65 85;
+      --primary-color: 0deg 0% 0%; 
+      --secondary-color: 0deg 0% 16%;
+      --transparent: 76 175 80 0;  
+      --custom-box-shadow: 0 1px 5px rgba(0,0,0,.25), 0 1px 10px rgba(0,0,0,.35);
+
+  }
         input[type="range"] {
           @apply bg-transparent
 

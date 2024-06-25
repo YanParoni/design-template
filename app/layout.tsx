@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import '../global.css'
 import Providers from "@app/provider";
 import React from "react";
+import LayoutContainer from '@ui/components/organisms/layout';
 
 export default function RootLayout({
   children,
@@ -10,16 +11,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" >
-      <body className='bg-bkg '  >
-     <div className="min-h-screen bg-bkg text-primary-color flex justify-center ">
-      <div className="max-w-[960px] w-full px-4 md:px-0 ">
+      <body className='bg-bkg'>
+      <LayoutContainer>
         <Providers>
           {children}
         </Providers>
-        </div>
-        </div>
+        </LayoutContainer>
       </body>
     </html>
-
   );
 }

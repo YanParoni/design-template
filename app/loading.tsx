@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { motion } from 'framer-motion';
 import CardLoadingSkeleton from '@ui/components/organisms/card/card-loading-skeleton';
+
 const SkeletonContainer = () => {
   const skeletons = Array(20).fill(null); 
-
   return (
     <div className='flex flex-col justify-center'>
       <motion.div

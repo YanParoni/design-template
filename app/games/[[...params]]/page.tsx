@@ -18,7 +18,7 @@ const GamesPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const paramsArray = pathname.split('/').slice(2); // Ignora "games"
+    const paramsArray = pathname.split('/').slice(2);
     const params: Record<string, string> = {};
 
     for (let i = 0; i < paramsArray.length; i += 2) {
@@ -58,7 +58,6 @@ const GamesPage = () => {
       paginationStore.setCurrentPage(1);
     }
 
-    console.log('Processed params:', { genre, platform, store, size, page });
     setLoading(false);
   }, []);
 
@@ -81,10 +80,10 @@ const GamesPage = () => {
 
   if (loading) return <div>Loading...</div>;
   return (
-    <main>
+    <>
       <FiltersAndVisualization />
       <List />
-    </main>
+    </>
   );
 };
 
