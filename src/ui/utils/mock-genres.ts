@@ -71,7 +71,7 @@ const mockedGenres = [
     },
     {
         label: 'MMO',
-        value: 'massive-multiplayer',
+        value: 'massively-multiplayer',
         alias:'mmo'
     },
     {
