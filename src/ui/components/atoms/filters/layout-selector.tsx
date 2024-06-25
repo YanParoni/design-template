@@ -25,7 +25,7 @@ const LayoutSelector: React.FC = () => {
 
   return (
     <div className="flex items-center gap-1">
-      <svg
+          <svg
         onClick={() => { setLayout(layoutOptions.GRID); togglePageSize(); }}
         className={`cursor-pointer  ${layout === layoutOptions.GRID ? 'fill-[#989cba] stroke-[#989cba]' : 'fill-[#535877] stroke-[#535877]'} hover:fill-[#989cba] hover:stroke-[#989cba]`}
         height="21"

@@ -49,7 +49,7 @@ const GamesPage = () => {
     }
 
     if (size) {
-      paginationStore.setPageSize(size === 'large' ? 40 : 8);
+      paginationStore.setPageSize(size === 'large' ? 40 : 12);
     }
 
     if (page) {
