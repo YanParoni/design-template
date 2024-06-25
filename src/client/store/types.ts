@@ -1,19 +1,15 @@
 export type FiltersState = {
-  genres: string[];
-  platforms: string[];
-  stores: string[];
+  genre: string | null;
+  platform: number | null;
+  store: number | null;
   search: string;
-  addGenre: (genre: string) => void;
-  setGenres: (genres: string[]) => void;
-  addPlatform: (platform: string) => void;
-  setPlatforms: (platforms: string[]) => void;
-  removePlatform: (platform: string) => void;
-  addStore: (store: string) => void;
-  setStores: (stores: string[]) => void;
-  removeStore: (store: string) => void;
+  setGenre: (genre: string | null) => void;
+  setPlatform: (platform: number | null) => void;
+  setStore: (store: number | null) => void;
   resetFilters: () => void;
   setSearch: (search: string) => void;
 };
+
 
 export type PaginationState = {
   currentPage: number;
@@ -29,8 +25,9 @@ export type GameState = {
   addGame: (game: any) => void;
 };
 
-
 export type GameResponse = {
   count: number;
   results: any[];
+  next: null | string;
+  previous: null | string;
 };

@@ -25,10 +25,6 @@ const LayoutSelector: React.FC = () => {
 
   return (
     <div className="flex items-center gap-1">
-      <div
-        onClick={() => { setLayout(layoutOptions.LIST); togglePageSize(); }}
-        className={`h-[15px] w-[13px] cursor-pointer rounded-[1px] ${layout === layoutOptions.LIST ? 'bg-[#989cba]' : 'bg-[#535877]'} hover:bg-[#989cba]`}
-      ></div>
       <svg
         onClick={() => { setLayout(layoutOptions.GRID); togglePageSize(); }}
         className={`cursor-pointer  ${layout === layoutOptions.GRID ? 'fill-[#989cba] stroke-[#989cba]' : 'fill-[#535877] stroke-[#535877]'} hover:fill-[#989cba] hover:stroke-[#989cba]`}
@@ -42,6 +38,10 @@ const LayoutSelector: React.FC = () => {
           transform="translate(3 3)"
         />
       </svg>
+      <div
+        onClick={() => { setLayout(layoutOptions.LIST); togglePageSize(); }}
+        className={`h-[15px] w-[13px] cursor-pointer rounded-[1px] ${layout === layoutOptions.LIST ? 'bg-[#989cba]' : 'bg-[#535877]'} hover:bg-[#989cba]`}
+      ></div>
     </div>
   );
 };

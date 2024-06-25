@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import mockedPlatforms from '@ui/utils/mock-platforms';
 import mockedGenres from '@ui/utils/mock-genres';
 import mockedStores from '@ui/utils/mock-stores';
@@ -8,38 +7,29 @@ const getAliasByValue = (value, options) => {
   return option ? option.alias : '';
 };
 
-const buildUrl = (genre, platform, store) => {
-  const genreAlias = getAliasByValue(genre, mockedGenres);
-  const platformAlias = getAliasByValue(platform, mockedPlatforms);
-  const storeAlias = getAliasByValue(store, mockedStores);
+const buildUrl = (filters: any) => {
+  const urlParts = [];
 
-  let url = '/games';
-  if (genreAlias) url += `/genre/${genreAlias}`;
-  if (platformAlias) url += `/platform/${platformAlias}`;
-  if (storeAlias) url += `/store/${storeAlias}`;
+  if (filters.genre && filters.genre !== 'any') {
+    urlParts.push('genre');
+    urlParts.push(getAliasByValue(filters.genre, mockedGenres));
+  }
+  if (filters.platform && filters.platform !== null) {
+    urlParts.push('platform');
+    urlParts.push(getAliasByValue(filters.platform, mockedPlatforms));
+  }
+  if (filters.store && filters.store !== null) {
+    urlParts.push('store');
+    urlParts.push(getAliasByValue(filters.store, mockedStores));
+  }
 
-  return url;
+  urlParts.push('size');
+  urlParts.push(filters.pageSize === 40 ? 'large' : 'small');
+
+  urlParts.push('page');
+  urlParts.push(filters.currentPage.toString());
+
+  return `/games/${urlParts.join('/')}`;
 };
 
-const GenresLink = ({ genre }) => (
-  <Link href={`/games/genre/${genre}`}>
-    <a>{genre}</a>
-  </Link>
-);
-
-const PlatformsLink = ({ platform }) => {
-  const alias = getAliasByValue(platform, mockedPlatforms);
-  return (
-    <Link href={`/games/platform/${alias}`}>
-      <a>{mockedPlatforms.find((p) => p.value === platform).label}</a>
-    </Link>
-  );
-};
-
-const StoresLink = ({ store }) => (
-  <Link href={`/games/store/${store}`}>
-    <a>{store}</a>
-  </Link>
-);
-
-export { GenresLink, PlatformsLink, StoresLink, buildUrl };
+export { buildUrl };

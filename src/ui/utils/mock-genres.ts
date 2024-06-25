@@ -1,7 +1,7 @@
 const mockedGenres = [
     {
         label: 'Any Genre',
-        value: '',
+        value: null,
         alias:'any'
     },
     {

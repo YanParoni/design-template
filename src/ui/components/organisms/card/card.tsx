@@ -18,9 +18,9 @@ interface ICard {
 
 const BASE_URL = process.env.NEXT_PUBLIC_REACT_APP === 'production' ? 'https://design-template-ivory.vercel.app' : 'http://localhost:3000';
 
-const Card = ({ id, imageUrl, percentage, name, width, height, dir }: ICard) => {
+const Card = React.memo(({ id, imageUrl, percentage, name, width, height, dir }: ICard) => {
   return (
-    <div className={`flex flex-${dir} cursor-pointer gap-2 rounded-[2px] border-2 border-[transparent] hover:border-[#dd00da] `}>
+    <div className={`flex flex-${dir} cursor-pointer gap-2 rounded-[2px] border-2 border-[transparent] hover:border-[#dd00da]`}>
       <Link
         as={{
           pathname: `${BASE_URL}/profile/${id}`,
@@ -31,19 +31,22 @@ const Card = ({ id, imageUrl, percentage, name, width, height, dir }: ICard) => 
           query: { name },
         }}
       >
-        <div className={`relative ${width} ${height} rounded-[2px] flex flex-row justify-center overflow-hidden `}>
-        <Image
+        <div className={`relative ${width} ${height} rounded-[2px] flex flex-row justify-center overflow-hidden`}>
+          <Image
             src={imageUrl}
             alt={`${name}-thumb`}
             layout="fill"
             objectFit="cover"
             quality={100}
             className=""
-          />          <ShadowEffect />
+          />
+          <ShadowEffect />
         </div>
       </Link>
     </div>
   );
-};
+});
+
+Card.displayName = 'Card';
 
 export default Card;

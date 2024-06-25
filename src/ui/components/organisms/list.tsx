@@ -1,13 +1,12 @@
-'use client';
-import * as React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import SkeletonContainer from '@app/loading';
 import { useSearchGames } from '@ui/queries/games';
 import Card from '@ui/components/organisms/card/card';
-import { usePaginationStore } from 'client/store';
 import Spinner from '@ui/components/atoms/loading-spinner';
+import Pagination from '@ui/components/molecules/pagination';
+import { usePaginationStore } from 'client/store';
 
-export function List() {
+function List() {
   const { isLoading, data, refetch } = useSearchGames();
   const { pageSize } = usePaginationStore();
 
@@ -45,12 +44,15 @@ export function List() {
               imageUrl={game.background_image}
               percentage={game.percentage}
               name={game.name}
-              width='w-full'
+              width="w-full"
               height={isLarge ? 'h-[261px]' : 'h-[150px]'}
               dir="col"
             />
           ))}
       </motion.div>
+      <Pagination next={data?.next} previous={data?.previous} />
     </div>
   );
 }
+
+export default React.memo(List);

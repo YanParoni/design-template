@@ -1,7 +1,7 @@
 const mockedPlatforms = [
     {
       label: 'Any Platform',
-      value: '',
+      value: null,
       alias: 'any-platform',
     },
     {

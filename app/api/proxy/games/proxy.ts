@@ -24,9 +24,7 @@ export class GamesProxy implements IGamesGateway {
         ...args
       }
     };
-    console.log(requestParams)
     const response = await this.fetchHttpClient.get(requestParams);
-    console.log(response.results.length)
     return response
   }
  

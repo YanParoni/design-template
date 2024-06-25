@@ -1,7 +1,7 @@
 const mockedStores = [
   {
       label: 'Any Store',
-      value: '',
+      value: null,
       alias:'any'
   },
   {

@@ -3,43 +3,32 @@ import { IGamesGateway } from "../../infra/gateways/contracts/games";
 import IQueryParams from "@infra/gateways/contracts/query";
 import { useSearchParams } from 'next/navigation';
 import { useFilterStore, usePaginationStore } from "client/store";
-import { useEffect } from 'react';
 import { iocContainer } from "@ioc/index";
 import { useGameStore } from "client/store";
-import { useRouter } from "next/navigation";
 
 export async function getGames(params: IQueryParams) {
     const gateway = iocContainer.get<IGamesGateway>('GamesGateway');
+    console.log(params,'retorno api')
     const response = await gateway.searchGame(params)
     useGameStore.getState().setGames(response.games)
     return response.games
 }
 
-
-
 export const useSearchGames = (name?: string) => {
-  const searchParams = useSearchParams();
   const filter = useFilterStore();
   const pagination = usePaginationStore();
-  const { genres, platforms, stores, search } = filter;
+  console.log(filter,pagination, 'query')
+  const { genre, platform, store, search } = filter;
   const { currentPage, pageSize } = pagination;
-  const router = useRouter();
-  
-  const page = searchParams.get('page') ?? currentPage.toString();
-  
-
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["getGames", page],
+    queryKey: ['getGames', currentPage, pageSize, genre, platform, store, search],
     queryFn: () => {
-      const genresString = genres.join(',');
-      const platformsString = platforms.join(',');
-      const storesString = stores.join(',');
       const obj: IQueryParams = {
-        parent_platforms: platformsString,
-        genres: genresString,
-        stores: storesString,
-        page: page,
+        parent_platforms: platform ? platform.toString() : '',
+        genres: genre || '',
+        stores: store ? store.toString() : '',
+        page: currentPage.toString(),
         search: search,
         page_size: pageSize,
       };
@@ -57,7 +46,6 @@ export const useSearchGames = (name?: string) => {
 
   return { data, isLoading, refetch };
 };
-
 
 export const useSearchChatGames = (args:IQueryParams) =>{
     const { data,isLoading,isSuccess } = useQuery({
