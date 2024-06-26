@@ -26,15 +26,18 @@ const Card = React.memo(
     return (
       <>
         <div
-          className={`flex flex-${dir} cursor-pointer gap-2 rounded-[3px] relative`}
+          className={`flex flex-${dir} cursor-pointer gap-2 rounded-[3px] relative hover:ring-2  hover:ring-inset hover:ring-accent-theme `}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >
           {hovered && (
             <div className="speech down">
-              <div className="flex flex-col items-center">
-                <p className="font-medium">
-                  {name} {rating}
+              <div className="flex flex-row items-center gap-1">
+                <p className="font-normal">
+                  {name} 
+                </p >
+                <p className="font-bold">
+                {rating}
                 </p>
               </div>
             </div>
@@ -50,7 +53,7 @@ const Card = React.memo(
             }}
           >
             <div
-              className={`relative ${width} ${height} rounded-[4px] flex flex-row justify-center overflow-hidden border-2 border-[transparent] shadow-sm hover:border-accent-theme`}
+              className={` relative ${width} ${height} rounded-[4px] flex flex-row justify-center overflow-hidden border-2 border-[transparent] `}
             >
               <Image
                 src={imageUrl}
@@ -58,7 +61,7 @@ const Card = React.memo(
                 layout="fill"
                 objectFit="cover"
                 quality={100}
-                className=""
+                className=" "
               />
               <ShadowEffect />
             </div>

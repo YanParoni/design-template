@@ -28,31 +28,35 @@ function List() {
   const isLarge = pageSize === 12;
 
   return (
-    <div className="flex flex-col mt-[.76923077rem]">
-      <motion.div
-        className={`grid gap-2 w-full ${
-          isLarge ? 'grid-cols-4' : 'grid-cols-8'
-        }`}
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 30 }}
-      >
-        {data &&
-          data.results.map((game) => (
-            <Card
-              key={game.id}
-              id={game.id}
-              imageUrl={game.background_image}
-              percentage={game.percentage}
-              rating={game.rating}
-              name={game.name}
-              width="w-full"
-              height={isLarge ? 'h-[261px]' : 'h-[150px]'}
-              dir="col"
-            />
-          ))}
-      </motion.div>
-      <Pagination next={data?.next} previous={data?.previous} />
+    <div className="flex flex-col mt-[.76923077rem] min-h-screen">
+      {data && data.results.length > 0 ? (
+        <>
+          <motion.div
+            className={`grid gap-2 w-full ${isLarge ? 'grid-cols-4' : 'grid-cols-8'}`}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 30 }}
+          >
+            {data.results.map((game) => (
+              <Card
+                key={game.id}
+                id={game.id}
+                imageUrl={game.background_image}
+                rating={game.rating}
+                name={game.name}
+                width="w-full"
+                height={isLarge ? 'h-[261px]' : 'h-[150px]'}
+                dir="col"
+              />
+            ))}
+          </motion.div>
+          <Pagination next={data?.next} previous={data?.previous} />
+        </>
+      ) : (
+        <div className="flex justify-center items-center ">
+          <span className="text-description text-[24px]">No results found.</span>
+        </div>
+      )}
     </div>
   );
 }

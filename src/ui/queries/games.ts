@@ -1,15 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { IGamesGateway } from "../../infra/gateways/contracts/games";
 import IQueryParams from "@infra/gateways/contracts/query";
-import { useSearchParams } from 'next/navigation';
 import { useFilterStore, usePaginationStore } from "client/store";
 import { iocContainer } from "@ioc/index";
 import { useGameStore } from "client/store";
 
 export async function getGames(params: IQueryParams) {
     const gateway = iocContainer.get<IGamesGateway>('GamesGateway');
-    console.log(params,'retorno api')
     const response = await gateway.searchGame(params)
+
     useGameStore.getState().setGames(response.games)
     return response.games
 }

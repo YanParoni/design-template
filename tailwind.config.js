@@ -17,7 +17,10 @@ module.exports = {
         'secondary-comp': "rgb(73 61 85 / <alpha-value>)",
         'tertiary-bkg': "rgb(98 68 102)",
         'accent-theme': "rgb(221 0 218 / <alpha-value>)",
+        'accent-theme-comp': "rgb(206 0 203 / <alpha-value>)",
         'accent-secondary': "rgb(0 221 248 / <alpha-value>)",
+        'light-purple': 'rgb(74 69 79 / <alpha-value>)',
+        'dark-background': "rgb(23 18 25 / <alpha-value>)",
         'hover': "rgb(122 0 170 / <alpha-value>)",
         'bkg-chat': "rgb(84 67 135 / <alpha-value>)",
         'primary-color': "hsl(0deg 0% 0% / <alpha-value>)",
@@ -30,6 +33,9 @@ module.exports = {
       fontFamily: {
         cursive: "'Source Serif 4', serif",
         montserrat: "'Montserrat', sans-serif",
+      },
+      boxShadow: {
+        'custom-inset': 'inset 0 0 1px 1px rgba(20,24,28,.125)',
       },
     },
   },
