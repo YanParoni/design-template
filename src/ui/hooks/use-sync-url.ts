@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useFilterStore, usePaginationStore } from 'client/store';
 import mockedPlatforms from '@ui/utils/mock-platforms';
@@ -22,7 +22,7 @@ const useUrlSync = () => {
       params[paramsArray[i]] = paramsArray[i + 1];
     }
 
-    const { genre, platform, store, size, page } = params;
+    const { genre, platform, store, size, page, search } = params;
 
     if (genre) {
       const genreObj = mockedGenres.find((g) => g.alias === genre);
@@ -55,19 +55,31 @@ const useUrlSync = () => {
       paginationStore.setCurrentPage(1);
     }
 
+    if (search) {
+      filterStore.setSearch(search);
+    }
+
     setLoading(false);
   }, []);
 
+  const filters = useMemo(() => ({
+    genre: filterStore.genre,
+    platform: filterStore.platform,
+    store: filterStore.store,
+    pageSize: paginationStore.pageSize,
+    currentPage: paginationStore.currentPage,
+    search: filterStore.search,
+  }), [
+    filterStore.genre,
+    filterStore.platform,
+    filterStore.store,
+    paginationStore.pageSize,
+    paginationStore.currentPage,
+    filterStore.search
+  ]);
+
   useEffect(() => {
     if (!loading) {
-      const filters = {
-        genre: filterStore.genre,
-        platform: filterStore.platform,
-        store: filterStore.store,
-        pageSize: paginationStore.pageSize,
-        currentPage: paginationStore.currentPage,
-      };
-
       const newUrl = buildUrl(filters);
       if (newUrl !== pathname) {
         router.replace(newUrl);

@@ -2,7 +2,6 @@ import { useState, createRef, useEffect } from "react";
 import { useSearchChatGames } from "@ui/queries/games";
 import Card from "@ui/components/organisms/card/card";
 import { useClickOutside } from '@ui/hooks/use-click-outside';
-import filterGamesByLevenshtein from "utils";
 interface IName {
     name: string
 }
@@ -19,8 +18,8 @@ const GameNameSpan = ({ name }: IName) => {
 
     useEffect(() => {
         if ( isSuccess && data) {
-            const filtered = filterGamesByLevenshtein(data.results, name)
-            setGame(filtered);
+            // const filtered = filterGamesByLevenshtein(data.results, name)
+            // setGame(filtered);
         }
     }, [data]);
 

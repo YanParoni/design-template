@@ -9,8 +9,8 @@ export async function PUT(req: NextRequest) {
     if (!parsedReq) return;
     const gamesProxy = iocContainer.get<IGamesGateway>('GamesProxy');
     const obj = await gamesProxy.searchGame(parsedReq);
-    games.count = obj.count;
-    games.results = obj.results;
+    games.count = obj?.count;
+    games.results = obj?.results;
     games.next = obj?.next;
     games.previous = obj?.previous;
     return NextResponse.json({ games });

@@ -6,7 +6,7 @@ export default function useDeviceDetect() {
   useEffect(() => {
     const checkIsMobile = () => {
       const screenWidth = window.innerWidth;
-      const isMobile = screenWidth < 720; 
+      const isMobile = screenWidth < 920; 
       setMobile(isMobile);
     };
 

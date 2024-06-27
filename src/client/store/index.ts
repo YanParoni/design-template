@@ -10,7 +10,7 @@ const useFilterStore = create<FiltersState>((set) => ({
   setPlatform: (platform: number | null) => set({ platform }),
   setStore: (store: number | null) => set({ store }),
   resetFilters: () => set({ genre: null, platform: null, store: null, search: '' }),
-  setSearch: (search: string) => set({ search }),
+  setSearch: (search: string ) => set({ search }),
 }));
 
 

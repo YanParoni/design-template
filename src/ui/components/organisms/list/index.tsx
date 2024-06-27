@@ -29,7 +29,7 @@ function List() {
 
   return (
     <div className="flex flex-col mt-[.76923077rem] min-h-screen">
-      {data && data.results.length > 0 ? (
+      {data && data?.results?.length > 0 ? (
         <>
           <motion.div
             className={`grid gap-2 w-full ${isLarge ? 'grid-cols-4' : 'grid-cols-8'}`}
@@ -37,13 +37,13 @@ function List() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
           >
-            {data.results.map((game) => (
+            {data?.results?.map((game) => (
               <Card
-                key={game.id}
-                id={game.id}
-                imageUrl={game.background_image}
-                rating={game.rating}
-                name={game.name}
+                key={game?.id}
+                id={game?.id}
+                imageUrl={game?.background_image}
+                rating={game?.rating}
+                name={game?.name}
                 width="w-full"
                 height={isLarge ? 'h-[261px]' : 'h-[150px]'}
                 dir="col"

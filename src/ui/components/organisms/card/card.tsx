@@ -20,7 +20,7 @@ const BASE_URL =
     : 'http://localhost:3000';
 
 const Card = React.memo(
-  ({ id, imageUrl, name, width, height, dir, rating }: ICard) => {
+  ({ id='', imageUrl='', name='', width='', height, dir, rating }: ICard) => {
     const [hovered, setHovered] = useState(false);
 
     return (
@@ -55,6 +55,7 @@ const Card = React.memo(
             <div
               className={` relative ${width} ${height} rounded-[4px] flex flex-row justify-center overflow-hidden border-2 border-[transparent] `}
             >
+              {imageUrl ?
               <Image
                 src={imageUrl}
                 alt={`${name}-thumb`}
@@ -62,7 +63,8 @@ const Card = React.memo(
                 objectFit="cover"
                 quality={100}
                 className=" "
-              />
+              />: <></>
+            }
               <ShadowEffect />
             </div>
           </Link>
