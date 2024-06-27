@@ -5,10 +5,12 @@ import Card from '@ui/components/organisms/card/card';
 import Spinner from '@ui/components/atoms/spinner';
 import Pagination from '@ui/components/molecules/pagination';
 import { usePaginationStore } from 'client/store';
+import useDeviceDetect from '@ui/hooks/use-device-detect';
 
 function List() {
   const { isLoading, data, refetch } = useSearchGames();
   const { pageSize } = usePaginationStore();
+  const { isMobile } = useDeviceDetect();
 
   const [layoutLoading, setLayoutLoading] = React.useState(false);
 
@@ -32,7 +34,7 @@ function List() {
       {data && data?.results?.length > 0 ? (
         <>
           <motion.div
-            className={`grid gap-2 w-full ${isLarge ? 'grid-cols-4' : 'grid-cols-8'}`}
+            className={`grid gap-2 w-full ${isMobile ? 'grid-cols-3'  : (isLarge ? 'grid-cols-4' : 'grid-cols-8')}`}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}

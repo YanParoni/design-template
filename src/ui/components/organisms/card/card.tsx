@@ -26,7 +26,7 @@ const Card = React.memo(
     return (
       <>
         <div
-          className={`flex flex-${dir} cursor-pointer gap-2 rounded-[3px] relative hover:ring-2  hover:ring-inset hover:ring-accent-theme `}
+          className={`flex flex-${dir} cursor-pointer gap-2 rounded-[3px] relative ring-1 ring-inset ring-white/10 lg:ring-[1px] hover:ring-2  hover:ring-inset hover:ring-accent-theme `}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >
