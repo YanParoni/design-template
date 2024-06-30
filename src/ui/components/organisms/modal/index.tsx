@@ -21,7 +21,7 @@ const Modal: React.FC<ModalProps> = ({ isVisible, onClose, children, title }) =>
         >
           <motion.div
             className="bg-[#574e72] rounded-[3px]"
-            style={{ padding: '22px 36px 26px', width: '420px' }}
+            style={{ padding: '22px 36px 26px', width: '350px' }}
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0.8 }}

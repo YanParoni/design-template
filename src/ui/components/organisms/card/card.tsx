@@ -17,7 +17,7 @@ interface ICard {
 const BASE_URL =
   process.env.NEXT_PUBLIC_REACT_APP === 'production'
     ? 'https://design-template-ivory.vercel.app'
-    : 'http://localhost:3000';
+    : 'http://localhost:3001';
 
 const Card = React.memo(
   ({ id='', imageUrl='', name='', width='', height, dir, rating }: ICard) => {

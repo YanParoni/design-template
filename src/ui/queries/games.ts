@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+import { iocContainer } from "@ioc/index";
 import { IGamesGateway } from "../../infra/gateways/contracts/games";
 import IQueryParams from "@infra/gateways/contracts/query";
 import { useFilterStore, usePaginationStore } from "client/store";
-import { iocContainer } from "@ioc/index";
 import { useGameStore } from "client/store";
 
 export async function getGames(params: IQueryParams) {

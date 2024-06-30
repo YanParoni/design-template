@@ -39,7 +39,7 @@ const NavigationLinks: React.FC<NavigationLinksProps> = ({ onSignInClick, onCrea
           CREATE ACCOUNT
         </motion.a>
         <motion.a
-          href="#"
+          href=""
           className="font-montserrat font-semibold text-description hover:text-white text-[14px]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

@@ -31,3 +31,10 @@ export type GameResponse = {
   next: null | string;
   previous: null | string;
 };
+
+export type AuthState = {
+  isAuthenticated: boolean;
+  token: string | null;
+  login: (token: string) => void;
+  logout: () => void;
+}

@@ -13,7 +13,10 @@ import { StoreInfoGateway } from '@infra/gateways/store'
 import { IChatGateway } from '@infra/gateways/contracts/chat'
 import { ChatGateway } from '@infra/gateways/chat'
 import { ChatProxy } from '@app/api/proxy/chat/proxy'
-
+import { AuthGateway } from '@infra/gateways/login'
+import { IAuthGateway } from '@infra/gateways/contracts/login'
+import { IUserGateway } from '@infra/gateways/contracts/user'
+import { UserGateway } from '@infra/gateways/user'
 const iocContainer = new Container({ defaultScope: 'Singleton' })
 
 iocContainer.bind<IHttpClient>(TYPES.AxiosHttpClient).to(AxiosHttpClient);
@@ -24,5 +27,8 @@ iocContainer.bind<IChatGateway>('ChatGateway').to(ChatGateway)
 iocContainer.bind<IChatGateway>('ChatProxy').to(ChatProxy)
 iocContainer.bind<IStoreInfoGateway>('StoreInfoGateway').to(StoreInfoGateway)
 iocContainer.bind<IStoreInfoGateway>('StoreInfoProxy').to(StoreInfoProxy)
+iocContainer.bind<IAuthGateway>('AuthGateway').to(AuthGateway)
+iocContainer.bind<IUserGateway>('UserGateway').to(UserGateway)
+
 
 export { iocContainer }
