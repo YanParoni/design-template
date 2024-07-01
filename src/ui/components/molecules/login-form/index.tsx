@@ -1,31 +1,39 @@
+// src/components/molecules/login-form.tsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Button from '@ui/components/atoms/button';
 import Input from '@ui/components/atoms/input';
 import GoogleButton from '@ui/components/atoms/google-button';
 import { XMarkIcon } from '@heroicons/react/24/solid';
-import { useLogin } from '@ui/queries/auth';
+import { useLogin } from '@ui/queries/auth'; 
 
 interface LoginFormProps {
   isVisible: boolean;
   onCloseClick: () => void;
-  onLoginSuccess: (token: string) => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ isVisible, onCloseClick, onLoginSuccess }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ isVisible, onCloseClick }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { mutateAsync } = useLogin();
 
   const handleLogin = async () => {
     try {
-      const response = await mutateAsync({ email, password });
-      if (response.accessToken) {
-        onLoginSuccess(response.accessToken); 
-      }
+      await mutateAsync({ email, password });
     } catch (error) {
       console.error('Login failed', error);
     }
+  };
+
+  const handleGoogleLogin = () => {
+    const authWindow = window.open('http://localhost:3000/auth/google', '_blank', 'width=500,height=600');
+
+    const authInterval = setInterval(() => {
+      if (authWindow?.closed) {
+        clearInterval(authInterval);
+        window.location.reload();
+      }
+    }, 1000);
   };
 
   return (
@@ -55,12 +63,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ isVisible, onCloseClick, onLoginS
             <div className="flex items-center justify-center">
               <h1 className="text-description text-center">---or---</h1>
             </div>
-            <GoogleButton />
+            <GoogleButton onClick={handleGoogleLogin} />
           </div>
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }
 
 export default LoginForm;

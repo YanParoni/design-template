@@ -1,3 +1,18 @@
+export interface UserProfile {
+  id: string;
+  username: string;
+  email: string;
+  profileImage: string;
+  bio: string;
+  isPrivate: boolean;
+  followers: string[];
+  following: string[];
+  blockedUsers: string[];
+  favorites: string[];
+  reviews: string[];
+  likes: string[];
+}
+
 export type FiltersState = {
   genre: string | null;
   platform: number | null;
@@ -35,6 +50,8 @@ export type GameResponse = {
 export type AuthState = {
   isAuthenticated: boolean;
   token: string | null;
-  login: (token: string) => void;
+  user: UserProfile | null;
+  login: (token: string, user: UserProfile) => void;
   logout: () => void;
-}
+};
+

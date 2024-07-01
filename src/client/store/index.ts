@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { FiltersState, PaginationState, GameState, GameResponse, AuthState } from './types';
+import { FiltersState, PaginationState, GameState, GameResponse, AuthState, UserProfile } from './types';
 
 const useFilterStore = create<FiltersState>((set) => ({
   genre: null,
@@ -12,12 +12,12 @@ const useFilterStore = create<FiltersState>((set) => ({
   resetFilters: () => set({ genre: null, platform: null, store: null, search: '' }),
   setSearch: (search: string ) => set({ search }),
 }));
-
 const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: false,
   token: null,
-  login: (token: string) => set({ isAuthenticated: true, token }),
-  logout: () => set({ isAuthenticated: false, token: null }),
+  user: null,
+  login: (token: string, user: UserProfile) => set({ isAuthenticated: true, token, user }),
+  logout: () => set({ isAuthenticated: false, token: null, user: null }),
 }));
 
 const usePaginationStore = create<PaginationState>((set) => ({

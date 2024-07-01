@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import useDeviceDetect from '@ui/hooks/use-device-detect';
 import Logo from '@ui/components/atoms/logo';
@@ -8,38 +8,13 @@ import LoginForm from '@ui/components/molecules/login-form';
 import SignUpModal from '@ui/components/molecules/sign-up-modal';
 import { AcademicCapIcon, UserIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { useAuthStore } from 'client/store';
-import { getProfile } from '@ui/queries/user';
+import useFetchProfile from '@ui/hooks/use-cases/use-fetch-profile';
 
 const Navbar: React.FC = () => {
-  const [user, setUser] = useState()
-  const [activeState, setActiveState] = useState<'default' | 'login' | 'signup'| 'logged'>('default');
   const { isMobile } = useDeviceDetect();
-  const { isAuthenticated, login, logout } = useAuthStore();
+  const { isAuthenticated, logout } = useAuthStore();
+  const { activeState, setActiveState } = useFetchProfile();
 
-  useEffect(() => {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      login(token);
-      const fetchProfile = async () => {
-        try {
-          const profile = await getProfile(token);
-          console.log(profile); 
-          setUser(profile)
-          setActiveState('logged');
-        } catch (error) {
-          console.error('Failed to fetch profile', error);
-          logout();
-          setActiveState('default');
-        }
-      };
-      fetchProfile()
-      setActiveState('logged')
-    }
-  }, [ ]);
-
-   useEffect(()=>{
-    console.log(user)
-   },[user])
   const handleSignInClick = () => {
     setTimeout(() => setActiveState('login'), 200);
   };
@@ -58,17 +33,9 @@ const Navbar: React.FC = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
-    setActiveState('default');
     logout();
+    setActiveState('default');
   };
-
-  const handleLoginSuccess = (token: string) => {
-    localStorage.setItem('accessToken', token);
-    login(token);
-    setActiveState('logged');
-  };
-
-
 
   const renderExpandedContent = () => (
     <AnimatePresence>
@@ -80,7 +47,7 @@ const Navbar: React.FC = () => {
           exit={{ height: 0 }}
           transition={{ duration: 0 }}
         >
-          {activeState === 'login' && <LoginForm isVisible={true} onCloseClick={handleCloseClick} onLoginSuccess={handleLoginSuccess} />}
+          {activeState === 'login' && <LoginForm isVisible={true} onCloseClick={handleCloseClick} />}
           {activeState === 'signup' && <SignUpModal isVisible={true} onClose={handleCloseModal} />}
         </motion.div>
       )}
@@ -97,11 +64,12 @@ const Navbar: React.FC = () => {
         />
       )}
       {activeState === 'login' && (
-        <LoginForm isVisible={true} onCloseClick={handleCloseClick} onLoginSuccess={handleLoginSuccess} />
+        <LoginForm isVisible={true} onCloseClick={handleCloseClick} />
       )}
       {activeState === 'signup' && <SignUpModal isVisible={true} onClose={handleCloseModal} />}
       {isAuthenticated && (
         <div className="flex items-center space-x-4">
+          <UserIcon className="w-6 h-6 text-white cursor-pointer" onClick={handleLogout} />
           <button className="text-white" onClick={handleLogout}>Logout</button>
         </div>
       )}
@@ -124,7 +92,7 @@ const Navbar: React.FC = () => {
       )}
     </div>
   );
-  
+
   return (
     <header className="bg-dark-background text-primary-color flex flex-col items-center">
       <nav className="max-w-[960px] w-full px-4 md:px-0 bg-dark-background h-[72px] flex items-center">

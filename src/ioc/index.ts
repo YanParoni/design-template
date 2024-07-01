@@ -13,10 +13,11 @@ import { StoreInfoGateway } from '@infra/gateways/store'
 import { IChatGateway } from '@infra/gateways/contracts/chat'
 import { ChatGateway } from '@infra/gateways/chat'
 import { ChatProxy } from '@app/api/proxy/chat/proxy'
-import { AuthGateway } from '@infra/gateways/login'
-import { IAuthGateway } from '@infra/gateways/contracts/login'
+import { AuthGateway } from '@infra/gateways/auth'
+import { IAuthGateway } from '@infra/gateways/contracts/auth'
 import { IUserGateway } from '@infra/gateways/contracts/user'
 import { UserGateway } from '@infra/gateways/user'
+
 const iocContainer = new Container({ defaultScope: 'Singleton' })
 
 iocContainer.bind<IHttpClient>(TYPES.AxiosHttpClient).to(AxiosHttpClient);
