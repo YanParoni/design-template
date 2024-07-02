@@ -1,17 +1,21 @@
 import './styles.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import ShadowEffect from '../../atoms/shadow-effect';
+import CardActions from '@ui/components/molecules/card/card-actions';
+import { useAuthStore } from 'client/store';
 
 interface ICard {
   id: string;
   imageUrl: string;
   name: string;
   height: string;
-  width: string;
   dir: string;
   rating: number;
+  liked?: boolean;
+  played?: boolean;
+  isLarge: boolean;
 }
 
 const BASE_URL =
@@ -20,27 +24,59 @@ const BASE_URL =
     : 'http://localhost:3001';
 
 const Card = React.memo(
-  ({ id='', imageUrl='', name='', width='', height, dir, rating }: ICard) => {
+  ({
+    id = '',
+    imageUrl = '',
+    name = '',
+    height,
+    dir,
+    rating,
+    liked,
+    played,
+    isLarge,
+  }: ICard) => {
     const [hovered, setHovered] = useState(false);
+    const { isAuthenticated } = useAuthStore();
+    const [isPlayed, setIsPlayed] = useState(played);
+
+    useEffect(() => {
+      setIsPlayed(played);
+    }, [played]);
+
+    const handlePlayToggle = () => {
+      setIsPlayed(!isPlayed);
+    };
 
     return (
       <>
         <div
-          className={`flex flex-${dir} cursor-pointer gap-2 rounded-[3px] relative ring-1 ring-inset ring-white/10 lg:ring-[1px] hover:ring-2  hover:ring-inset hover:ring-accent-theme `}
+          className={`flex flex-${dir} cursor-pointer gap-2 rounded-[3px] relative ring-1 ring-inset ${
+            isAuthenticated
+              ? isPlayed
+                ? 'hover:ring-accent-theme'
+                : 'hover:ring-white/80'
+              : 'hover:ring-accent-theme'
+          } lg:ring-[1px] hover:ring-2 hover:ring-inset ring-white/10`}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
+          onClick={isAuthenticated ? handlePlayToggle : undefined}
         >
           {hovered && (
             <div className="speech down">
               <div className="flex flex-row items-center gap-1">
-                <p className="font-normal">
-                  {name} 
-                </p >
-                <p className="font-bold">
-                {rating}
-                </p>
+                <p className="font-normal">{name}</p>
+                <p className="font-bold">{rating}</p>
               </div>
             </div>
+          )}
+          {isAuthenticated && (
+            <CardActions
+              hovered={hovered}
+              liked={liked}
+              played={isPlayed}
+              gameId={id}
+              isLarge={isLarge}
+            />
           )}
           <Link
             as={{
@@ -53,18 +89,19 @@ const Card = React.memo(
             }}
           >
             <div
-              className={` relative ${width} ${height} rounded-[4px] flex flex-row justify-center overflow-hidden border-2 border-[transparent] `}
+              className={`relative w-full ${height} rounded-[4px] flex flex-row justify-center overflow-hidden border-2 border-[transparent]`}
             >
-              {imageUrl ?
-              <Image
-                src={imageUrl}
-                alt={`${name}-thumb`}
-                layout="fill"
-                objectFit="cover"
-                quality={100}
-                className=" "
-              />: <></>
-            }
+              {imageUrl ? (
+                <Image
+                  src={imageUrl}
+                  alt={`${name}-thumb`}
+                  layout="fill"
+                  objectFit="cover"
+                  quality={100}
+                />
+              ) : (
+                <></>
+              )}
               <ShadowEffect />
             </div>
           </Link>

@@ -12,12 +12,15 @@ const useFilterStore = create<FiltersState>((set) => ({
   resetFilters: () => set({ genre: null, platform: null, store: null, search: '' }),
   setSearch: (search: string ) => set({ search }),
 }));
+
 const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: false,
   token: null,
   user: null,
+  activeState: 'default',
   login: (token: string, user: UserProfile) => set({ isAuthenticated: true, token, user }),
   logout: () => set({ isAuthenticated: false, token: null, user: null }),
+  setActiveState: (state) => set({ activeState: state }),
 }));
 
 const usePaginationStore = create<PaginationState>((set) => ({

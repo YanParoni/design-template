@@ -17,6 +17,8 @@ import { AuthGateway } from '@infra/gateways/auth'
 import { IAuthGateway } from '@infra/gateways/contracts/auth'
 import { IUserGateway } from '@infra/gateways/contracts/user'
 import { UserGateway } from '@infra/gateways/user'
+import { GameInteractionGateway } from '@infra/gateways/game-interaction'
+import {  IGameInteractionGateway} from '@infra/gateways/contracts/game-interaction'
 
 const iocContainer = new Container({ defaultScope: 'Singleton' })
 
@@ -30,6 +32,7 @@ iocContainer.bind<IStoreInfoGateway>('StoreInfoGateway').to(StoreInfoGateway)
 iocContainer.bind<IStoreInfoGateway>('StoreInfoProxy').to(StoreInfoProxy)
 iocContainer.bind<IAuthGateway>('AuthGateway').to(AuthGateway)
 iocContainer.bind<IUserGateway>('UserGateway').to(UserGateway)
+iocContainer.bind<IGameInteractionGateway>('GameInteractionGateway').to(GameInteractionGateway)
 
 
 export { iocContainer }

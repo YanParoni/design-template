@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { iocContainer } from "@ioc/index";
 import { IGameInteractionGateway, CreateInteractionDto } from "@infra/gateways/contracts/game-interaction";
+import { useAuthStore } from "client/store";
 
 async function createInteraction(data: CreateInteractionDto) {
   const gateway = iocContainer.get<IGameInteractionGateway>('GameInteractionGateway');
@@ -20,16 +21,18 @@ export const useCreateInteraction = () => {
   };
 };
 
-async function getUserInteractions(userId: string) {
+export async function getUserInteractions(userId: string) {
+
   const gateway = iocContainer.get<IGameInteractionGateway>('GameInteractionGateway');
   const response = await gateway.getUserInteractions(userId);
   return response;
 }
 
-export const useGetUserInteractions = (userId: string) => {
+export const useGameInteractions = () => {
+  const { user } = useAuthStore();
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ['getUserInteractions', userId],
-    queryFn: () => getUserInteractions(userId),
+    queryKey: ['getUserInteractions', user?.id],
+    queryFn: () => getUserInteractions(user!.id),
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });

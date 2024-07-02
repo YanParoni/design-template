@@ -15,7 +15,6 @@ export class FetchHttpClient implements IHttpClient {
   }
 
   private async fetchRequest(input: RequestInfo, init?: RequestInit): Promise<HttpClientDTO.Output> {
-    console.log(input,  'fetch request', init)
     const response = await fetch(input, init);
     
     if (!response.ok) {
@@ -25,7 +24,6 @@ export class FetchHttpClient implements IHttpClient {
   }
 
   async get({ url, headers, params }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
-    console.log(url,'http')
     const hasParams = params && Object.keys(params).length > 0;
     const queryParams = hasParams ? new URLSearchParams(params).toString() : '';
     const fullUrl = queryParams ? `${url}?${queryParams}` : url;

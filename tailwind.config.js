@@ -4,6 +4,7 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/ui/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./public/*.{png,svg}"
   ],
   theme: {
     extend: {

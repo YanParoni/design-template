@@ -15,7 +15,6 @@ export class UserGateway implements IUserGateway {
 
   async getProfile(data: any): Promise<any> {
     const token = jwt.decode(data) as {sub:string}
-    console.log(data, 'token gateway')
     const url = `${BASE_URL}/users/profile/${token.sub}`	;
     try {
       const response = await this.fetchHttpClient.get({

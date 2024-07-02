@@ -4,11 +4,10 @@ import { getProfile } from '@ui/queries/user';
 
 const useFetchProfile = () => {
   const [user, setUser] = useState(null);
-  const { isAuthenticated, login, logout } = useAuthStore();
-  const [activeState, setActiveState] = useState<'default' | 'login' | 'signup' | 'logged'>('default');
+  const { isAuthenticated, login, logout, setActiveState } = useAuthStore();
 
   useEffect(() => {
-    const token = localStorage.getItem('accessToken')
+    const token = localStorage.getItem('accessToken');
 
     const fetchProfile = async () => {
       if (token) {
@@ -25,12 +24,12 @@ const useFetchProfile = () => {
       }
     };
 
-    if ( token) {
+    if (token) {
       fetchProfile();
     }
-  }, [isAuthenticated, login, logout]);
+  }, [isAuthenticated, login, logout, setActiveState]);
 
-  return { user, activeState, setActiveState };
+  return { user };
 };
 
 export default useFetchProfile;

@@ -26,8 +26,8 @@
       --secondary-color: 0deg 0% 16%;
       --transparent: 76 175 80 0;  
       --custom-box-shadow: 0 1px 5px rgba(0,0,0,.25), 0 1px 10px rgba(0,0,0,.35);
-
   }
+  
   input::placeholder {
     font-size: 12px;
   }

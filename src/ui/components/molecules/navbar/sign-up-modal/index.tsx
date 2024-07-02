@@ -1,5 +1,5 @@
 import Modal from '@ui/components/organisms/modal';
-import SignUpForm from '@ui/components/molecules/sign-up-form';
+import SignUpForm from '@ui/components/molecules/navbar/sign-up-form';
 
 interface SignUpModalProps {
   isVisible: boolean;

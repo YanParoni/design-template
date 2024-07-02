@@ -20,9 +20,7 @@ const Input: React.FC<InputProps> = ({ label, variant, type='text', onChange }) 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
 
-  useEffect(()=>{
-    console.log(isFocused,'focus')
-  },[isFocused])
+
   
   return (
     <div className="w-full">

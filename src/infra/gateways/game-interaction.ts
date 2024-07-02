@@ -1,3 +1,4 @@
+// src/infra/gateways/game-interaction.ts
 import { inject, injectable } from 'inversify';
 import TYPES from '@infra/http/types';
 import type { IHttpClient } from '../http/contracts';

@@ -51,7 +51,9 @@ export type AuthState = {
   isAuthenticated: boolean;
   token: string | null;
   user: UserProfile | null;
+  activeState: 'default' | 'login' | 'signup' | 'logged';
   login: (token: string, user: UserProfile) => void;
   logout: () => void;
+  setActiveState: (state: 'default' | 'login' | 'signup' | 'logged') => void;
 };
 
