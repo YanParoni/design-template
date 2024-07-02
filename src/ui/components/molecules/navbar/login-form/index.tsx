@@ -40,7 +40,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ isVisible, onCloseClick }) => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="flex flex-col  lg:flex-row  space-x-4 space-y-2  lg:space-y-0 items-start lg:items-end px-8 lg:px-0"
+          className="flex flex-col  lg:flex-row  space-x-2 space-y-2  lg:space-y-0 items-start lg:items-end px-8 lg:px-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -54,7 +54,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ isVisible, onCloseClick }) => {
             <Input label="Username" variant="primary" onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className="w-screen pr-6 lg:pr-0 lg:w-[150px]">
-            <Input label="Password" variant="primary" onChange={(e) => setPassword(e.target.value)} />
+            <Input forgottenLabel type='password' label="Password" variant="primary" onChange={(e) => setPassword(e.target.value)} />
           </div>
           <div className='flex flex-row py-2 pr-4  lg:py-0 justify-between  w-screen lg:w-fit lg:gap-2'>
             <div className="flex flex-col justify-end">
