@@ -11,7 +11,6 @@ const Navbar: React.FC = () => {
   const { isMobile } = useDeviceDetect();
   useFetchProfile();
 
- 
   return (
     <header className="bg-dark-background text-primary-color flex flex-col items-center">
       <nav className="max-w-[960px] w-full px-4 md:px-0 bg-dark-background h-[72px] flex items-center">

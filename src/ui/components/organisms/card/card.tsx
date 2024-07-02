@@ -43,10 +43,6 @@ const Card = React.memo(
       setIsPlayed(played);
     }, [played]);
 
-    const handlePlayToggle = () => {
-      setIsPlayed(!isPlayed);
-    };
-
     return (
       <>
         <div
@@ -59,7 +55,6 @@ const Card = React.memo(
           } lg:ring-[1px] hover:ring-2 hover:ring-inset ring-white/10`}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
-          onClick={isAuthenticated ? handlePlayToggle : undefined}
         >
           {hovered && (
             <div className="speech down">
@@ -73,6 +68,7 @@ const Card = React.memo(
             <CardActions
               hovered={hovered}
               liked={liked}
+              setIsPlayed={setIsPlayed}
               played={isPlayed}
               gameId={id}
               isLarge={isLarge}
@@ -113,4 +109,4 @@ const Card = React.memo(
 
 Card.displayName = 'Card';
 
-export default Card;
+export default Card

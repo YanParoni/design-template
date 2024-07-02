@@ -1,37 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { EllipsisHorizontalIcon, HeartIcon } from '@heroicons/react/24/solid';
+import { HeartIcon } from '@heroicons/react/24/solid';
 import ControllerIcon from '@ui/components/atoms/card/controller-icon';
 import { useCreateInteraction } from '@ui/queries/game-interaction';
 import EllipsisIcon from '@ui/components/atoms/card/ellipsis-icon';
+
 type Props = {
   hovered: boolean;
   liked?: boolean;
   played?: boolean;
   gameId: string;
   isLarge: boolean;
+  setIsPlayed:any
 };
 
-const CardActions = ({ hovered, liked = false, played = false, gameId, isLarge }: Props) => {
+const CardActions = ({ hovered, liked = false, played = false, gameId, isLarge , setIsPlayed}: Props) => {
   const { createInteraction } = useCreateInteraction();
 
   const [isLiked, setIsLiked] = useState(liked);
-  const [isPlayed, setIsPlayed] = useState(played);
 
   useEffect(() => {
     setIsLiked(liked);
     setIsPlayed(played);
   }, [liked, played]);
 
-  const handleLike = async () => {
+  const handleLike = async (e: React.MouseEvent) => {
+    e.stopPropagation();
     const newLikedState = !isLiked;
     setIsLiked(newLikedState);
-    await createInteraction({ gameId, liked: newLikedState, played: isPlayed });
+    await createInteraction({ gameId, liked: newLikedState, played: played });
   };
 
-  const handlePlay = async () => {
-    const newPlayedState = !isPlayed;
-    setIsPlayed(newPlayedState);
-    await createInteraction({ gameId, liked: isLiked, played: newPlayedState });
+  const handlePlay = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsPlayed(!played);
+    await createInteraction({ gameId, liked: isLiked, played: !played });
   };
 
   return (
@@ -44,7 +46,7 @@ const CardActions = ({ hovered, liked = false, played = false, gameId, isLarge }
         >
           <ControllerIcon
             className={`w-6 h-6 ${isLarge ? 'w-7 h-7' : ''} ${
-              isPlayed ? 'fill-accent-theme' : 'fill-[#f1ddff] hover:fill-[#d8c7e2]'
+              played ? 'fill-accent-theme' : 'fill-[#f1ddff] hover:fill-[#d8c7e2]'
             }`}
             onClick={handlePlay}
           />
