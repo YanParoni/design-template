@@ -2,12 +2,12 @@ import React from 'react';
 import NavigationLinks from '@ui/components/molecules/navbar/navigation-links';
 import LoginForm from '@ui/components/molecules/navbar/login-form';
 import SignUpModal from '@ui/components/molecules/navbar/sign-up-modal';
-import { UserIcon } from '@heroicons/react/24/solid';
 import { useAuthStore } from 'client/store';
-
+import UserDropdown from '../user-dropdown';
 
 const DesktopContent: React.FC = () => {
-  const { activeState, setActiveState, isAuthenticated, logout, user } = useAuthStore();
+
+  const { activeState, setActiveState, logout, } = useAuthStore();
 
   const handleSignInClick = () => {
     setTimeout(() => setActiveState('login'), 200);
@@ -30,7 +30,7 @@ const DesktopContent: React.FC = () => {
     logout();
     setActiveState('default');
   };
-  
+
   return (
     <>
       {activeState === 'default' && (
@@ -40,15 +40,13 @@ const DesktopContent: React.FC = () => {
           isVisible={activeState === 'default'}
         />
       )}
-      {activeState === 'login' && <LoginForm isVisible={true} onCloseClick={handleCloseClick} />}
-      {activeState === 'signup' && <SignUpModal isVisible={true} onClose={handleCloseModal} />}
-      {isAuthenticated && (
-        <div className="flex items-center space-x-4">
-
-          <UserIcon className="w-6 h-6 text-white cursor-pointer" onClick={handleLogout} />
-          <button className="text-white" onClick={handleLogout}>Logout</button>
-        </div>
+      {activeState === 'login' && (
+        <LoginForm isVisible={true} onCloseClick={handleCloseClick} />
       )}
+      {activeState === 'signup' && (
+        <SignUpModal isVisible={true} onClose={handleCloseModal} />
+      )}
+      <UserDropdown/>
     </>
   );
 };

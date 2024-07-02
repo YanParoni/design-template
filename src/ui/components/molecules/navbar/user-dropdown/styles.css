@@ -1,0 +1,39 @@
+
+.dropdown {
+  @apply relative inline-block text-left  rounded-[3px]   ;
+}
+
+.dropdown-open {
+  @apply w-full  shadow-[inset_0_1px_0_rgba(0,0,0,.05),0_0_15px_rgba(0,0,0,.5)] ;
+
+}
+
+.dropdown-button {
+  @apply inline-flex justify-center items-center shadow-sm pt-1 pb-1 z-0 text-xs font-montserrat font-normal cursor-pointer   ;
+
+}
+
+.dropdown-button-open {
+  @apply text-white  px-2;
+}
+
+.dropdown-button-closed {
+  @apply text-description hover:text-white;
+}
+
+.dropdown-list {
+  @apply absolute w-full top-[0] z-50 bg-[#9188a8]  rounded-[3px] border-t-[1px] hover:border-t-white/60 ;
+  min-width: max-content;
+}
+
+.dropdown-item {
+  @apply block w-full text-left text-[black] px-4 py-1 text-[11px] hover:bg-[#786f8e] hover:text-white cursor-pointer ;
+}
+
+.dropdown-item-selected {
+  @apply text-white;
+}
+
+.dropdown-item-border {
+  @apply border-t border-b border-[#7a7b99];
+}
