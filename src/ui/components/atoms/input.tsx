@@ -27,7 +27,7 @@ const Input: React.FC<InputProps> = ({ label, variant, type = 'text', onChange, 
       <div className='w-full flex justify-between '>
       <label className="text-description text-[12px] mb-1">{label}</label>
       {type === 'password' && forgottenLabel && (
-          <Link className=" text-accent-theme hover:text-white text-[12px] font-semibold" href='/forgot'>Forgotten?</Link>
+          <Link className=" text-accent-theme hover:text-white text-[12px] font-semibold" href='/user/request-reset'>Forgotten?</Link>
       )}
       </div>
       <input

@@ -7,7 +7,6 @@ interface SplitButtonProps {
 
 const SplitButton: React.FC<SplitButtonProps> = ({
   onMainClick,
-  onSecondaryClick,
 }) => {
   return (
     <div className="relative inline-flex">

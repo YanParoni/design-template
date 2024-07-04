@@ -21,6 +21,7 @@ const CardActions = ({ hovered, liked = false, played = false, gameId, isLarge ,
   useEffect(() => {
     setIsLiked(liked);
     setIsPlayed(played);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [liked, played]);
 
   const handleLike = async (e: React.MouseEvent) => {
