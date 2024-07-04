@@ -1,5 +1,4 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import UserDropdown from '../user-dropdown';
 import { useAuthStore } from 'client/store';
 
 interface NavigationLinksProps {
@@ -11,7 +10,7 @@ const NavigationLinks: React.FC<NavigationLinksProps> = ({
   onSignInClick,
   onCreateAccountClick,
 }) => {
-  const { activeState, setActiveState, logout } = useAuthStore();
+  const { activeState } = useAuthStore();
 
   return (
     <AnimatePresence>
@@ -58,7 +57,6 @@ const NavigationLinks: React.FC<NavigationLinksProps> = ({
         </motion.a>
           </>
         )}
-        <UserDropdown />
       </motion.div>
     </AnimatePresence>
   );

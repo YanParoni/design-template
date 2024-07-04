@@ -12,12 +12,12 @@ const LayoutSelector: React.FC = () => {
   const { pageSize, setPageSize } = usePaginationStore();
 
   useEffect(() => {
-    setLayout(pageSize === 12 ? layoutOptions.LIST : layoutOptions.GRID);
+    setLayout(pageSize === 15 ? layoutOptions.LIST : layoutOptions.GRID);
   }, [pageSize]);
 
   const togglePageSize = () => {
     if (pageSize === 40) {
-      setPageSize(12);
+      setPageSize(15);
     } else {
       setPageSize(40);
     }

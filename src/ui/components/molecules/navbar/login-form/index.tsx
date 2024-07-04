@@ -6,16 +6,16 @@ import Input from '@ui/components/atoms/input';
 import GoogleButton from '@ui/components/atoms/google-button';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { useLogin } from '@ui/queries/auth'; 
-
+import { useAuthStore } from 'client/store';
 interface LoginFormProps {
-  isVisible: boolean;
   onCloseClick: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ isVisible, onCloseClick }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { mutateAsync } = useLogin();
+  const { activeState, setActiveState } = useAuthStore();
 
   const handleLogin = async () => {
     try {
@@ -38,7 +38,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ isVisible, onCloseClick }) => {
 
   return (
     <AnimatePresence>
-      {isVisible && (
+      {activeState === 'login' && (
         <motion.div
           className="flex flex-col  lg:flex-row  space-x-2 space-y-2  lg:space-y-0 items-start lg:items-end px-8 lg:px-0"
           initial={{ opacity: 0 }}

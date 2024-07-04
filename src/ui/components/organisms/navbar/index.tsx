@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
 
   return (
     <header className="bg-dark-background text-primary-color flex flex-col items-center">
-      <nav className="max-w-[960px] w-full px-4 md:px-0 bg-dark-background h-[72px] flex items-center">
+      <nav className="max-w-[960px] w-full px-4 md:px-0 bg-dark-background lg:h-[72px] h-[40px] flex items-center">
         <div className="flex justify-between items-center w-full">
           <Logo />
           <div className="flex space-x-4">

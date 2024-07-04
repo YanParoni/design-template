@@ -46,7 +46,7 @@ const Card = React.memo(
     return (
       <>
         <div
-          className={`flex flex-${dir} cursor-pointer gap-2 rounded-[3px] relative ring-1 ring-inset ${
+          className={`flex flex-${dir} cursor-pointer gap-2 rounded-[4px] relative ring-1 ring-inset ${
             isAuthenticated
               ? isPlayed
                 ? 'hover:ring-accent-theme'

@@ -46,7 +46,7 @@ const useUrlSync = () => {
     }
 
     if (size) {
-      paginationStore.setPageSize(size === 'large' ? 40 : 12);
+      paginationStore.setPageSize(size === 'large' ? 40 : 15);
     }
 
     if (page) {

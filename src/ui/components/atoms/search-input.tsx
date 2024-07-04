@@ -19,7 +19,7 @@ const SearchInput: React.FC<InputProps> = ({ onChange, onClick }) => {
   };
 
   return (
-    <div className="relative w-full max-w-[140px]">
+    <div className="relative w-full min-w-[140px]">
       <input
         type="text"
         placeholder="Search here..."

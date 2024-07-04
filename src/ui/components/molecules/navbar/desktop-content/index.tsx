@@ -3,10 +3,10 @@ import NavigationLinks from '@ui/components/molecules/navbar/navigation-links';
 import LoginForm from '@ui/components/molecules/navbar/login-form';
 import SignUpModal from '@ui/components/molecules/navbar/sign-up-modal';
 import { useAuthStore } from 'client/store';
+import LoggedNavbar from '../logged-nav';
 
 const DesktopContent: React.FC = () => {
-
-  const { activeState, setActiveState } = useAuthStore();
+  const { setActiveState } = useAuthStore();
 
   const handleSignInClick = () => {
     setTimeout(() => setActiveState('login'), 200);
@@ -26,16 +26,13 @@ const DesktopContent: React.FC = () => {
 
   return (
     <>
-        <NavigationLinks
-          onSignInClick={handleSignInClick}
-          onCreateAccountClick={handleCreateAccountClick}
-        />
-      {activeState === 'login' && (
-        <LoginForm isVisible={true} onCloseClick={handleCloseClick} />
-      )}
-      {activeState === 'signup' && (
-        <SignUpModal isVisible={true} onClose={handleCloseModal} />
-      )}
+      <NavigationLinks
+        onSignInClick={handleSignInClick}
+        onCreateAccountClick={handleCreateAccountClick}
+      />
+        <LoginForm onCloseClick={handleCloseClick} />
+        <SignUpModal onClose={handleCloseModal} />
+        <LoggedNavbar/>
     </>
   );
 };

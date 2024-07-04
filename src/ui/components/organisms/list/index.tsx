@@ -49,14 +49,14 @@ function List() {
       </div>
     );
   }
-  const isLarge = pageSize === 12;
+  const isLarge = pageSize === 15;
 
   return (
     <div className="flex flex-col mt-[.76923077rem] min-h-screen">
       {transformedGames && transformedGames.length > 0 ? (
         <>
           <motion.div
-            className={`grid gap-2 w-full ${isMobile ? 'grid-cols-3' : isLarge ? 'grid-cols-4' : 'grid-cols-8'}`}
+            className={`grid gap-2 w-full ${isMobile ? 'grid-cols-4' : isLarge ? 'grid-cols-5' : 'grid-cols-8'}`}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
@@ -68,7 +68,7 @@ function List() {
                 imageUrl={game.background_image}
                 rating={game.rating}
                 name={game.name}
-                height={isLarge ? 'h-[261px]' : 'h-[150px]'}
+                height={isMobile ? 'h-[101px]': isLarge? 'h-[255px]': 'h-[150px]'}
                 dir="col"
                 liked={game.liked}
                 played={game.played}
