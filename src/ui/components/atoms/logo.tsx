@@ -1,7 +1,7 @@
 const Logo: React.FC = () => (
-  <div className="text-white tracking-wide text-[24px] font-montserrat font-semibold cursor-pointer">
+  <div className="cursor-pointer font-montserrat text-[24px] font-semibold tracking-wide text-white">
     Playboxd
   </div>
 );
 
-export default Logo
+export default Logo;

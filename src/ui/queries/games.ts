@@ -6,10 +6,10 @@ import { useFilterStore, usePaginationStore } from "client/store";
 import { useGameStore } from "client/store";
 
 export async function getGames(params: IQueryParams) {
-    const gateway = iocContainer.get<IGamesGateway>('GamesGateway');
-    const response = await gateway.searchGame(params)
-    useGameStore.getState().setGames(response.games)
-    return response.games
+  const gateway = iocContainer.get<IGamesGateway>("GamesGateway");
+  const response = await gateway.searchGame(params);
+  useGameStore.getState().setGames(response.games);
+  return response.games;
 }
 
 export const useSearchGames = (name?: string) => {
@@ -19,12 +19,20 @@ export const useSearchGames = (name?: string) => {
   const { currentPage, pageSize } = pagination;
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ['getGames', currentPage, pageSize, genre, platform, store, search],
+    queryKey: [
+      "getGames",
+      currentPage,
+      pageSize,
+      genre,
+      platform,
+      store,
+      search,
+    ],
     queryFn: () => {
       const obj: IQueryParams = {
-        parent_platforms: platform ? platform.toString() : '',
-        genres: genre || '',
-        stores: store ? store.toString() : '',
+        parent_platforms: platform ? platform.toString() : "",
+        genres: genre || "",
+        stores: store ? store.toString() : "",
         page: currentPage.toString(),
         search: search,
         page_size: pageSize,
@@ -33,7 +41,9 @@ export const useSearchGames = (name?: string) => {
         obj.search = name;
       }
       const filteredObj = Object.fromEntries(
-        Object.entries(obj).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+        Object.entries(obj).filter(
+          ([_, v]) => v !== null && v !== undefined && v !== "",
+        ),
       );
       return getGames(filteredObj);
     },
@@ -44,14 +54,14 @@ export const useSearchGames = (name?: string) => {
   return { data, isLoading, refetch };
 };
 
-export const useSearchChatGames = (args:IQueryParams) =>{
-    const { data,isLoading,isSuccess } = useQuery({
-        queryKey: ["chatGames",args.search],
-        queryFn: () => {
-            return getGames(args)
-        },
-        refetchOnWindowFocus: false,
-        refetchOnMount: false,
-    });
-    return { data,isLoading,isSuccess }
-}
+export const useSearchChatGames = (args: IQueryParams) => {
+  const { data, isLoading, isSuccess } = useQuery({
+    queryKey: ["chatGames", args.search],
+    queryFn: () => {
+      return getGames(args);
+    },
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
+  return { data, isLoading, isSuccess };
+};

@@ -1,5 +1,5 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { useAuthStore } from 'client/store';
+import { motion, AnimatePresence } from "framer-motion";
+import { useAuthStore } from "client/store";
 
 interface NavigationLinksProps {
   onSignInClick: () => void;
@@ -19,13 +19,13 @@ const NavigationLinks: React.FC<NavigationLinksProps> = ({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className="flex space-x-4 items-center "
+        className="flex items-center space-x-4"
       >
-        {activeState === 'default' && (
+        {activeState === "default" && (
           <>
             <motion.a
               href="#"
-              className="font-montserrat font-semibold text-description hover:text-white text-[14px]"
+              className="font-montserrat text-[14px] font-semibold text-description hover:text-white"
               onClick={onSignInClick}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -36,7 +36,7 @@ const NavigationLinks: React.FC<NavigationLinksProps> = ({
             </motion.a>
             <motion.a
               href="#"
-              className="font-montserrat font-semibold text-description hover:text-white text-[14px]"
+              className="font-montserrat text-[14px] font-semibold text-description hover:text-white"
               onClick={onCreateAccountClick}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -46,15 +46,15 @@ const NavigationLinks: React.FC<NavigationLinksProps> = ({
               CREATE ACCOUNT
             </motion.a>
             <motion.a
-          href=""
-          className="font-montserrat font-semibold text-description hover:text-white text-[14px]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          GAMES
-        </motion.a>
+              href=""
+              className="font-montserrat text-[14px] font-semibold text-description hover:text-white"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              GAMES
+            </motion.a>
           </>
         )}
       </motion.div>

@@ -1,13 +1,13 @@
-import * as React from 'react';
+import * as React from "react";
 
 interface IChatTitle {
-  title: string
+  title: string;
 }
 
 export function ChatTitle({ title }: IChatTitle) {
   return (
-    <div className='flex w-full'>
-      <h3 className="mx-16  text-primary-color text-center font-normal text-2xl md:text-lg">
+    <div className="flex w-full">
+      <h3 className="mx-16 text-center text-2xl font-normal text-primary-color md:text-lg">
         {title}
       </h3>
     </div>

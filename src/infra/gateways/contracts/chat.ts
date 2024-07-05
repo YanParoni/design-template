@@ -1,4 +1,3 @@
-
 export interface IChatGateway {
-    getCompletion: (...params: any) => Promise<any>
-  }
+  getCompletion: (...params: any) => Promise<any>;
+}

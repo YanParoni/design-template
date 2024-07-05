@@ -1,44 +1,47 @@
-function levenshteinDistance(a:any, b:any) {
-    const matrix = [];
+function levenshteinDistance(a: any, b: any) {
+  const matrix = [];
 
-    for (let i = 0; i <= b.length; i++) {
-        matrix[i] = [i];
+  for (let i = 0; i <= b.length; i++) {
+    matrix[i] = [i];
+  }
+
+  for (let j = 0; j <= a.length; j++) {
+    matrix[0][j] = j;
+  }
+
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (a[j - 1] === b[i - 1]) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j] + 1,
+          matrix[i][j - 1] + 1,
+          matrix[i - 1][j - 1] + 1,
+        );
+      }
     }
+  }
 
-    for (let j = 0; j <= a.length; j++) {
-        matrix[0][j] = j;
-    }
-
-    for (let i = 1; i <= b.length; i++) {
-        for (let j = 1; j <= a.length; j++) {
-            if (a[j - 1] === b[i - 1]) {
-                matrix[i][j] = matrix[i - 1][j - 1];
-            } else {
-                matrix[i][j] = Math.min(
-                    matrix[i - 1][j] + 1,
-                    matrix[i][j - 1] + 1,
-                    matrix[i - 1][j - 1] + 1
-                );
-            }
-        }
-    }
-
-    return matrix[b.length][a.length];
+  return matrix[b.length][a.length];
 }
 
-function findClosestGame(data:any, criteria:any) {
-    let closestGame = null;
-    let minDistance = Infinity;
+function findClosestGame(data: any, criteria: any) {
+  let closestGame = null;
+  let minDistance = Infinity;
 
-    data.forEach((game:any) => {
-        const distance = levenshteinDistance(criteria.toLowerCase(), game.slug.toLowerCase());
-        if (distance < minDistance) {
-            minDistance = distance;
-            closestGame = game;
-        }
-    });
+  data.forEach((game: any) => {
+    const distance = levenshteinDistance(
+      criteria.toLowerCase(),
+      game.slug.toLowerCase(),
+    );
+    if (distance < minDistance) {
+      minDistance = distance;
+      closestGame = game;
+    }
+  });
 
-    return closestGame;
+  return closestGame;
 }
 
 export default findClosestGame;

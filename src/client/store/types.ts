@@ -25,7 +25,6 @@ export type FiltersState = {
   setSearch: (search: string) => void;
 };
 
-
 export type PaginationState = {
   currentPage: number;
   pageSize: number;
@@ -51,9 +50,8 @@ export type AuthState = {
   isAuthenticated: boolean;
   token: string | null;
   user: UserProfile | null;
-  activeState: 'default' | 'login' | 'signup' | 'logged';
+  activeState: "default" | "login" | "signup" | "logged";
   login: (token: string, user: UserProfile) => void;
   logout: () => void;
-  setActiveState: (state: 'default' | 'login' | 'signup' | 'logged') => void;
+  setActiveState: (state: "default" | "login" | "signup" | "logged") => void;
 };
-

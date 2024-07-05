@@ -1,17 +1,21 @@
-import { RefObject, useEffect } from 'react'
+import { RefObject, useEffect } from "react";
 
-export function useClickOutside (ref: RefObject<any>, fnAfterClick: () => void, ...someStates: any[]) {
+export function useClickOutside(
+  ref: RefObject<any>,
+  fnAfterClick: () => void,
+  ...someStates: any[]
+) {
   useEffect(() => {
     const handleClickOut = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target)) {
-        fnAfterClick()
+        fnAfterClick();
       }
-    }
+    };
 
-    document.addEventListener('mousedown', handleClickOut)
+    document.addEventListener("mousedown", handleClickOut);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOut)
-    }
-  }, [ref, fnAfterClick, ...someStates])
+      document.removeEventListener("mousedown", handleClickOut);
+    };
+  }, [ref, fnAfterClick, ...someStates]);
 }

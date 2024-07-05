@@ -1,14 +1,18 @@
-import { inject, injectable } from 'inversify';
-import TYPES from '@infra/http/types';
-import type { IHttpClient } from '../http/contracts';
-import { IAuthGateway, LoginUserDto } from './contracts/auth';
+import { inject, injectable } from "inversify";
+import TYPES from "@infra/http/types";
+import type { IHttpClient } from "../http/contracts";
+import { IAuthGateway, LoginUserDto } from "./contracts/auth";
 
-const BASE_URL = process.env.NEXT_PUBLIC_REACT_APP === 'production' ? '' : 'http://localhost:3000';
+const BASE_URL =
+  process.env.NEXT_PUBLIC_REACT_APP === "production"
+    ? ""
+    : "http://localhost:3000";
 
 @injectable()
 export class AuthGateway implements IAuthGateway {
   constructor(
-    @inject(TYPES.AxiosHttpClient) private readonly fetchHttpClient: IHttpClient
+    @inject(TYPES.AxiosHttpClient)
+    private readonly fetchHttpClient: IHttpClient,
   ) {}
 
   async login(data: LoginUserDto): Promise<any> {
@@ -18,12 +22,12 @@ export class AuthGateway implements IAuthGateway {
         url,
         data,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
       return response;
     } catch (error) {
-      console.error('Error in AuthGateway login', error);
+      console.error("Error in AuthGateway login", error);
     }
   }
 
@@ -33,12 +37,12 @@ export class AuthGateway implements IAuthGateway {
       const response = await this.fetchHttpClient.get({
         url,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
       return response;
     } catch (error) {
-      console.error('Error in AuthGateway getProfile', error);
+      console.error("Error in AuthGateway getProfile", error);
     }
   }
 }

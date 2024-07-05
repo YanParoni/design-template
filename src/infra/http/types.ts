@@ -1,6 +1,6 @@
 const TYPES = {
-    AxiosHttpClient: Symbol.for('AxiosHttpClient'),
-    FetchHttpClient: Symbol.for('FetchHttpClient'),
-  };
+  AxiosHttpClient: Symbol.for("AxiosHttpClient"),
+  FetchHttpClient: Symbol.for("FetchHttpClient"),
+};
 
-export default TYPES
+export default TYPES;

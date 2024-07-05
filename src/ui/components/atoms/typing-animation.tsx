@@ -2,13 +2,13 @@ import { motion } from "framer-motion";
 import React from "react";
 
 const TypingAnimation = () => {
-  const delay = 0.3; 
+  const delay = 0.3;
   return (
     <div className="flex items-center space-x-2">
       {[...Array(3)].map((_, index) => (
         <motion.div
           key={index}
-          className="w-3 h-3 rounded-full bg-gradient-to-r from-gray-400 to-gray-600"
+          className="h-3 w-3 rounded-full bg-gradient-to-r from-gray-400 to-gray-600"
           initial={{ y: 0, opacity: 1 }}
           animate={{
             y: [0, 10, 0],
@@ -18,7 +18,7 @@ const TypingAnimation = () => {
             duration: 1.5,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: index * delay, 
+            delay: index * delay,
           }}
         ></motion.div>
       ))}

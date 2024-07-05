@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+import React, { useState } from "react";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,7 +13,7 @@ const SearchInput: React.FC<InputProps> = ({ onChange, onClick }) => {
   const handleBlur = () => setIsFocused(false);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       onClick(e as any);
     }
   };
@@ -23,14 +23,17 @@ const SearchInput: React.FC<InputProps> = ({ onChange, onClick }) => {
       <input
         type="text"
         placeholder="Search here..."
-        className="w-full border-b-2 border-b-[#574964] text-description font-montserrat bg-light-purple text-1rem leading-[1.0625rem] px-2 rounded-full h-[24px] pl-4 pr-8"
-        style={{ backgroundColor: isFocused ? 'white' : '' }}
+        className="text-1rem h-[24px] w-full rounded-full border-b-2 border-b-[#574964] bg-light-purple px-2 pl-4 pr-8 font-montserrat leading-[1.0625rem] text-description"
+        style={{ backgroundColor: isFocused ? "white" : "" }}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onChange}
         onKeyDown={handleKeyDown}
       />
-      <MagnifyingGlassIcon onClick={onClick} className="absolute cursor-pointer right-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-description" />
+      <MagnifyingGlassIcon
+        onClick={onClick}
+        className="absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 transform cursor-pointer text-description"
+      />
     </div>
   );
 };

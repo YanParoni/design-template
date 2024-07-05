@@ -6,16 +6,14 @@ export default function useDeviceDetect() {
   useEffect(() => {
     const checkIsMobile = () => {
       const screenWidth = window.innerWidth;
-      const isMobile = screenWidth < 920; 
+      const isMobile = screenWidth < 920;
       setMobile(isMobile);
     };
 
     checkIsMobile();
 
-   
     window.addEventListener("resize", checkIsMobile);
 
-   
     return () => {
       window.removeEventListener("resize", checkIsMobile);
     };

@@ -1,10 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
-import { IAuthGateway, LoginUserDto } from "../../infra/gateways/contracts/auth";
+import {
+  IAuthGateway,
+  LoginUserDto,
+} from "../../infra/gateways/contracts/auth";
 import { useDeps } from "../hooks/use-deps";
 import { useAuthStore } from "client/store";
 
 export const useLogin = () => {
-  const auth = useDeps<IAuthGateway>('AuthGateway');
+  const auth = useDeps<IAuthGateway>("AuthGateway");
   const { login } = useAuthStore();
 
   const { mutateAsync, data, isPending } = useMutation({
@@ -21,6 +24,6 @@ export const useLogin = () => {
   return {
     mutateAsync,
     data,
-    isPending
+    isPending,
   };
 };

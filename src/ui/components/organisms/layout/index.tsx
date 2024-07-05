@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface LayoutContainerProps {
   children: React.ReactNode;
@@ -6,10 +6,8 @@ interface LayoutContainerProps {
 
 const LayoutContainer: React.FC<LayoutContainerProps> = ({ children }) => {
   return (
-    <div className="min-h-screen     text-primary-color flex justify-center">
-      <div className="max-w-[960px] pt-7 w-full px-4 md:px-0">
-        {children}
-      </div>
+    <div className="flex min-h-screen justify-center text-primary-color">
+      <div className="w-full max-w-[960px] px-4 pt-7 md:px-0">{children}</div>
     </div>
   );
 };

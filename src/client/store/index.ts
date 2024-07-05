@@ -1,24 +1,33 @@
-import { create } from 'zustand';
-import { FiltersState, PaginationState, GameState, GameResponse, AuthState, UserProfile } from './types';
+import { create } from "zustand";
+import {
+  FiltersState,
+  PaginationState,
+  GameState,
+  GameResponse,
+  AuthState,
+  UserProfile,
+} from "./types";
 
 const useFilterStore = create<FiltersState>((set) => ({
   genre: null,
   platform: null,
   store: null,
-  search: '',
+  search: "",
   setGenre: (genre: string | null) => set({ genre }),
   setPlatform: (platform: number | null) => set({ platform }),
   setStore: (store: number | null) => set({ store }),
-  resetFilters: () => set({ genre: null, platform: null, store: null, search: '' }),
-  setSearch: (search: string ) => set({ search }),
+  resetFilters: () =>
+    set({ genre: null, platform: null, store: null, search: "" }),
+  setSearch: (search: string) => set({ search }),
 }));
 
 const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: false,
   token: null,
   user: null,
-  activeState: 'default',
-  login: (token: string, user: UserProfile) => set({ isAuthenticated: true, token, user }),
+  activeState: "default",
+  login: (token: string, user: UserProfile) =>
+    set({ isAuthenticated: true, token, user }),
   logout: () => set({ isAuthenticated: false, token: null, user: null }),
   setActiveState: (state) => set({ activeState: state }),
 }));
@@ -35,7 +44,7 @@ const useGameStore = create<GameState>((set, get) => {
     count: 0,
     results: [],
     next: null,
-    previous:null,
+    previous: null,
   };
 
   const getGameByName = (name: string): any | undefined => {

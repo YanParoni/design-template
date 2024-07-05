@@ -5,6 +5,8 @@ export interface CreateInteractionDto {
 }
 
 export interface IGameInteractionGateway {
-  createInteraction: (createInteractionDto: CreateInteractionDto) => Promise<any>;
+  createInteraction: (
+    createInteractionDto: CreateInteractionDto,
+  ) => Promise<any>;
   getUserInteractions: (userId: string) => Promise<any>;
 }

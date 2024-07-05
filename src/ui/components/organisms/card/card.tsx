@@ -1,10 +1,10 @@
-import './styles.css';
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import ShadowEffect from '../../atoms/shadow-effect';
-import CardActions from '@ui/components/molecules/card/card-actions';
-import { useAuthStore } from 'client/store';
+import "./styles.css";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import ShadowEffect from "../../atoms/shadow-effect";
+import CardActions from "@ui/components/molecules/card/card-actions";
+import { useAuthStore } from "client/store";
 
 interface ICard {
   id: string;
@@ -19,15 +19,15 @@ interface ICard {
 }
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_REACT_APP === 'production'
-    ? 'https://design-template-ivory.vercel.app'
-    : 'http://localhost:3001';
+  process.env.NEXT_PUBLIC_REACT_APP === "production"
+    ? "https://design-template-ivory.vercel.app"
+    : "http://localhost:3001";
 
 const Card = React.memo(
   ({
-    id = '',
-    imageUrl = '',
-    name = '',
+    id = "",
+    imageUrl = "",
+    name = "",
     height,
     dir,
     rating,
@@ -46,13 +46,13 @@ const Card = React.memo(
     return (
       <>
         <div
-          className={`flex flex-${dir} cursor-pointer gap-2 rounded-[4px] relative ring-1 ring-inset ${
+          className={`flex flex-${dir} relative cursor-pointer gap-2 rounded-[4px] ring-1 ring-inset ${
             isAuthenticated
               ? isPlayed
-                ? 'hover:ring-accent-theme'
-                : 'hover:ring-white/80'
-              : 'hover:ring-accent-theme'
-          } lg:ring-[1px] hover:ring-2 hover:ring-inset ring-white/10`}
+                ? "hover:ring-accent-theme"
+                : "hover:ring-white/80"
+              : "hover:ring-accent-theme"
+          } ring-white/10 hover:ring-2 hover:ring-inset lg:ring-[1px]`}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
         >
@@ -85,7 +85,7 @@ const Card = React.memo(
             }}
           >
             <div
-              className={`relative w-full ${height} rounded-[4px] flex flex-row justify-center overflow-hidden border-2 border-[transparent]`}
+              className={`relative w-full ${height} flex flex-row justify-center overflow-hidden rounded-[4px] border-2 border-[transparent]`}
             >
               {imageUrl ? (
                 <Image
@@ -104,9 +104,9 @@ const Card = React.memo(
         </div>
       </>
     );
-  }
+  },
 );
 
-Card.displayName = 'Card';
+Card.displayName = "Card";
 
-export default Card
+export default Card;

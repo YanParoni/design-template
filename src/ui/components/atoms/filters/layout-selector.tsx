@@ -1,10 +1,10 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import { usePaginationStore } from 'client/store';
+"use client";
+import React, { useState, useEffect } from "react";
+import { usePaginationStore } from "client/store";
 
 const layoutOptions = {
-  GRID: 'GRID',
-  LIST: 'LIST',
+  GRID: "GRID",
+  LIST: "LIST",
 };
 
 const LayoutSelector: React.FC = () => {
@@ -25,9 +25,12 @@ const LayoutSelector: React.FC = () => {
 
   return (
     <div className="flex items-center gap-1">
-          <svg
-        onClick={() => { setLayout(layoutOptions.GRID); togglePageSize(); }}
-        className={`cursor-pointer  ${layout === layoutOptions.GRID ? 'fill-comp-description stroke-comp-description' : 'fill-comp-muted stroke-comp-muted'} hover:fill-comp-description hover:stroke-comp-description`}
+      <svg
+        onClick={() => {
+          setLayout(layoutOptions.GRID);
+          togglePageSize();
+        }}
+        className={`cursor-pointer ${layout === layoutOptions.GRID ? "fill-comp-description stroke-comp-description" : "fill-comp-muted stroke-comp-muted"} hover:fill-comp-description hover:stroke-comp-description`}
         height="21"
         viewBox="0 0 21 21"
         width="21"
@@ -39,10 +42,12 @@ const LayoutSelector: React.FC = () => {
         />
       </svg>
       <div
-        onClick={() => { setLayout(layoutOptions.LIST); togglePageSize(); }}
-        className={`h-[15px] w-[13px] cursor-pointer rounded-[1px] ${layout === layoutOptions.LIST ? 'bg-comp-description' : 'bg-comp-muted'} hover:bg-comp-description`}
+        onClick={() => {
+          setLayout(layoutOptions.LIST);
+          togglePageSize();
+        }}
+        className={`h-[15px] w-[13px] cursor-pointer rounded-[1px] ${layout === layoutOptions.LIST ? "bg-comp-description" : "bg-comp-muted"} hover:bg-comp-description`}
       ></div>
-  
     </div>
   );
 };

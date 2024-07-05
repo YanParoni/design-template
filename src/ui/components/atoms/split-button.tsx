@@ -1,18 +1,16 @@
-import React from 'react';
+import React from "react";
 
 interface SplitButtonProps {
   onMainClick: () => void;
   onSecondaryClick: () => void;
 }
 
-const SplitButton: React.FC<SplitButtonProps> = ({
-  onMainClick,
-}) => {
+const SplitButton: React.FC<SplitButtonProps> = ({ onMainClick }) => {
   return (
     <div className="relative inline-flex">
       <button
         onClick={onMainClick}
-        className="font-montserrat min-w-[57px] min-h-[27px] rounded-[3px] px-3 shadow-[inset_0_1px_0_hsla(0,0%,100%,.05)] border-t-[2px] border-t-[#f481f2] bg-accent-theme hover:bg-accent-theme-comp text-white font-semibold  text-[13px]  tracking-wider flex items-center"
+        className="flex min-h-[27px] min-w-[57px] items-center rounded-[3px] border-t-[2px] border-t-[#f481f2] bg-accent-theme px-3 font-montserrat text-[13px] font-semibold tracking-wider text-white shadow-[inset_0_1px_0_hsla(0,0%,100%,.05)] hover:bg-accent-theme-comp"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +18,7 @@ const SplitButton: React.FC<SplitButtonProps> = ({
           viewBox="0 0 24 24"
           strokeWidth={3}
           stroke="white"
-          className="w-4 h-4"
+          className="h-4 w-4"
         >
           <path
             strokeLinecap="round"
@@ -29,7 +27,7 @@ const SplitButton: React.FC<SplitButtonProps> = ({
           />
         </svg>
         <span className="ml-1">LOG</span>
-        </button>
+      </button>
     </div>
   );
 };

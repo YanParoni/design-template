@@ -1,6 +1,6 @@
-import './styles.css';
-import React, { useState } from 'react';
-import { ChevronDownIcon } from '@heroicons/react/24/solid';
+import "./styles.css";
+import React, { useState } from "react";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
 interface DropdownProps {
   label: string;
@@ -29,38 +29,40 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <div
-      className={'dropdown'}
+      className={"dropdown"}
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <div className={`${isOpen ? 'dropdown-open' : ''}`}>
+      <div className={`${isOpen ? "dropdown-open" : ""}`}>
         <div
           className={`dropdown-button ${
-            isOpen ? 'dropdown-button-open' : 'dropdown-button-closed'
+            isOpen ? "dropdown-button-open" : "dropdown-button-closed"
           }`}
         >
-          <p className="font-montserrat font-medium text-[11px] z-1">
+          <p className="z-1 font-montserrat text-[11px] font-medium">
             {showValue?.toUpperCase()}
           </p>
-          <ChevronDownIcon className="w-4 h-4 -mr-1" aria-hidden="true" />
+          <ChevronDownIcon className="-mr-1 h-4 w-4" aria-hidden="true" />
         </div>
         {isOpen && (
           <ul className="dropdown-list">
             <div
               className={`dropdown-button ${
-                isOpen ? 'dropdown-button-open' : 'dropdown-button-closed'
+                isOpen ? "dropdown-button-open" : "dropdown-button-closed"
               }`}
             >
-              <p className="font-montserrat font-medium text-[11px]">{showValue?.toUpperCase()}</p>
-              <ChevronDownIcon className="w-4 h-4 -mr-1" aria-hidden="true" />
+              <p className="font-montserrat text-[11px] font-medium">
+                {showValue?.toUpperCase()}
+              </p>
+              <ChevronDownIcon className="-mr-1 h-4 w-4" aria-hidden="true" />
             </div>
             {options.map((option, index) => (
               <li
                 key={option.value}
                 onClick={() => handleSelect(option.value)}
                 className={`dropdown-item ${
-                  selectedValue === option.value ? 'dropdown-item-selected' : ''
-                } ${index === 0 ? 'dropdown-item-border' : ''}`}
+                  selectedValue === option.value ? "dropdown-item-selected" : ""
+                } ${index === 0 ? "dropdown-item-border" : ""}`}
               >
                 {option.label}
               </li>

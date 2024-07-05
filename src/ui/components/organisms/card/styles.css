@@ -8,7 +8,7 @@
   width: fit-content;
   white-space: nowrap;
   position: absolute;
-  top:-30px;
+  top: -30px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;

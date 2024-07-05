@@ -1,6 +1,6 @@
-import React from 'react';
-import Input from '@ui/components/atoms/input';
-import Button from '@ui/components/atoms/button';
+import React from "react";
+import Input from "@ui/components/atoms/input";
+import Button from "@ui/components/atoms/button";
 
 const SignUpForm: React.FC = () => {
   return (
@@ -14,11 +14,7 @@ const SignUpForm: React.FC = () => {
           />
         </div>
         <div className="mb-4 w-[140px]">
-          <Input
-            variant="secondary"
-            onChange={() => {}}
-            label="Username"
-          />
+          <Input variant="secondary" onChange={() => {}} label="Username" />
         </div>
         <div className="mb-4 w-[140px]">
           <Input
@@ -28,11 +24,7 @@ const SignUpForm: React.FC = () => {
             type="password"
           />
         </div>
-        <Button
-          label="Sign Up"
-          variant="primary"
-          onClick={() => {}}
-        />
+        <Button label="Sign Up" variant="primary" onClick={() => {}} />
       </form>
     </>
   );

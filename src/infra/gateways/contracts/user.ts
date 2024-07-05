@@ -1,3 +1,3 @@
 export interface IUserGateway {
-  getProfile: (id:string ) => Promise<any>;
+  getProfile: (id: string) => Promise<any>;
 }

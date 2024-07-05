@@ -1,6 +1,5 @@
-import { injectable } from 'inversify';
-import { HttpClientDTO, IHttpClient } from './contracts';
-
+import { injectable } from "inversify";
+import { HttpClientDTO, IHttpClient } from "./contracts";
 
 @injectable()
 export class FetchHttpClient implements IHttpClient {
@@ -14,41 +13,79 @@ export class FetchHttpClient implements IHttpClient {
     }
   }
 
-  private async fetchRequest(input: RequestInfo, init?: RequestInit): Promise<HttpClientDTO.Output> {
+  private async fetchRequest(
+    input: RequestInfo,
+    init?: RequestInit,
+  ): Promise<HttpClientDTO.Output> {
     const response = await fetch(input, init);
-    
+
     if (!response.ok) {
       throw new Error(`Fetch request failed: ${response.status}`);
     }
     return await response.json();
   }
 
-  async get({ url, headers, params }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+  async get({
+    url,
+    headers,
+    params,
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
     const hasParams = params && Object.keys(params).length > 0;
-    const queryParams = hasParams ? new URLSearchParams(params).toString() : '';
+    const queryParams = hasParams ? new URLSearchParams(params).toString() : "";
     const fullUrl = queryParams ? `${url}?${queryParams}` : url;
-    return await this.thrower(() => this.fetchRequest(fullUrl, { headers, method: 'GET' }));
-  }
-  
-
-  async post({ url, data, headers}: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
-    return await this.thrower(() =>this.fetchRequest(url, { body: JSON.stringify(data), headers, method: 'POST' })
+    return await this.thrower(() =>
+      this.fetchRequest(fullUrl, { headers, method: "GET" }),
     );
   }
 
-  async put({ url, data, headers }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+  async post({
+    url,
+    data,
+    headers,
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
     return await this.thrower(() =>
-      this.fetchRequest(url, { body: JSON.stringify(data), headers, method: 'PUT' })
-      );
-  }
-
-  async patch({ url, data, headers }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
-    return await this.thrower(() =>
-      this.fetchRequest(url, { body: JSON.stringify(data), headers, method: 'PATCH' })
+      this.fetchRequest(url, {
+        body: JSON.stringify(data),
+        headers,
+        method: "POST",
+      }),
     );
   }
 
-  async delete({ url, headers,}: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
-    return await this.thrower(() => this.fetchRequest(url, { headers, method: 'DELETE' }));
+  async put({
+    url,
+    data,
+    headers,
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+    return await this.thrower(() =>
+      this.fetchRequest(url, {
+        body: JSON.stringify(data),
+        headers,
+        method: "PUT",
+      }),
+    );
+  }
+
+  async patch({
+    url,
+    data,
+    headers,
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+    return await this.thrower(() =>
+      this.fetchRequest(url, {
+        body: JSON.stringify(data),
+        headers,
+        method: "PATCH",
+      }),
+    );
+  }
+
+  async delete({
+    url,
+    headers,
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+    return await this.thrower(() =>
+      this.fetchRequest(url, { headers, method: "DELETE" }),
+    );
   }
 }

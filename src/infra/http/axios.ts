@@ -1,7 +1,7 @@
-import { injectable } from 'inversify';
-import { HttpClientDTO, IHttpClient } from './contracts';
-import 'reflect-metadata';
-import AuthInterceptor from './interceptors/auth-interceptor';
+import { injectable } from "inversify";
+import { HttpClientDTO, IHttpClient } from "./contracts";
+import "reflect-metadata";
+import AuthInterceptor from "./interceptors/auth-interceptor";
 
 @injectable()
 export class AxiosHttpClient implements IHttpClient {
@@ -9,7 +9,7 @@ export class AxiosHttpClient implements IHttpClient {
 
   constructor() {
     this.axiosInstance = AuthInterceptor;
-    this.axiosInstance.defaults.headers['Content-Type'] = 'application/json';
+    this.axiosInstance.defaults.headers["Content-Type"] = "application/json";
   }
 
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -21,63 +21,87 @@ export class AxiosHttpClient implements IHttpClient {
     }
   }
 
-  async get({ url, headers, params }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+  async get({
+    url,
+    headers,
+    params,
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
     const result = await this.axiosInstance.request({
       url,
       headers,
       params,
-      method: 'get'
+      method: "get",
     });
     return result;
   }
 
-  async post({ url, data, headers, params }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+  async post({
+    url,
+    data,
+    headers,
+    params,
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
     const result = await this.thrower(async () => {
       return await this.axiosInstance.request({
         url,
         data,
         headers,
         params,
-        method: 'post'
+        method: "post",
       });
     });
     return result.data;
   }
 
-  async put({ url, data, headers, params }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+  async put({
+    url,
+    data,
+    headers,
+    params,
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
     const result = await this.thrower(async () => {
       return await this.axiosInstance.request({
         url,
         data,
         headers,
         params,
-        method: 'put'
+        method: "put",
       });
     });
     return result.data;
   }
 
-  async patch({ url, data, headers, params }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+  async patch({
+    url,
+    data,
+    headers,
+    params,
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
     const result = await this.thrower(async () => {
       return await this.axiosInstance.request({
         url,
         data,
         headers,
         params,
-        method: 'patch'
+        method: "patch",
       });
     });
     return result.data;
   }
 
-  async delete({ url, data, headers, params }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+  async delete({
+    url,
+    data,
+    headers,
+    params,
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
     const result = await this.thrower(async () => {
       return await this.axiosInstance.request({
         url,
         data,
         headers,
         params,
-        method: 'delete'
+        method: "delete",
       });
     });
     return result.data;
