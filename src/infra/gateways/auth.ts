@@ -1,12 +1,13 @@
 import { inject, injectable } from "inversify";
 import TYPES from "@infra/http/types";
 import type { IHttpClient } from "../http/contracts";
-import { IAuthGateway, LoginUserDto } from "./contracts/auth";
+import { IAuthGateway, LoginUserDto, ResetRequestDTO } from "./contracts/auth";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_REACT_APP === "production"
     ? ""
     : "http://localhost:3000";
+
 
 @injectable()
 export class AuthGateway implements IAuthGateway {
@@ -39,6 +40,22 @@ export class AuthGateway implements IAuthGateway {
         headers: {
           "Content-Type": "application/json",
         },
+      });
+      return response;
+    } catch (error) {
+      console.error("Error in AuthGateway getProfile", error);
+    }
+  }
+
+  async requestReset(email:ResetRequestDTO): Promise<any>{
+    const url =`${BASE_URL}/auth/reset-password-request`
+    try {
+      const response = await this.fetchHttpClient.post({
+        url,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data:email
       });
       return response;
     } catch (error) {

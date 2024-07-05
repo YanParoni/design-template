@@ -27,3 +27,20 @@ export const useLogin = () => {
     isPending,
   };
 };
+
+export const useRequestReset = () => {
+  const auth = useDeps<IAuthGateway>("AuthGateway");
+
+  const { mutateAsync, data, isPending } = useMutation({
+    mutationFn: async (email: { email: string }) => {
+      const response = await auth.requestReset(email);
+      return response;
+    },
+  });
+
+  return {
+    mutateAsync,
+    data,
+    isPending,
+  };
+};

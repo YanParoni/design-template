@@ -15,7 +15,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { mutateAsync } = useLogin();
-  const { activeState, setActiveState } = useAuthStore();
+  const { activeState } = useAuthStore();
 
   const handleLogin = async () => {
     try {

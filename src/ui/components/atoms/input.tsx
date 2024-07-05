@@ -7,6 +7,7 @@ interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
   forgottenLabel?: boolean;
+  value: any
 }
 
 const Input: React.FC<InputProps> = ({
@@ -15,6 +16,7 @@ const Input: React.FC<InputProps> = ({
   type = "text",
   onChange,
   forgottenLabel,
+  value
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -33,7 +35,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className="w-full">
       <div className="flex w-full justify-between">
-        <label className="mb-1 text-[12px] text-description">{label}</label>
+        <label className="mb-1 text-[12px] text-[#cf9ad6]">{label}</label>
         {type === "password" && forgottenLabel && (
           <Link
             className="text-[12px] font-semibold text-accent-theme hover:text-white"
@@ -45,6 +47,7 @@ const Input: React.FC<InputProps> = ({
       </div>
       <input
         type={type}
+        value={value}
         placeholder={""}
         className={`${baseStyles} ${styles}`}
         style={{ backgroundColor: isFocused ? "white" : "" }}

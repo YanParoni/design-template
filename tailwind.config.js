@@ -28,7 +28,6 @@ module.exports = {
         'secondary-color': "hsl(0deg 0% 16% / <alpha-value>)",
         'shadow': "rgb(51 65 85 / <alpha-value>)",
         'transparent': 'rgba(76 175 80 0 / <alpha-value>)',
-        'shadow': "rgb(var(--color-shadow) / <alpha-value>)",
 
       },
       fontFamily: {
@@ -37,7 +36,7 @@ module.exports = {
       },
       boxShadow: {
         'custom-inset': 'inset 0 0 1px 1px rgba(20,24,28,.125)',
-          'light': 'inset 0 .1rem  rgba(255, 255, 255, .7)',
+        'light': 'inset 0 0.02rem  rgba(255, 255, 255, 1)',
       },
     },
   },
