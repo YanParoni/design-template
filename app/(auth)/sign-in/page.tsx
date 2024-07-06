@@ -25,14 +25,14 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex h-full w-full items-center justify-center pt-12">
-      <div className="relative w-[495px] max-w-[38.15rem] rounded-lg bg-[#775677] pb-20 pt-12">
+    <div className="flex h-full w-full items-center justify-center sm:pt-12">
+      <div className="relative flex flex-col justify-center w-full h-full sm:w-[495px] sm:max-w-[38.15rem] sm:h-[432px] sm:rounded-lg bg-[#775677] pb-20 pt-12">
         <div className="">
-          <h1 className="mb-8 text-center text-2xl font-bold text-white">
+          <h1 className="mb-8 text-center text-xl sm:text-2xl font-bold text-white">
             Sign in to Playboxd
           </h1>
         </div>
-        <div className="flex flex-col justify-center gap-6 px-24">
+        <div className="flex flex-col justify-center gap-5 px-2 sm:px-24">
           <Input
             label="Username"
             variant="primary"
@@ -51,7 +51,7 @@ const SignIn = () => {
         </div>
         <button
           onClick={handleRedirect}
-          className={`absolute bottom-0 h-14 w-full rounded-b-lg bg-[#775677] p-24 py-2 text-[11px] font-bold text-comp-description shadow-light transition duration-200 hover:text-accent-theme`}
+          className={`absolute bottom-0 h-14 w-full rounded-b-lg bg-[#775677] px-2 sm:px-24 py-2 text-[11px] font-bold text-comp-description shadow-light transition duration-200 hover:text-accent-theme`}
         >
           Reset your password or retrieve a forgotten username.
         </button>
