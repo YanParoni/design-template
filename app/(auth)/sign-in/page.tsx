@@ -51,7 +51,7 @@ const SignIn = () => {
         </div>
         <button
           onClick={handleRedirect}
-          className={`absolute bottom-0 h-14 w-full rounded-b-lg bg-[#775677] px-2 sm:px-24 py-2 text-[11px] font-bold text-comp-description shadow-light transition duration-200 hover:text-accent-theme`}
+          className={`absolute bottom-0 h-14 w-full rounded-b-lg bg-[#775677] px-1 sm:px-24 py-2 text-[11px] font-bold text-comp-description shadow-light transition duration-200 hover:text-accent-theme`}
         >
           Reset your password or retrieve a forgotten username.
         </button>
