@@ -1,7 +1,9 @@
+import "reflect-metadata";
+import "../global.css";
+
 export default function RootLayout({ children }) {
   return (
-    <html>
-      <head />
+    <html  suppressHydrationWarning>
       <body>{children}</body>
     </html>
   );
