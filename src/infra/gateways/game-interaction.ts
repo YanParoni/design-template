@@ -15,7 +15,7 @@ const BASE_URL =
 @injectable()
 export class GameInteractionGateway implements IGameInteractionGateway {
   constructor(
-    @inject(TYPES.AxiosHttpClient) private readonly httpClient: IHttpClient,
+    @inject(TYPES.FetchHttpClient) private readonly httpClient: IHttpClient,
   ) {}
 
   async createInteraction(

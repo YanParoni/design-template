@@ -24,7 +24,6 @@ const GameNameSpan = ({ name }: IName) => {
     if (isSuccess && data) {
       // const filtered = filterGamesByLevenshtein(data.results, name)
       setGame("");
-      console.log(game);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);

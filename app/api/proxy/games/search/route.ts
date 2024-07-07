@@ -18,5 +18,5 @@ export async function PUT(req: NextRequest) {
   games.results = obj?.results;
   games.next = obj?.next;
   games.previous = obj?.previous;
-  return NextResponse.json({ games });
+  return NextResponse.json({ games:obj });
 }

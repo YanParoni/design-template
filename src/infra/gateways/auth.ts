@@ -12,7 +12,7 @@ const BASE_URL =
 @injectable()
 export class AuthGateway implements IAuthGateway {
   constructor(
-    @inject(TYPES.AxiosHttpClient)
+    @inject(TYPES.FetchHttpClient)
     private readonly fetchHttpClient: IHttpClient,
   ) {}
 
@@ -32,13 +32,14 @@ export class AuthGateway implements IAuthGateway {
     }
   }
 
-  async getProfile(id: string): Promise<any> {
-    const url = `${BASE_URL}/users/profile/${id}`;
+  async getProfile(data: string): Promise<any> {
+    const url = `${BASE_URL}/auth/profile`;
     try {
       const response = await this.fetchHttpClient.get({
         url,
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${data}`,
         },
       });
       return response;

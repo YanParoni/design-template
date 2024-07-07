@@ -12,14 +12,14 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { mutateAsync } = useLogin();
   const { activeState } = useAuthStore();
 
   const handleLogin = async () => {
     try {
-      await mutateAsync({ email, password });
+      const response = await mutateAsync({ username, password });
     } catch (error) {
       console.error("Login failed", error);
     }
@@ -58,7 +58,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
             <Input
               label="Username"
               variant="primary"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className="w-screen pr-6 lg:w-[150px] lg:pr-0">

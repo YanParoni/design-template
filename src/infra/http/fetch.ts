@@ -4,47 +4,49 @@ import { HttpClientDTO, IHttpClient } from "./contracts";
 @injectable()
 export class FetchHttpClient implements IHttpClient {
   constructor() {}
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  private async thrower(callback: Function) {
+
+  private async thrower<T>(callback: () => Promise<HttpClientDTO.Output<T>>): Promise<HttpClientDTO.Output<T>> {
     try {
       return await callback();
     } catch (error: any) {
       console.log(error.message);
+      throw error;
     }
   }
 
-  private async fetchRequest(
+
+  private async fetchRequest<T>(
     input: RequestInfo,
     init?: RequestInit,
-  ): Promise<HttpClientDTO.Output> {
+  ): Promise<HttpClientDTO.Output<T>> {
     const response = await fetch(input, init);
-
+    
     if (!response.ok) {
       throw new Error(`Fetch request failed: ${response.status}`);
     }
     return await response.json();
   }
 
-  async get({
+  async get<T>({
     url,
     headers,
     params,
-  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
     const hasParams = params && Object.keys(params).length > 0;
     const queryParams = hasParams ? new URLSearchParams(params).toString() : "";
     const fullUrl = queryParams ? `${url}?${queryParams}` : url;
-    return await this.thrower(() =>
-      this.fetchRequest(fullUrl, { headers, method: "GET" }),
-    );
+    const response = await this.fetchRequest<T>(fullUrl, { headers, method: "GET" })
+
+    return response
   }
 
-  async post({
+  async post<T>({
     url,
     data,
     headers,
-  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
     return await this.thrower(() =>
-      this.fetchRequest(url, {
+      this.fetchRequest<T>(url, {
         body: JSON.stringify(data),
         headers,
         method: "POST",
@@ -52,13 +54,13 @@ export class FetchHttpClient implements IHttpClient {
     );
   }
 
-  async put({
+  async put<T>({
     url,
     data,
     headers,
-  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
     return await this.thrower(() =>
-      this.fetchRequest(url, {
+      this.fetchRequest<T>(url, {
         body: JSON.stringify(data),
         headers,
         method: "PUT",
@@ -66,13 +68,13 @@ export class FetchHttpClient implements IHttpClient {
     );
   }
 
-  async patch({
+  async patch<T>({
     url,
     data,
     headers,
-  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
     return await this.thrower(() =>
-      this.fetchRequest(url, {
+      this.fetchRequest<T>(url, {
         body: JSON.stringify(data),
         headers,
         method: "PATCH",
@@ -80,12 +82,12 @@ export class FetchHttpClient implements IHttpClient {
     );
   }
 
-  async delete({
+  async delete<T>({
     url,
     headers,
-  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output> {
+  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
     return await this.thrower(() =>
-      this.fetchRequest(url, { headers, method: "DELETE" }),
+      this.fetchRequest<T>(url, { headers, method: "DELETE" }),
     );
   }
 }

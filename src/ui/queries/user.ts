@@ -1,6 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { iocContainer } from "@ioc/index";
-import { IUserGateway } from "../../infra/gateways/contracts/user";
+import { CreateUserDTO, UserDTO, IUserGateway  } from "../../infra/gateways/contracts/user";
 
 export async function getProfile(params: any) {
   const gateway = iocContainer.get<IUserGateway>("UserGateway");
@@ -17,4 +17,21 @@ export const useSearchGames = (name: string) => {
   });
 
   return { data, isLoading, refetch };
+};
+
+
+export const useCreateUser = () => {
+  const authGateway = iocContainer.get<IUserGateway>("UserGateway");
+
+  const mutation = useMutation<UserDTO | null, Error, CreateUserDTO>({
+    mutationFn: async (user: CreateUserDTO) => {
+      const response = await authGateway.createUser(user);
+      if (!response) {
+        throw new Error("User creation failed");
+      }
+      return response;
+    },
+  });
+
+  return mutation;
 };

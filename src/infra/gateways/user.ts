@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import TYPES from "@infra/http/types";
 import type { IHttpClient } from "../http/contracts";
-import { IUserGateway } from "./contracts/user";
+import { CreateUserDTO, IUserGateway, UserDTO } from "./contracts/user";
 import jwt from "jsonwebtoken";
 
 const BASE_URL =
@@ -12,7 +12,7 @@ const BASE_URL =
 @injectable()
 export class UserGateway implements IUserGateway {
   constructor(
-    @inject(TYPES.FetchHttpClient)
+    @inject(TYPES.AxiosHttpClient)
     private readonly fetchHttpClient: IHttpClient,
   ) {}
 
@@ -30,6 +30,23 @@ export class UserGateway implements IUserGateway {
       return response;
     } catch (error) {
       console.error("Error in AuthGateway login", error);
+    }
+  }
+
+  async createUser(user: CreateUserDTO): Promise<UserDTO|null> {
+    const url = `${BASE_URL}/users/register`;
+    try {
+      const response = await this.fetchHttpClient.post({
+        url,
+        headers: {
+          Accept: "*/*",
+        },
+        data: user
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error in AuthGateway login", error);
+      return null
     }
   }
 }

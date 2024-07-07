@@ -8,14 +8,16 @@ import { useAuthStore } from "client/store";
 
 export const useLogin = () => {
   const auth = useDeps<IAuthGateway>("AuthGateway");
-  const { login } = useAuthStore();
+  const { login, setActiveState } = useAuthStore();
 
-  const { mutateAsync, data, isPending } = useMutation({
+  const { mutateAsync, data, isError, error } = useMutation({
     mutationFn: async (data: LoginUserDto) => {
       const response = await auth.login(data);
       if (response && response.accessToken) {
-        const profile = await auth.getProfile(response.userId);
+        const profile = await auth.getProfile(response.accessToken);
+        
         login(response.accessToken, profile);
+        setActiveState('logged')
       }
       return response;
     },
@@ -24,7 +26,8 @@ export const useLogin = () => {
   return {
     mutateAsync,
     data,
-    isPending,
+    isError,
+    error,
   };
 };
 

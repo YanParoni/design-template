@@ -14,5 +14,7 @@ export namespace HttpClientDTO {
     params?: any;
   };
 
-  export type Output = any;
+  export type Output<T = any> = {
+    data: T;
+  };
 }

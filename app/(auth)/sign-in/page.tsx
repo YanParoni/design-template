@@ -6,14 +6,14 @@ import Button from "@ui/components/atoms/button";
 import { useLogin } from "@ui/queries/auth";
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
   const { mutateAsync } = useLogin();
 
   const handleLogin = async () => {
     try {
-      await mutateAsync({ email, password });
+      await mutateAsync({ username, password });
       router.push('/games')
     } catch (error) {
       console.error("Login failed", error);
@@ -36,13 +36,13 @@ const SignIn = () => {
           <Input
             label="Username"
             variant="primary"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <Input
             label="Password"
             variant="primary"
-            value={email}
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <div className="flex justify-end">

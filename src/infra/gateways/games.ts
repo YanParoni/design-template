@@ -28,7 +28,7 @@ export class GamesGateway implements IGamesGateway {
       const response = await this.fetchHttpClient.put(requestParams);
       return response;
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 }
