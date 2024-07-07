@@ -6,7 +6,7 @@ const AuthSuccess: React.FC = () => {
 
   useEffect(() => {
     const token = search.get("token");
-    localStorage.setItem("accessToken", token as string);
+    localStorage.setItem("token", token as string);
     window.opener.postMessage({ token }, window.location.origin);
     window.close();
   }, []);
