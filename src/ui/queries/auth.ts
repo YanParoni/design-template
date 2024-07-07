@@ -15,7 +15,7 @@ export const useLogin = () => {
       const response = await auth.login(data);
       if (response && response.accessToken) {
         const profile = await auth.getProfile(response.accessToken);
-        
+        localStorage.setItem('token', response.accessToken);
         login(response.accessToken, profile);
         setActiveState('logged')
       }
