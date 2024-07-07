@@ -2,17 +2,18 @@ import "./styles.css";
 import React, { useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { useAuthStore } from "client/store";
-import { UserIcon } from "@heroicons/react/24/solid";
+import UserProfileImage from "@ui/components/atoms/navbar/user-profile-image";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, setActiveState, logout, user } = useAuthStore();
+  const { isAuthenticated, setActiveState, logout, user, token } = useAuthStore();
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     logout();
     setActiveState("default");
   };
+
 
   return (
     <>
@@ -29,11 +30,8 @@ export default function UserDropdown() {
               }`}
             >
               <div className="flex items-center space-x-2">
-                <div className="rounded-full border-[1px] border-[#7d6589] bg-[#4b3756] px-[2px] py-[2px]">
-                  <UserIcon
-                    className="h-6 w-6 cursor-pointer text-[#7d6589]"
-                    onClick={handleLogout}
-                  />
+                <div className="rounded-full border-[.02rem] border-[#7d6589] bg-[#4b3756] px-[2px] py-[2px]">
+                  <UserProfileImage profileImage={user?.profileImage} />
                 </div>
                 {user && (
                   <h1 className="font-montserrat text-[14px] font-semibold text-description">
@@ -51,11 +49,8 @@ export default function UserDropdown() {
                   }`}
                 >
                   <div className="flex items-center space-x-2">
-                    <div className="rounded-full border-[1px] border-[#7d6589] bg-[#4b3756] px-[2px] py-[2px]">
-                      <UserIcon
-                        className="h-6 w-6 cursor-pointer text-[#7d6589]"
-                        onClick={handleLogout}
-                      />
+                    <div className="rounded-full border-[.01rem] border-[#7d6589] bg-[#4b3756] px-[2px] py-[2px]">
+                      <UserProfileImage profileImage={user?.profileImage} />
                     </div>
                     {user && (
                       <h1 className="font-montserrat text-[14px] font-semibold text-white">

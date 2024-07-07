@@ -3,9 +3,10 @@ import { UserIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { useAuthStore } from "client/store";
 import UserLockIcon from "@ui/components/atoms/navbar/user-lock-icon";
 import { KeyIcon } from "@heroicons/react/24/solid";
+import UserProfileImage from "@ui/components/atoms/navbar/user-profile-image";
 
 const MobileContent: React.FC = () => {
-  const { activeState, setActiveState, isAuthenticated, logout } =
+  const { activeState, setActiveState, isAuthenticated, logout,user } =
     useAuthStore();
 
   const handleSignInClick = () => {
@@ -20,19 +21,13 @@ const MobileContent: React.FC = () => {
     setActiveState("default");
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    setActiveState("default");
-    logout();
-  };
+  
 
   return (
     <div className="flex items-center space-x-4">
       {isAuthenticated ? (
-        <UserIcon
-          className="h-5 w-5 cursor-pointer text-white"
-          onClick={handleLogout}
-        />
+      <UserProfileImage
+      profileImage={user?.profileImage}/>
       ) : (
         <>
           {activeState === "login" ? (
