@@ -41,7 +41,6 @@ export class FetchHttpClient implements IHttpClient {
     const queryParams = hasParams ? new URLSearchParams(params).toString() : "";
     const fullUrl = queryParams ? `${url}?${queryParams}` : url;
     const response = await this.fetchRequest<T>(fullUrl, { headers: fullHeaders, method: "GET" });
-
     return response;
   }
 

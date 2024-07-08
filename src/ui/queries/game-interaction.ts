@@ -4,7 +4,7 @@ import {
   IGameInteractionGateway,
   CreateInteractionDto,
 } from "@infra/gateways/contracts/game-interaction";
-import { useAuthStore } from "client/store";
+import { useAuthStore, useGameInteractionsStore } from "client/store";
 
 async function createInteraction(data: CreateInteractionDto) {
   const gateway = iocContainer.get<IGameInteractionGateway>(
@@ -36,11 +36,19 @@ export async function getUserInteractions(userId: string) {
 
 export const useGameInteractions = () => {
   const { user } = useAuthStore();
+  const { setGameInteractions } = useGameInteractionsStore();
+
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["getUserInteractions", user?.sub],
-    queryFn: () => getUserInteractions(user!.sub),
+    queryFn: async () => {
+      if (!user) return null;
+      const response = await getUserInteractions(user.sub);
+      setGameInteractions(response);
+      return response;
+    },
     refetchOnWindowFocus: false,
     refetchOnMount: false,
+    enabled: !!user,
   });
 
   return { data, isLoading, refetch };

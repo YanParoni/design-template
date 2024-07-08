@@ -49,6 +49,7 @@ export class GameInteractionGateway implements IGameInteractionGateway {
         },
         addAuth: true,
       });
+      console.log(response, 'gateway getuser')
       return response;
     } catch (error) {
       console.error(

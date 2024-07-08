@@ -6,7 +6,15 @@ import {
   GameResponse,
   AuthState,
   UserProfile,
+  GameInteractionsState,
 } from "./types";
+
+
+export const useGameInteractionsStore = create<GameInteractionsState>((set) => ({
+  gameInteractions: [],
+  setGameInteractions: (interactions) => set({ gameInteractions: interactions }),
+}));
+
 
 const useFilterStore = create<FiltersState>((set) => ({
   genre: null,

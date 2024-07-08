@@ -55,3 +55,17 @@ export type AuthState = {
   logout: () => void;
   setActiveState: (state: "default" | "login" | "signup" | "logged") => void;
 };
+
+
+interface GameInteraction {
+  id: string;
+  userId: string;
+  gameId: string;
+  liked: boolean;
+  played: boolean;
+}
+
+export interface GameInteractionsState {
+  gameInteractions: GameInteraction[];
+  setGameInteractions: (interactions: GameInteraction[]) => void;
+}

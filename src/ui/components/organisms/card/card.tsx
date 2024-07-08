@@ -4,17 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import ShadowEffect from "../../atoms/shadow-effect";
 import CardActions from "@ui/components/molecules/card/card-actions";
-import { useAuthStore } from "client/store";
+import { useAuthStore, useGameInteractionsStore } from "client/store";
 
 interface ICard {
-  id: string;
+  id: number;
   imageUrl: string;
   name: string;
   height: string;
   dir: string;
   rating: number;
-  liked?: boolean;
-  played?: boolean;
   isLarge: boolean;
 }
 
@@ -25,23 +23,24 @@ const BASE_URL =
 
 const Card = React.memo(
   ({
-    id = "",
+    id,
     imageUrl = "",
     name = "",
     height,
     dir,
     rating,
-    liked,
-    played,
     isLarge,
   }: ICard) => {
     const [hovered, setHovered] = useState(false);
     const { isAuthenticated } = useAuthStore();
-    const [isPlayed, setIsPlayed] = useState(played);
+    const { gameInteractions } = useGameInteractionsStore();
+    const gameInteraction = gameInteractions.find(interaction => interaction.gameId === id.toString());
+    const [isPlayed, setIsPlayed] = useState(gameInteraction?.played || false);
 
     useEffect(() => {
-      setIsPlayed(played);
-    }, [played]);
+      const gameInteraction = gameInteractions.find(interaction => Number(interaction.gameId) === id);
+      setIsPlayed(gameInteraction?.played || false);
+    }, [gameInteractions, gameInteraction]);
 
     return (
       <>
@@ -67,10 +66,10 @@ const Card = React.memo(
           {isAuthenticated && (
             <CardActions
               hovered={hovered}
-              liked={liked}
+              liked={gameInteraction?.liked || false}
               setIsPlayed={setIsPlayed}
               played={isPlayed}
-              gameId={id}
+              gameId={id.toString()}
               isLarge={isLarge}
             />
           )}
