@@ -1,23 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import Link from "next/link";
 
-interface InputProps {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   variant: "primary" | "secondary";
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  type?: string;
   forgottenLabel?: boolean;
-  value: any
 }
 
-const Input: React.FC<InputProps> = ({
+const Input = forwardRef<HTMLInputElement, InputProps>(({
   label,
   variant,
   type = "text",
-  onChange,
   forgottenLabel,
-  value
-}) => {
+  ...rest
+}, ref) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const baseStyles = `w-full text-black font-montserrat text-1rem h-[1.6rem] leading-[1.0625rem] p-[0.3125rem_0.4375rem] h-[31px] rounded-[3px]`;
@@ -47,16 +43,18 @@ const Input: React.FC<InputProps> = ({
       </div>
       <input
         type={type}
-        value={value}
-        placeholder={""}
+        ref={ref}
+        placeholder=""
         className={`${baseStyles} ${styles}`}
         style={{ backgroundColor: isFocused ? "white" : "" }}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        onChange={onChange}
+        {...rest}
       />
     </div>
   );
-};
+});
+
+Input.displayName = "Input";
 
 export default Input;

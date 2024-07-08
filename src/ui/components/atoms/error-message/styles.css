@@ -1,0 +1,29 @@
+.sp {
+  font-size: 11px;
+  color: rgb(228 221 255);
+  background: rgb(98 68 102);
+  padding: 5px;
+  border-radius: 5px;
+  width: fit-content;
+  white-space: nowrap;
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 10px);
+  transform: translateY(-50%);
+  z-index: 1000;
+}
+
+.sp::after {
+  display: block;
+  width: 0;
+  content: "";
+  border: 10px solid transparent;
+}
+
+.sp.right::after {
+  border-right-color: rgb(98 68 102);
+  top: 50%;
+  left: -20px;
+  transform: translateY(-50%);
+  position: absolute;
+}

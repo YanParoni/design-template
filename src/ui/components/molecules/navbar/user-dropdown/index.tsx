@@ -9,7 +9,7 @@ export default function UserDropdown() {
   const { isAuthenticated, setActiveState, logout, user, token } = useAuthStore();
 
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem("token");
     logout();
     setActiveState("default");
   };

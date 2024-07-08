@@ -1,59 +1,68 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "@ui/components/atoms/input";
 import Button from "@ui/components/atoms/button";
 import { useCreateUser } from "@ui/queries/user";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import signUpSchema from "@ui/validators/signup-schema";
+import ErrorMessage from "@ui/components/atoms/error-message";
+
+interface SignUpFormValues {
+  username: string;
+  email: string;
+  password: string;
+}
 
 const SignUpForm: React.FC = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<SignUpFormValues>({
+    resolver: yupResolver(signUpSchema),
+    mode: "onChange",
+  });
   const createUser = useCreateUser();
 
-  const handleSubmit = async () => {
+  const onSubmit = async (data: SignUpFormValues) => {
     try {
-      await createUser.mutateAsync({
-        username,
-        email,
-        password,
-      });
+      await createUser.mutateAsync(data);
       alert("User created successfully!");
+      reset();
     } catch (error) {
       console.error("Error creating user", error);
       alert("Failed to create user");
     }
   };
 
-
   return (
-    <>
-      <form>
-        <div className="mb-4 w-[240px]">
-          <Input
-            variant="secondary"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            label="Email Address"
-          />
-        </div>
-        <div className="mb-4 w-[140px]">
-          <Input 
-          value={username}
+    <form onSubmit={handleSubmit(onSubmit)} className="relative">
+      <div className="mb-4 w-[240px] relative">
+        <Input
           variant="secondary"
-          onChange={(e) => setUsername(e.target.value)}
-          label="Username" />
-        </div>
-        <div className="mb-4 w-[140px]">
-          <Input
-            value={password}
-            variant="secondary"
-            onChange={(e) => setPassword(e.target.value)}
-            label="Password"
-            type="password"
-          />
-        </div>
-        <Button label="Sign Up" variant="primary" onClick={handleSubmit} />
-      </form>
-    </>
+          {...register("email")}
+          label="Email Address"
+        />
+        {errors?.email && <ErrorMessage message={errors?.email?.message as string} />}
+      </div>
+      
+      <div className="mb-4 w-[140px] relative">
+        <Input
+          variant="secondary"
+          {...register("username")}
+          label="Username"
+        />
+        {errors.username && <ErrorMessage message={errors.username.message as string} />}
+      </div>
+      
+      <div className="mb-4 w-[140px] relative">
+        <Input
+          variant="secondary"
+          {...register("password")}
+          label="Password"
+          type="password"
+        />
+        {errors.password && <ErrorMessage message={errors.password.message as string} />}
+      </div>
+      
+      <Button label="Sign Up" variant="primary" type="submit" disabled={!isValid} />
+    </form>
   );
 };
 

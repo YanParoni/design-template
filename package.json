@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
+    "@hookform/resolvers": "^3.9.0",
     "@next/font": "^13.4.19",
     "@tanstack/react-query": "^5.0.0-alpha.71",
     "@tanstack/react-query-next-experimental": "^5.0.0-alpha.80",
@@ -31,14 +32,16 @@
     "openai": "^4.4.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.52.1",
+    "yup": "^1.4.0",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/styled-components": "^5.1.26",
-    "@typescript-eslint/eslint-plugin": "^6.4.1",
-    "@typescript-eslint/parser": "^5.62.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "autoprefixer": "^10.4.15",
     "cssnano": "^6.0.1",
     "eslint": "^8.57.0",
