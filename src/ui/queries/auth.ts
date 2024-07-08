@@ -47,3 +47,37 @@ export const useRequestReset = () => {
     isPending,
   };
 };
+
+export const useResetPassword = () => {
+  const auth = useDeps<IAuthGateway>('AuthGateway');
+  
+  const { mutateAsync, data, isPending } = useMutation({
+    mutationFn: async  ({ token, newPassword }: { token: string, newPassword: string }) => {
+      const response = await auth.resetPassword(token, newPassword);
+      return response;
+    }})
+    return {
+      mutateAsync,
+      data,
+      isPending,
+    };
+  }
+
+  export const useValidateToken = () => {
+    const auth = useDeps<IAuthGateway>("AuthGateway");
+  
+    const { mutateAsync, data, isPending, isError, error } = useMutation({
+      mutationFn: async (token: string) => {
+        const response = await auth.validateToken(token);
+        return response;
+      },
+    });
+  
+    return {
+      mutateAsync,
+      data,
+      isPending,
+      isError,
+      error,
+    };
+  };

@@ -36,9 +36,10 @@ export async function getUserInteractions(userId: string) {
 
 export const useGameInteractions = () => {
   const { user } = useAuthStore();
+  console.log(user);
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["getUserInteractions", user?.id],
-    queryFn: () => getUserInteractions(user!.id),
+    queryKey: ["getUserInteractions", user?.sub],
+    queryFn: () => getUserInteractions(user!.sub),
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });

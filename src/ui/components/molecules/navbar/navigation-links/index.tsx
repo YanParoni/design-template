@@ -15,10 +15,10 @@ const NavigationLinks: React.FC<NavigationLinksProps> = ({
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+         exit={{ opacity: 0 }}
+         transition={{ duration: 0.1 }}
         className="flex items-center space-x-4"
       >
         {activeState === "default" && (

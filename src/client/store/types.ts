@@ -49,7 +49,7 @@ export type GameResponse = {
 export type AuthState = {
   isAuthenticated: boolean;
   token: string | null;
-  user: UserProfile | null;
+  user: UserProfile | null | any;
   activeState: "default" | "login" | "signup" | "logged";
   login: (token: string, user: UserProfile) => void;
   logout: () => void;

@@ -45,9 +45,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
       {activeState === "login" && (
         <motion.div
           className="flex flex-col items-start space-x-2 space-y-2 px-8 lg:flex-row lg:items-end lg:space-y-0 lg:px-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.2 }}
         >
           <XMarkIcon
@@ -59,6 +59,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
               label="Username"
               variant="primary"
               onChange={(e) => setUsername(e.target.value)}
+              value={username}
             />
           </div>
           <div className="w-screen pr-6 lg:w-[150px] lg:pr-0">
@@ -68,6 +69,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
               label="Password"
               variant="primary"
               onChange={(e) => setPassword(e.target.value)}
+              value={password}
             />
           </div>
           <div className="flex w-screen flex-row justify-between py-2 pr-4 lg:w-fit lg:gap-2 lg:py-0">
