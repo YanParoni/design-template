@@ -47,7 +47,11 @@ const Pagination: React.FC<PaginationProps> = ({ next, previous }) => {
         <div className="h-[29px] w-[57px]"></div>
       )}
       {next ? (
+        <div
+        className='w-14 h-7'
+        >
         <Button label="Next" variant="secondary" onClick={handleNext} />
+      </div>
       ) : (
         <div className="h-[29px] w-[57px]"></div>
       )}
