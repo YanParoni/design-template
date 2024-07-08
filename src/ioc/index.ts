@@ -26,7 +26,7 @@ const iocContainer = new Container({ defaultScope: "Singleton" });
 
 iocContainer.bind<IHttpClient>(TYPES.AxiosHttpClient).to(AxiosHttpClient);
 iocContainer.bind<IHttpClient>(TYPES.FetchHttpClient).to(FetchHttpClient);
-iocContainer.bind<IAuthMiddleware>('AuthMiddleware').to(AuthMiddleware);
+iocContainer.bind<IAuthMiddleware>(TYPES.AuthMiddleware).to(AuthMiddleware);
 iocContainer.bind<IGamesGateway>("GamesGateway").to(GamesGateway);
 iocContainer.bind<IGamesGateway>("GamesProxy").to(GamesProxy);
 iocContainer.bind<IChatGateway>("ChatGateway").to(ChatGateway);

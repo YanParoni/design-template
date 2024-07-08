@@ -12,6 +12,7 @@ export namespace HttpClientDTO {
     data?: any;
     headers?: any;
     params?: any;
+    addAuth?: boolean;
   };
 
   export type Output<T = any> = {

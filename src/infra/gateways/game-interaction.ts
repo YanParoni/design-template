@@ -1,4 +1,3 @@
-// src/infra/gateways/game-interaction.ts
 import { inject, injectable } from "inversify";
 import TYPES from "@infra/http/types";
 import type { IHttpClient } from "../http/contracts";
@@ -32,6 +31,7 @@ export class GameInteractionGateway implements IGameInteractionGateway {
         headers: {
           "Content-Type": "application/json",
         },
+        addAuth: true,
       });
       return response;
     } catch (error) {
@@ -47,6 +47,7 @@ export class GameInteractionGateway implements IGameInteractionGateway {
         headers: {
           "Content-Type": "application/json",
         },
+        addAuth: true,
       });
       return response;
     } catch (error) {

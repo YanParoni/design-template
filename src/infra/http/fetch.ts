@@ -1,11 +1,12 @@
 import { injectable, inject } from "inversify";
 import { HttpClientDTO, IHttpClient } from "./contracts";
-import { AuthMiddleware } from "./middlewares/auth.middleware";
+import type { IAuthMiddleware } from "@infra/gateways/contracts/auth-middleware";
+import TYPES from "./types";
 
 @injectable()
 export class FetchHttpClient implements IHttpClient {
   constructor(
-    @inject(AuthMiddleware) private readonly authMiddleware: AuthMiddleware
+    @inject(TYPES.AuthMiddleware) private readonly authMiddleware: IAuthMiddleware
   ) {}
 
   private async thrower<T>(callback: () => Promise<HttpClientDTO.Output<T>>): Promise<HttpClientDTO.Output<T>> {

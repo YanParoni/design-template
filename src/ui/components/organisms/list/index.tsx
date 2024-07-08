@@ -18,8 +18,9 @@ function List() {
     useGameInteractions();
 
   function transformGamesWithInteractions(games, interactions) {
-    return games.map((game) => {
-      const interaction = interactions.data.find(
+    if(!games || !interactions )return 
+    return games?.map((game) => {
+      const interaction = interactions?.data?.find(
         (interaction) => parseInt(interaction.gameId) === game.id,
       );
       return {
@@ -31,6 +32,7 @@ function List() {
   }
 
   useEffect(() => {
+    console.log(interactions, data, 'useEffect list transformer')
     if (interactions && data?.results) {
       setTransformedGames(
         transformGamesWithInteractions(data?.results, interactions),
