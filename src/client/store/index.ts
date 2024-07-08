@@ -7,8 +7,21 @@ import {
   AuthState,
   UserProfile,
   GameInteractionsState,
+  AlertState,
+  AlertType
 } from "./types";
 
+
+
+
+export const useAlertStore = create<AlertState>((set) => ({
+  message: '',
+  type: 'success',
+  isVisible: false,
+  showAlert: (message: string, type: AlertType) =>
+    set({ message, type, isVisible: true }),
+  hideAlert: () => set({ isVisible: false }),
+}));
 
 export const useGameInteractionsStore = create<GameInteractionsState>((set) => ({
   gameInteractions: [],

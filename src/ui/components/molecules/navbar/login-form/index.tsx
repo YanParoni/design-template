@@ -1,4 +1,3 @@
-// src/components/molecules/login-form.tsx
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "@ui/components/atoms/button";
@@ -7,6 +6,7 @@ import GoogleButton from "@ui/components/atoms/google-button";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useLogin } from "@ui/queries/auth";
 import { useAuthStore } from "client/store";
+import { useAlertStore } from "client/store";
 interface LoginFormProps {
   onCloseClick: () => void;
 }
@@ -16,12 +16,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
   const [password, setPassword] = useState("");
   const { mutateAsync } = useLogin();
   const { activeState } = useAuthStore();
+  const { showAlert } = useAlertStore();
 
   const handleLogin = async () => {
-    try {
-      const response = await mutateAsync({ username, password });
-    } catch (error) {
-      console.error("Login failed", error);
+    const response = await mutateAsync({ username, password });
+    if (response.success) {
+      showAlert("Logged in successfully!", "success");
+    } else {
+      showAlert("Failed to log in", "error");
     }
   };
 

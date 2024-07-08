@@ -5,17 +5,13 @@ import LayoutContainer from "@ui/components/organisms/layout";
 import Navbar from "@ui/components/organisms/navbar";
 import Providers from "@app/provider";
 
-export default function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <Providers>
-    <section className="bg-bkg">
-          <Navbar />
-          <LayoutContainer>{children}</LayoutContainer>
-    </section>
+      <section className="bg-bkg">
+        <Navbar />
+        <LayoutContainer>{children}</LayoutContainer>
+      </section>
     </Providers>
   );
 }

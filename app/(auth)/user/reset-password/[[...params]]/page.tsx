@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import resetPasswordSchema from "@ui/validators/reset-password-schema";
 import { useRouter, useSearchParams } from "next/navigation";
-
+import { useAlertStore } from "client/store";
 interface ResetPasswordFormValues {
   newPassword: string;
   confirmPassword: string;
@@ -29,11 +29,11 @@ const ResetPassword: React.FC = () => {
   const [token, setToken] = useState("");
   const { mutateAsync: validateToken } = useValidateToken();
   const { mutateAsync: resetPassword } = useResetPassword();
-
+  const { showAlert } = useAlertStore()
   useEffect(() => {
     const tokenFromUrl = search.get("token");
     if (!tokenFromUrl) {
-      alert("Invalid or expired token");
+      showAlert('Invalid or expired token', 'error');
       return router.push("/games");
     }
     setToken(tokenFromUrl);
@@ -42,12 +42,12 @@ const ResetPassword: React.FC = () => {
       try {
         const response = await validateToken(tokenFromUrl);
         if (!response.valid) {
-          alert(response.message);
+          showAlert(response.message, 'error');
           router.push("/games");
         }
       } catch (error) {
         console.error("Error validating token", error);
-        alert("Invalid or expired token");
+        showAlert('Invalid or expired token', 'error');
         router.push("/games");
       }
     };
@@ -58,12 +58,12 @@ const ResetPassword: React.FC = () => {
   const onSubmit = async (data: ResetPasswordFormValues) => {
     try {
       await resetPassword({ token, newPassword: data.newPassword });
-      alert("Password reset successfully");
+      showAlert('Password reset successfully', 'success');
       reset();
       router.push("/sign-in");
     } catch (error) {
       console.error("Error resetting password", error);
-      alert("Failed to reset password");
+      showAlert('Failed to reset password', 'error');
     }
   };
 

@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import signUpSchema from "@ui/validators/signup-schema";
 import ErrorMessage from "@ui/components/atoms/error-message";
-
+import { useAlertStore } from "client/store";
 interface SignUpFormValues {
   username: string;
   email: string;
@@ -14,54 +14,67 @@ interface SignUpFormValues {
 }
 
 const SignUpForm: React.FC = () => {
-  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<SignUpFormValues>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    reset,
+  } = useForm<SignUpFormValues>({
     resolver: yupResolver(signUpSchema),
     mode: "onChange",
   });
   const createUser = useCreateUser();
+  const { showAlert } = useAlertStore(); 
 
   const onSubmit = async (data: SignUpFormValues) => {
     try {
       await createUser.mutateAsync(data);
-      alert("User created successfully!");
+      showAlert("User created successfully!", "success");
       reset();
     } catch (error) {
       console.error("Error creating user", error);
-      alert("Failed to create user");
+      showAlert("Failed to create user", "error");
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="relative">
-      <div className="mb-4 w-[240px] relative">
+      <div className="relative mb-4 w-[240px]">
         <Input
           variant="secondary"
           {...register("email")}
           label="Email Address"
         />
-        {errors?.email && <ErrorMessage message={errors?.email?.message as string} />}
+        {errors?.email && (
+          <ErrorMessage message={errors?.email?.message as string} />
+        )}
       </div>
-      
-      <div className="mb-4 w-[140px] relative">
-        <Input
-          variant="secondary"
-          {...register("username")}
-          label="Username"
-        />
-        {errors.username && <ErrorMessage message={errors.username.message as string} />}
+
+      <div className="relative mb-4 w-[140px]">
+        <Input variant="secondary" {...register("username")} label="Username" />
+        {errors.username && (
+          <ErrorMessage message={errors.username.message as string} />
+        )}
       </div>
-      
-      <div className="mb-4 w-[140px] relative">
+
+      <div className="relative mb-4 w-[140px]">
         <Input
           variant="secondary"
           {...register("password")}
           label="Password"
           type="password"
         />
-        {errors.password && <ErrorMessage message={errors.password.message as string} />}
+        {errors.password && (
+          <ErrorMessage message={errors.password.message as string} />
+        )}
       </div>
-      
-      <Button label="Sign Up" variant="primary" type="submit" disabled={!isValid} />
+
+      <Button
+        label="Sign Up"
+        variant="primary"
+        type="submit"
+        disabled={!isValid}
+      />
     </form>
   );
 };

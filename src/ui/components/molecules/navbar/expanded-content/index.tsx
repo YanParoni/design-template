@@ -28,10 +28,10 @@ const ExpandedContent: React.FC = () => {
           transition={{ duration: 0 }}
         >
           {activeState === "login" && (
-            <LoginForm isVisible={true} onCloseClick={handleCloseClick} />
+            <LoginForm onCloseClick={handleCloseClick} />
           )}
           {activeState === "signup" && (
-            <SignUpModal isVisible={true} onClose={handleCloseModal} />
+            <SignUpModal  onClose={handleCloseModal} />
           )}
         </motion.div>
       )}

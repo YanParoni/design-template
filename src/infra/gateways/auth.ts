@@ -28,6 +28,7 @@ export class AuthGateway implements IAuthGateway {
       return response;
     } catch (error) {
       console.error("Error in AuthGateway login", error);
+      return error 
     }
   }
 

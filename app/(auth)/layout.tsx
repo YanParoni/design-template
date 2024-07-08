@@ -5,10 +5,11 @@ import React from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    
+    <Providers>
       <section className="h-screen w-screen bg-bkg">
-        <Providers>{children}</Providers>
+        {children}
       </section>
+      </Providers>
     
   );
 }

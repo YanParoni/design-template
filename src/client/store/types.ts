@@ -69,3 +69,13 @@ export interface GameInteractionsState {
   gameInteractions: GameInteraction[];
   setGameInteractions: (interactions: GameInteraction[]) => void;
 }
+
+export type AlertType = 'success' | 'error';
+
+export interface AlertState {
+  message: string;
+  type: AlertType;
+  isVisible: boolean;
+  showAlert: (message: string, type: AlertType) => void;
+  hideAlert: () => void;
+}
