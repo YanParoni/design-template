@@ -1,9 +1,12 @@
-import { injectable } from "inversify";
+import { injectable, inject } from "inversify";
 import { HttpClientDTO, IHttpClient } from "./contracts";
+import { AuthMiddleware } from "./middlewares/auth.middleware";
 
 @injectable()
 export class FetchHttpClient implements IHttpClient {
-  constructor() {}
+  constructor(
+    @inject(AuthMiddleware) private readonly authMiddleware: AuthMiddleware
+  ) {}
 
   private async thrower<T>(callback: () => Promise<HttpClientDTO.Output<T>>): Promise<HttpClientDTO.Output<T>> {
     try {
@@ -14,13 +17,12 @@ export class FetchHttpClient implements IHttpClient {
     }
   }
 
-
   private async fetchRequest<T>(
     input: RequestInfo,
     init?: RequestInit,
   ): Promise<HttpClientDTO.Output<T>> {
     const response = await fetch(input, init);
-    
+
     if (!response.ok) {
       throw new Error(`Fetch request failed: ${response.status}`);
     }
@@ -29,26 +31,30 @@ export class FetchHttpClient implements IHttpClient {
 
   async get<T>({
     url,
-    headers,
+    headers = {},
     params,
-  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
+    addAuth = false,
+  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<HttpClientDTO.Output<T>> {
+    const fullHeaders = this.authMiddleware.apply(headers, addAuth);
     const hasParams = params && Object.keys(params).length > 0;
     const queryParams = hasParams ? new URLSearchParams(params).toString() : "";
     const fullUrl = queryParams ? `${url}?${queryParams}` : url;
-    const response = await this.fetchRequest<T>(fullUrl, { headers, method: "GET" })
+    const response = await this.fetchRequest<T>(fullUrl, { headers: fullHeaders, method: "GET" });
 
-    return response
+    return response;
   }
 
   async post<T>({
     url,
     data,
-    headers,
-  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
+    headers = {},
+    addAuth = false,
+  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<HttpClientDTO.Output<T>> {
+    const fullHeaders = this.authMiddleware.apply(headers, addAuth);
     return await this.thrower(() =>
       this.fetchRequest<T>(url, {
         body: JSON.stringify(data),
-        headers,
+        headers: fullHeaders,
         method: "POST",
       }),
     );
@@ -57,12 +63,14 @@ export class FetchHttpClient implements IHttpClient {
   async put<T>({
     url,
     data,
-    headers,
-  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
+    headers = {},
+    addAuth = false,
+  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<HttpClientDTO.Output<T>> {
+    const fullHeaders = this.authMiddleware.apply(headers, addAuth);
     return await this.thrower(() =>
       this.fetchRequest<T>(url, {
         body: JSON.stringify(data),
-        headers,
+        headers: fullHeaders,
         method: "PUT",
       }),
     );
@@ -71,12 +79,14 @@ export class FetchHttpClient implements IHttpClient {
   async patch<T>({
     url,
     data,
-    headers,
-  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
+    headers = {},
+    addAuth = false,
+  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<HttpClientDTO.Output<T>> {
+    const fullHeaders = this.authMiddleware.apply(headers, addAuth);
     return await this.thrower(() =>
       this.fetchRequest<T>(url, {
         body: JSON.stringify(data),
-        headers,
+        headers: fullHeaders,
         method: "PATCH",
       }),
     );
@@ -84,10 +94,12 @@ export class FetchHttpClient implements IHttpClient {
 
   async delete<T>({
     url,
-    headers,
-  }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
+    headers = {},
+    addAuth = false,
+  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<HttpClientDTO.Output<T>> {
+    const fullHeaders = this.authMiddleware.apply(headers, addAuth);
     return await this.thrower(() =>
-      this.fetchRequest<T>(url, { headers, method: "DELETE" }),
+      this.fetchRequest<T>(url, { headers: fullHeaders, method: "DELETE" }),
     );
   }
 }

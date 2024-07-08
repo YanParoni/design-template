@@ -19,11 +19,14 @@ import { IUserGateway } from "@infra/gateways/contracts/user";
 import { UserGateway } from "@infra/gateways/user";
 import { GameInteractionGateway } from "@infra/gateways/game-interaction";
 import { IGameInteractionGateway } from "@infra/gateways/contracts/game-interaction";
+import { IAuthMiddleware } from "@infra/gateways/contracts/auth-middleware";
+import { AuthMiddleware } from "@infra/http/middlewares/auth.middleware";
 
 const iocContainer = new Container({ defaultScope: "Singleton" });
 
 iocContainer.bind<IHttpClient>(TYPES.AxiosHttpClient).to(AxiosHttpClient);
 iocContainer.bind<IHttpClient>(TYPES.FetchHttpClient).to(FetchHttpClient);
+iocContainer.bind<IAuthMiddleware>('AuthMiddleware').to(AuthMiddleware);
 iocContainer.bind<IGamesGateway>("GamesGateway").to(GamesGateway);
 iocContainer.bind<IGamesGateway>("GamesProxy").to(GamesProxy);
 iocContainer.bind<IChatGateway>("ChatGateway").to(ChatGateway);
