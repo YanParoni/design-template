@@ -22,7 +22,8 @@
     "incremental": true,
     "types": [
       "reflect-metadata",
-      "@types/node"
+      "@types/node",
+      "jest"
     ],
     "plugins": [
       {

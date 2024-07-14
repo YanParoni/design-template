@@ -21,7 +21,7 @@ const ExpandedContent: React.FC = () => {
     <AnimatePresence>
       {isMobile && activeState !== "default" && (
         <motion.div
-          className="z-50 flex w-full flex-col items-center justify-start bg-dark-background pb-5"
+          className="flex w-full flex-col items-center justify-start bg-dark-background pb-5"
           initial={{ height: 0 }}
           animate={{ height: "auto" }}
           exit={{ height: 0 }}
@@ -31,7 +31,7 @@ const ExpandedContent: React.FC = () => {
             <LoginForm onCloseClick={handleCloseClick} />
           )}
           {activeState === "signup" && (
-            <SignUpModal  onClose={handleCloseModal} />
+            <SignUpModal onClose={handleCloseModal} />
           )}
         </motion.div>
       )}

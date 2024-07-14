@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Input from "@ui/components/atoms/input";
+import Input from "@ui/components/atoms/inputs/input";
 import Button from "@ui/components/atoms/button";
 import ErrorMessage from "@ui/components/atoms/error-message";
 import { useRequestReset } from "@ui/queries/auth";
@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import forgotPasswordSchema from "@ui/validators/forgot-password-schema";
 import { useRouter } from "next/navigation";
-import { CheckCircleIcon } from "@heroicons/react/24/solid";
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
 
 interface ForgotPasswordFormValues {
   email: string;
@@ -26,15 +26,22 @@ const ForgotPassword: React.FC = () => {
   });
   const { mutateAsync: requestReset } = useRequestReset();
   const [phases, setPhases] = useState<"toSubmit" | "submitted">("toSubmit");
+  const [responseMessage, setResponseMessage] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
   const router = useRouter();
 
   const onSubmit = async (data: ForgotPasswordFormValues) => {
     try {
-      await requestReset(data);
+      const response = await requestReset(data);
+      setResponseMessage(response.message);
+      setIsSuccess(response.success);
       setPhases("submitted");
       reset();
     } catch (error) {
       console.error("Error requesting password reset", error);
+      setResponseMessage("An error occurred. Please try again.");
+      setIsSuccess(false);
+      setPhases("submitted");
     }
   };
 
@@ -46,7 +53,7 @@ const ForgotPassword: React.FC = () => {
     if (state === "toSubmit") {
       return (
         <>
-          <p className="text-balance xs:text-xs px-2 text-center text-sm text-[#e7cbed] sm:text-base">
+          <p className="xs:text-xs text-balance px-2 text-center text-sm text-[#e7cbed] sm:text-base">
             Enter your email below, and we'll send you a message with your
             username and a link to reset your password.
           </p>
@@ -65,10 +72,13 @@ const ForgotPassword: React.FC = () => {
     } else if (state === "submitted") {
       return (
         <>
-          <CheckCircleIcon className="h-12 w-12 justify-self-center text-[#e7cbed]" />
-          <p className="text-balance xs:text-xs px-6 text-center text-sm text-[#e7cbed] sm:text-base">
-            If the provided address belongs to an account, you will receive a
-            link to reset your password.
+          {isSuccess ? (
+            <CheckCircleIcon className="h-12 w-12 justify-self-center text-[#e7cbed]" />
+          ) : (
+            <XCircleIcon className="h-12 w-12 justify-self-center text-[#e7cbed]" />
+          )}
+          <p className="xs:text-xs text-balance px-6 text-center text-sm text-[#e7cbed] sm:text-base">
+            {responseMessage}
           </p>
         </>
       );

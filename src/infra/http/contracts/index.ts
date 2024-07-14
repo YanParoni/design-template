@@ -17,5 +17,6 @@ export namespace HttpClientDTO {
 
   export type Output<T = any> = {
     data: T;
+    error: any;
   };
 }

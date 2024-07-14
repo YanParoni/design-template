@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "@ui/components/atoms/input";
+import Input from "@ui/components/atoms/inputs/input";
 import Button from "@ui/components/atoms/button";
 import { useCreateUser } from "@ui/queries/user";
 import { useForm } from "react-hook-form";
@@ -13,7 +13,12 @@ interface SignUpFormValues {
   password: string;
 }
 
-const SignUpForm: React.FC = () => {
+interface SignUpForm{
+  onClose: () => void;
+}
+
+
+const SignUpForm: React.FC<SignUpForm> = ({ onClose }) => {
   const {
     register,
     handleSubmit,
@@ -21,16 +26,17 @@ const SignUpForm: React.FC = () => {
     reset,
   } = useForm<SignUpFormValues>({
     resolver: yupResolver(signUpSchema),
-    mode: "onChange",
+    mode: "onBlur",
   });
   const createUser = useCreateUser();
-  const { showAlert } = useAlertStore(); 
+  const { showAlert } = useAlertStore();
 
   const onSubmit = async (data: SignUpFormValues) => {
     try {
       await createUser.mutateAsync(data);
       showAlert("User created successfully!", "success");
       reset();
+      onClose()
     } catch (error) {
       console.error("Error creating user", error);
       showAlert("Failed to create user", "error");

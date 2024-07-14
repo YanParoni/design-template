@@ -7,13 +7,28 @@ const BASE_URL =
   process.env.NEXT_PUBLIC_REACT_APP === "production"
     ? ""
     : "http://localhost:3000";
-
 @injectable()
 export class AuthGateway implements IAuthGateway {
   constructor(
     @inject(TYPES.FetchHttpClient)
     private readonly fetchHttpClient: IHttpClient,
   ) {}
+
+  async getProfile(): Promise<any> {
+    const url = `${BASE_URL}/auth/profile`;
+    try {
+      const response = await this.fetchHttpClient.get({
+        url,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        addAuth: true,
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error in AuthGateway getProfile", error);
+    }
+  }
 
   async login(data: LoginUserDto): Promise<any> {
     const url = `${BASE_URL}/auth/login`;
@@ -24,27 +39,11 @@ export class AuthGateway implements IAuthGateway {
         headers: {
           "Content-Type": "application/json",
         },
+        addAuth: true,
       });
-      return response;
+      return response.data;
     } catch (error) {
-      console.error("Error in AuthGateway login", error);
-      return error 
-    }
-  }
-
-  async getProfile(data: string): Promise<any> {
-    const url = `${BASE_URL}/auth/profile`;
-    try {
-      const response = await this.fetchHttpClient.get({
-        url,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${data}`,
-        },
-      });
-      return response;
-    } catch (error) {
-      console.error("Error in AuthGateway getProfile", error);
+      console.error("Error logging in", error);
     }
   }
 
@@ -58,9 +57,25 @@ export class AuthGateway implements IAuthGateway {
         },
         data: email,
       });
-      return response;
+      return response.data;
     } catch (error) {
-      console.error("Error in AuthGateway requestReset", error);
+      console.error("Error requesting password reset", error);
+    }
+  }
+
+  async resetPassword(token:string ,newPassword: string): Promise<any> {
+    const url = `${BASE_URL}/auth/reset-password`;
+    try {
+      const response = await this.fetchHttpClient.post({
+        url,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: { newPassword, token },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error resetting password", error);
     }
   }
 
@@ -69,29 +84,31 @@ export class AuthGateway implements IAuthGateway {
     try {
       const response = await this.fetchHttpClient.get({
         url,
-        headers: {
-          "Content-Type": "application/json",
-        },
+        addAuth: true,
       });
-      return response;
+      return response.data;
     } catch (error) {
-      console.error("Error in AuthGateway validateToken", error);
+      console.error("Error validating token", error);
     }
   }
 
-  async resetPassword(token: string, newPassword: string): Promise<any> {
-    const url = `${BASE_URL}/auth/reset-password`;
+  async changePassword(
+    currentPassword: string | null,
+    newPassword: string,
+  ): Promise<any> {
+    const url = `${BASE_URL}/auth/change-password`;
     try {
-      const response = await this.fetchHttpClient.post({
+      const response = await this.fetchHttpClient.patch({
         url,
         headers: {
           "Content-Type": "application/json",
         },
-        data: { token, newPassword },
+        data: { currentPassword, newPassword },
+        addAuth: true,
       });
       return response;
     } catch (error) {
-      console.error("Error in AuthGateway resetPassword", error);
+      console.error("Error in AuthGateway changePassword", error);
     }
   }
 }

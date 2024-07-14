@@ -4,10 +4,10 @@ import { useAuthStore } from "client/store";
 import UserLockIcon from "@ui/components/atoms/navbar/user-lock-icon";
 import { KeyIcon } from "@heroicons/react/24/solid";
 import UserProfileImage from "@ui/components/atoms/navbar/user-profile-image";
+import UserDropdown from "../../../organisms/navbar/user-dropdown";
 
 const MobileContent: React.FC = () => {
-  const { activeState, setActiveState, isAuthenticated, logout,user } =
-    useAuthStore();
+  const { activeState, setActiveState, isAuthenticated, user } = useAuthStore();
 
   const handleSignInClick = () => {
     setTimeout(() => setActiveState("login"), 200);
@@ -21,13 +21,10 @@ const MobileContent: React.FC = () => {
     setActiveState("default");
   };
 
-  
-
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex items-end space-x-4">
       {isAuthenticated ? (
-      <UserProfileImage
-      profileImage={user?.profileImage}/>
+        <UserDropdown />
       ) : (
         <>
           {activeState === "login" ? (
@@ -47,21 +44,6 @@ const MobileContent: React.FC = () => {
             className="h-w-5 w-5 cursor-pointer fill-white"
             onClick={handleCreateAccountClick}
           />
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2.5}
-            stroke="currentColor"
-            className="h-w-5 w-5 cursor-pointer stroke-white"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-            />
-          </svg>
         </>
       )}
     </div>

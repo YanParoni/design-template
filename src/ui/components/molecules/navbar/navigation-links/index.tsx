@@ -11,14 +11,13 @@ const NavigationLinks: React.FC<NavigationLinksProps> = ({
   onCreateAccountClick,
 }) => {
   const { activeState } = useAuthStore();
-
   return (
     <AnimatePresence>
       <motion.div
-         initial={{ opacity: 0 }}
-         animate={{ opacity: 1 }}
-         exit={{ opacity: 0 }}
-         transition={{ duration: 0.1 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.1 }}
         className="flex items-center space-x-4"
       >
         {activeState === "default" && (
@@ -44,16 +43,6 @@ const NavigationLinks: React.FC<NavigationLinksProps> = ({
               transition={{ duration: 0.2 }}
             >
               CREATE ACCOUNT
-            </motion.a>
-            <motion.a
-              href=""
-              className="font-montserrat text-[14px] font-semibold text-description hover:text-white"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              GAMES
             </motion.a>
           </>
         )}

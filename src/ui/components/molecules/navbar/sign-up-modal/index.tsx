@@ -1,4 +1,4 @@
-import Modal from "@ui/components/organisms/modal";
+import Modal from "@ui/components/atoms/modal";
 import SignUpForm from "@ui/components/molecules/navbar/sign-up-form";
 import { useAuthStore } from "client/store";
 
@@ -15,7 +15,7 @@ const SignUpModal: React.FC<SignUpModalProps> = ({ onClose }) => {
       isVisible={activeState === "signup"}
       onClose={onClose}
     >
-      <SignUpForm />
+      <SignUpForm onClose={onClose} />
     </Modal>
   );
 };

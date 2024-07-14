@@ -7,7 +7,7 @@ import Dropdown from "@ui/components/molecules/dropdown";
 import mockedGenres from "@ui/utils/mock-genres";
 import mockedPlatforms from "@ui/utils/mock-platforms";
 import mockedStores from "@ui/utils/mock-stores";
-import SearchInput from "@ui/components/atoms/search-input";
+import SearchInput from "@ui/components/atoms/inputs/search-input";
 import useDeviceDetect from "@ui/hooks/use-device-detect";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";

@@ -1,17 +1,22 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { iocContainer } from "@ioc/index";
-import { CreateUserDTO, UserDTO, IUserGateway  } from "../../infra/gateways/contracts/user";
+import {
+  CreateUserDTO,
+  UserDTO,
+  IUserGateway,
+} from "../../infra/gateways/contracts/user";
+import { IAuthGateway } from "@infra/gateways/contracts/auth";
 
-export async function getProfile(params: any) {
-  const gateway = iocContainer.get<IUserGateway>("UserGateway");
-  const response = await gateway.getProfile(params);
+export async function getProfile() {
+  const gateway = iocContainer.get<IAuthGateway>("AuthGateway");
+  const response = await gateway.getProfile();
   return response;
 }
 
-export const useSearchGames = (name: string) => {
+export const useGetProfile = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["getProfile"],
-    queryFn: () => getProfile(name),
+    queryFn: () => getProfile(),
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
@@ -19,17 +24,87 @@ export const useSearchGames = (name: string) => {
   return { data, isLoading, refetch };
 };
 
-
 export const useCreateUser = () => {
-  const authGateway = iocContainer.get<IUserGateway>("UserGateway");
+  const userGateway = iocContainer.get<IUserGateway>("UserGateway");
 
   const mutation = useMutation<UserDTO | null, Error, CreateUserDTO>({
     mutationFn: async (user: CreateUserDTO) => {
-      const response = await authGateway.createUser(user);
+      const response = await userGateway.createUser(user);
       if (!response) {
         throw new Error("User creation failed");
       }
       return response;
+    },
+  });
+
+  return mutation;
+};
+
+export const useUpdateProfileImage = () => {
+  const userGateway = iocContainer.get<IUserGateway>("UserGateway");
+
+  const mutation = useMutation<
+    any,
+    Error,
+    { token: string; base64Image: string }
+  >({
+    mutationFn: async ({ base64Image }) => {
+      const response = await userGateway.changeAvatar(base64Image);
+      if (!response) {
+        throw new Error("Profile image update failed");
+      }
+      return response;
+    },
+  });
+
+  return mutation;
+};
+
+export const useUpdateBio = () => {
+  const userGateway = iocContainer.get<IUserGateway>("UserGateway");
+
+  const mutation = useMutation<any, Error, { newBio: string }>({
+    mutationFn: async ({ newBio }) => {
+      const response = await userGateway.updateBio(newBio);
+      if (!response) {
+        throw new Error("Bio update failed");
+      }
+      return response;
+    },
+  });
+
+  return mutation;
+};
+
+export const useUpdateAt = () => {
+  const userGateway = iocContainer.get<IUserGateway>("UserGateway");
+
+  const mutation = useMutation<any, Error, { newAt: string }>({
+    mutationFn: async ({ newAt }) => {
+      const response = await userGateway.updateAt(newAt);
+      if (!response) {
+        throw new Error("At update failed");
+      }
+      return response;
+    },
+  });
+
+  return mutation;
+};
+
+export const useUpdateUserDetails = () => {
+  const queryClient = useQueryClient();
+  const userGateway = iocContainer.get<IUserGateway>("UserGateway");
+  const mutation = useMutation<any, Error, any>({
+    mutationFn: async (details) => {
+      const response = await userGateway.updateUserDetails(details);
+      if (!response) {
+        throw new Error("At update failed");
+      }
+      return response;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getProfile"] });
     },
   });
 

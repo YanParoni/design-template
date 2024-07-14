@@ -56,8 +56,7 @@ export type AuthState = {
   setActiveState: (state: "default" | "login" | "signup" | "logged") => void;
 };
 
-
-interface GameInteraction {
+export interface GameInteraction {
   id: string;
   userId: string;
   gameId: string;
@@ -70,7 +69,7 @@ export interface GameInteractionsState {
   setGameInteractions: (interactions: GameInteraction[]) => void;
 }
 
-export type AlertType = 'success' | 'error';
+export type AlertType = "success" | "error";
 
 export interface AlertState {
   message: string;
@@ -78,4 +77,27 @@ export interface AlertState {
   isVisible: boolean;
   showAlert: (message: string, type: AlertType) => void;
   hideAlert: () => void;
+}
+
+export interface ModalStoreState {
+  isVisible: boolean;
+  isCropping: boolean;
+  editMode: "profile" | "header" | null;
+  selectedImage: string | null;
+  localProfileImage: string | null;
+  localHeaderImage: string | null;
+  croppedAreaPixels: any;
+  hasChanges: boolean;
+  passwordModal: boolean;
+  handlePasswordModal: (value: boolean) => void;
+  setHasChanges: () => void;
+  openModal: () => void;
+  closeModal: () => void;
+  startCropping: () => void;
+  stopCropping: () => void;
+  setSelectedImage: (image: string | null) => void;
+  setCroppedAreaPixels: (area: any) => void;
+  saveCroppedImage: () => void;
+  setEditMode: (mode: "profile" | "header") => void;
+  resetState: () => void;
 }

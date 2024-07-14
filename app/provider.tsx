@@ -12,23 +12,20 @@ function Providers({ children }: React.PropsWithChildren) {
   const { login, setActiveState } = useAuthStore();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const userProfile = jwt.decode(token) as any
-      login(token, userProfile);
-      setActiveState('logged');
-    } else {
-      setActiveState('default');
-    }
+    const token = localStorage.getItem("token");
+    if (!token) return setActiveState("default");
+    const userProfile = jwt.decode(token) as any;
+    login(token, userProfile);
+    setActiveState("logged");
   }, [login, setActiveState]);
 
   return (
     <QueryClientProvider client={client}>
       <ReactQueryStreamedHydration>
         <ThemeProvider>
-          <Alert/>
+          <Alert />
           {children}
-          </ThemeProvider>
+        </ThemeProvider>
       </ReactQueryStreamedHydration>
     </QueryClientProvider>
   );

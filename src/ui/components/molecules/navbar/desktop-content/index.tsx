@@ -7,11 +7,9 @@ import LoggedNavbar from "../logged-nav";
 
 const DesktopContent: React.FC = () => {
   const { setActiveState } = useAuthStore();
-  const [showNavigation, setShowNavigation] = useState(true);
 
   const handleSignInClick = () => {
     setTimeout(() => {
-      setShowNavigation(false);
       setActiveState("login");
     }, 200);
   };
@@ -19,9 +17,7 @@ const DesktopContent: React.FC = () => {
   const handleCloseClick = () => {
     setTimeout(() => {
       setActiveState("default");
-      setTimeout(() => {
-        setShowNavigation(true);
-      }, 200);
+      setTimeout(() => {}, 200);
     }, 200);
   };
 
@@ -35,12 +31,10 @@ const DesktopContent: React.FC = () => {
 
   return (
     <>
-      {showNavigation && (
-        <NavigationLinks
-          onSignInClick={handleSignInClick}
-          onCreateAccountClick={handleCreateAccountClick}
-        />
-      )}
+      <NavigationLinks
+        onSignInClick={handleSignInClick}
+        onCreateAccountClick={handleCreateAccountClick}
+      />
       <LoginForm onCloseClick={handleCloseClick} />
       <SignUpModal onClose={handleCloseModal} />
       <LoggedNavbar />

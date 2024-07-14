@@ -6,12 +6,12 @@ const UserProfileImage = ({ profileImage }) => {
     return (
       <img
         src={profileImage}
-        className="h-8 w-8 rounded-full object-cover"
+        className="h-6 w-6 rounded-full object-cover md:h-7 md:w-7"
         alt="User profile"
       />
     );
   } else {
-    return <UserIcon className="h-8 w-8 text-[#7d6589]" />;
+    return <UserIcon className="h-6 w-6 p-1 text-[#7d6589] md:h-7 md:w-7" />;
   }
 };
 

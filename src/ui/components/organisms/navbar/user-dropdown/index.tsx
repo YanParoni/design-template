@@ -1,19 +1,23 @@
 import "./styles.css";
 import React, { useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import { useAuthStore } from "client/store";
+import { useAuthStore, useModalStore } from "client/store";
 import UserProfileImage from "@ui/components/atoms/navbar/user-profile-image";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, setActiveState, logout, user, token } = useAuthStore();
+  const { openModal, handlePasswordModal } = useModalStore();
+  const { isAuthenticated, setActiveState, logout, user } = useAuthStore();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
     logout();
     setActiveState("default");
+    localStorage.removeItem("token");
   };
 
+  const truncateUsername = (username:string) => {
+    return username.length > 10 ? username.substring(0, 10) + "..." : username;
+  };
 
   return (
     <>
@@ -29,13 +33,13 @@ export default function UserDropdown() {
                 isOpen ? "dropdown-button-open" : "dropdown-button-closed"
               }`}
             >
-              <div className="flex items-center space-x-2">
-                <div className="rounded-full border-[.02rem] border-[#7d6589] bg-[#4b3756] px-[2px] py-[2px]">
+              <div className="flex items-center gap-2">
+                <div className="rounded-full border-[.02rem] border-[#7d6589] bg-[#4b3756]">
                   <UserProfileImage profileImage={user?.profileImage} />
                 </div>
                 {user && (
                   <h1 className="font-montserrat text-[14px] font-semibold text-description">
-                    {user.username}
+                    {truncateUsername(user.username)}
                   </h1>
                 )}
                 <ChevronDownIcon className="-mr-1 h-4 w-4" aria-hidden="true" />
@@ -48,13 +52,13 @@ export default function UserDropdown() {
                     isOpen ? "dropdown-button-open" : "dropdown-button-closed"
                   }`}
                 >
-                  <div className="flex items-center space-x-2">
-                    <div className="rounded-full border-[.01rem] border-[#7d6589] bg-[#4b3756] px-[2px] py-[2px]">
+                  <div className="flex items-center gap-2">
+                    <div className="rounded-full border-[.02rem] border-[#7d6589] bg-[#4b3756]">
                       <UserProfileImage profileImage={user?.profileImage} />
                     </div>
                     {user && (
                       <h1 className="font-montserrat text-[14px] font-semibold text-white">
-                        {user.username}
+                        {truncateUsername(user.username)}
                       </h1>
                     )}
                     <ChevronDownIcon
@@ -63,11 +67,22 @@ export default function UserDropdown() {
                     />
                   </div>
                 </div>
-                <div key={"hello"} className={`dropdown-item`}>
+                <div
+                  key={"Profile Button"}
+                  className={`dropdown-item`}
+                  onClick={openModal}
+                >
                   Profile
                 </div>
                 <div
-                  key={"hello2"}
+                  key={"Credentials Button"}
+                  className={`dropdown-item`}
+                  onClick={() => handlePasswordModal(true)}
+                >
+                  Credentials
+                </div>
+                <div
+                  key={"Signout Button"}
                   className={`dropdown-item`}
                   onClick={handleLogout}
                 >

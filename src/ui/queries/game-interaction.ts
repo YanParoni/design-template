@@ -39,10 +39,10 @@ export const useGameInteractions = () => {
   const { setGameInteractions } = useGameInteractionsStore();
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["getUserInteractions", user?.sub],
+    queryKey: ["getUserInteractions", user?.id],
     queryFn: async () => {
-      if (!user) return null;
-      const response = await getUserInteractions(user.sub);
+      if (!user.id) return;
+      const response = await getUserInteractions(user.id);
       setGameInteractions(response);
       return response;
     },

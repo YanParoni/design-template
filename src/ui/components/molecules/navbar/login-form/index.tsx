@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "@ui/components/atoms/button";
-import Input from "@ui/components/atoms/input";
+import Input from "@ui/components/atoms/inputs/input";
 import GoogleButton from "@ui/components/atoms/google-button";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useLogin } from "@ui/queries/auth";
@@ -12,18 +12,18 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { mutateAsync } = useLogin();
   const { activeState } = useAuthStore();
   const { showAlert } = useAlertStore();
 
   const handleLogin = async () => {
-    const response = await mutateAsync({ username, password });
-    if (response.success) {
-      showAlert("Logged in successfully!", "success");
-    } else {
+    const response = await mutateAsync({ email, password });
+    if (response.error) {
       showAlert("Failed to log in", "error");
+    } else {
+      showAlert("Logged in successfully!", "success");
     }
   };
 
@@ -58,10 +58,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
           />
           <div className="w-screen pr-6 lg:w-[150px] lg:pr-0">
             <Input
-              label="Username"
+              label="Email"
               variant="primary"
-              onChange={(e) => setUsername(e.target.value)}
-              value={username}
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
           </div>
           <div className="w-screen pr-6 lg:w-[150px] lg:pr-0">

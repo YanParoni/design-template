@@ -33,7 +33,7 @@ export class GameInteractionGateway implements IGameInteractionGateway {
         },
         addAuth: true,
       });
-      return response;
+      return response.data;
     } catch (error) {
       console.error("Error in GameInteractionGateway createInteraction", error);
     }
@@ -49,8 +49,7 @@ export class GameInteractionGateway implements IGameInteractionGateway {
         },
         addAuth: true,
       });
-      console.log(response, 'gateway getuser')
-      return response;
+      return response.data;
     } catch (error) {
       console.error(
         "Error in GameInteractionGateway getUserInteractions",

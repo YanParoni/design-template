@@ -6,15 +6,18 @@ import TYPES from "./types";
 @injectable()
 export class FetchHttpClient implements IHttpClient {
   constructor(
-    @inject(TYPES.AuthMiddleware) private readonly authMiddleware: IAuthMiddleware
+    @inject(TYPES.AuthMiddleware)
+    private readonly authMiddleware: IAuthMiddleware,
   ) {}
 
-  private async thrower<T>(callback: () => Promise<HttpClientDTO.Output<T>>): Promise<HttpClientDTO.Output<T>> {
+  private async thrower<T>(
+    callback: () => Promise<HttpClientDTO.Output<T>>,
+  ): Promise<HttpClientDTO.Output<T>> {
     try {
       return await callback();
     } catch (error: any) {
       console.log(error.message);
-      throw error;
+      return { data: null as any, error: error.message };
     }
   }
 
@@ -24,10 +27,24 @@ export class FetchHttpClient implements IHttpClient {
   ): Promise<HttpClientDTO.Output<T>> {
     const response = await fetch(input, init);
 
-    if (!response.ok) {
-      throw new Error(`Fetch request failed: ${response.status}`);
+    let responseBody: T;
+    try {
+      responseBody = await response.json();
+    } catch (error) {
+      responseBody = {} as T;
     }
-    return await response.json();
+
+    if (!response.ok) {
+      return {
+        data: responseBody,
+        error: `Fetch request failed: ${response.status}`,
+      };
+    }
+
+    return {
+      data: responseBody,
+      error: null,
+    };
   }
 
   async get<T>({
@@ -35,13 +52,17 @@ export class FetchHttpClient implements IHttpClient {
     headers = {},
     params,
     addAuth = false,
-  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<HttpClientDTO.Output<T>> {
+  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<
+    HttpClientDTO.Output<T>
+  > {
     const fullHeaders = this.authMiddleware.apply(headers, addAuth);
     const hasParams = params && Object.keys(params).length > 0;
     const queryParams = hasParams ? new URLSearchParams(params).toString() : "";
     const fullUrl = queryParams ? `${url}?${queryParams}` : url;
-    const response = await this.fetchRequest<T>(fullUrl, { headers: fullHeaders, method: "GET" });
-    return response;
+    return await this.fetchRequest<T>(fullUrl, {
+      headers: fullHeaders,
+      method: "GET",
+    });
   }
 
   async post<T>({
@@ -49,7 +70,9 @@ export class FetchHttpClient implements IHttpClient {
     data,
     headers = {},
     addAuth = false,
-  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<HttpClientDTO.Output<T>> {
+  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<
+    HttpClientDTO.Output<T>
+  > {
     const fullHeaders = this.authMiddleware.apply(headers, addAuth);
     return await this.thrower(() =>
       this.fetchRequest<T>(url, {
@@ -65,7 +88,9 @@ export class FetchHttpClient implements IHttpClient {
     data,
     headers = {},
     addAuth = false,
-  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<HttpClientDTO.Output<T>> {
+  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<
+    HttpClientDTO.Output<T>
+  > {
     const fullHeaders = this.authMiddleware.apply(headers, addAuth);
     return await this.thrower(() =>
       this.fetchRequest<T>(url, {
@@ -81,7 +106,9 @@ export class FetchHttpClient implements IHttpClient {
     data,
     headers = {},
     addAuth = false,
-  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<HttpClientDTO.Output<T>> {
+  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<
+    HttpClientDTO.Output<T>
+  > {
     const fullHeaders = this.authMiddleware.apply(headers, addAuth);
     return await this.thrower(() =>
       this.fetchRequest<T>(url, {
@@ -96,7 +123,9 @@ export class FetchHttpClient implements IHttpClient {
     url,
     headers = {},
     addAuth = false,
-  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<HttpClientDTO.Output<T>> {
+  }: HttpClientDTO.Input & { addAuth?: boolean }): Promise<
+    HttpClientDTO.Output<T>
+  > {
     const fullHeaders = this.authMiddleware.apply(headers, addAuth);
     return await this.thrower(() =>
       this.fetchRequest<T>(url, { headers: fullHeaders, method: "DELETE" }),

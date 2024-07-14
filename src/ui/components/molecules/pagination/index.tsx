@@ -42,16 +42,20 @@ const Pagination: React.FC<PaginationProps> = ({ next, previous }) => {
   return (
     <div className="mt-[10px] flex items-center justify-between border-t border-t-tertiary-bkg pt-2">
       {previous ? (
-        <Button label="Previous" variant="secondary" onClick={handlePrevious} />
+        <div className="h-7 w-16">
+          <Button
+            label="Previous"
+            variant="secondary"
+            onClick={handlePrevious}
+          />
+        </div>
       ) : (
         <div className="h-[29px] w-[57px]"></div>
       )}
       {next ? (
-        <div
-        className='w-14 h-7'
-        >
-        <Button label="Next" variant="secondary" onClick={handleNext} />
-      </div>
+        <div className="h-7 w-14">
+          <Button label="Next" variant="secondary" onClick={handleNext} />
+        </div>
       ) : (
         <div className="h-[29px] w-[57px]"></div>
       )}

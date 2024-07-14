@@ -6,6 +6,7 @@ import Spinner from "@ui/components/atoms/spinner";
 import Pagination from "@ui/components/molecules/pagination";
 import { usePaginationStore } from "client/store";
 import useDeviceDetect from "@ui/hooks/use-device-detect";
+import CardLoadingSkeleton from "../card/card-loading-skeleton";
 
 function List() {
   const [layoutLoading, setLayoutLoading] = React.useState(false);
@@ -13,19 +14,29 @@ function List() {
   const { pageSize } = usePaginationStore();
   const { isMobile } = useDeviceDetect();
 
+  const isLarge = pageSize === 15;
+
   useEffect(() => {
     setLayoutLoading(true);
     refetch().finally(() => setLayoutLoading(false));
   }, [pageSize, refetch]);
 
-  if (isLoading || layoutLoading ) {
+  if (isLoading || layoutLoading) {
+    const skeletons = Array(pageSize).fill(null);
+
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <Spinner />
+      <div 
+      className={`grid w-full pt-2 gap-2 ${isMobile ? "grid-cols-4" : isLarge ? "grid-cols-5" : "grid-cols-8"}`}>
+      {skeletons.map((_, index) => (
+          <CardLoadingSkeleton key={index}
+          height={
+            isMobile ? "h-[101px]" : isLarge ? "h-[255px]" : "h-[150px]"
+          }
+          />
+        ))}
       </div>
     );
   }
-  const isLarge = pageSize === 15;
 
   return (
     <div className="mt-[.76923077rem] flex min-h-screen flex-col">

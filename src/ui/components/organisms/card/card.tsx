@@ -1,11 +1,10 @@
 import "./styles.css";
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import ShadowEffect from "../../atoms/shadow-effect";
 import CardActions from "@ui/components/molecules/card/card-actions";
 import { useAuthStore, useGameInteractionsStore } from "client/store";
-
+import { GameInteraction } from "client/store/types";
 interface ICard {
   id: number;
   imageUrl: string;
@@ -16,31 +15,27 @@ interface ICard {
   isLarge: boolean;
 }
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_REACT_APP === "production"
-    ? "https://design-template-ivory.vercel.app"
-    : "http://localhost:3001";
-
 const Card = React.memo(
-  ({
-    id,
-    imageUrl = "",
-    name = "",
-    height,
-    dir,
-    rating,
-    isLarge,
-  }: ICard) => {
+  ({ id, imageUrl = "", name = "", height, dir, rating, isLarge }: ICard) => {
     const [hovered, setHovered] = useState(false);
     const { isAuthenticated } = useAuthStore();
     const { gameInteractions } = useGameInteractionsStore();
-    const gameInteraction = gameInteractions.find(interaction => interaction.gameId === id.toString());
-    const [isPlayed, setIsPlayed] = useState(gameInteraction?.played || false);
+    const [isPlayed, setIsPlayed] = useState(false);
+    const [gameInteraction, setGameInteraction] = useState<
+      GameInteraction | undefined
+    >(undefined);
+
+    const fetchGameInteraction = useCallback(() => {
+      const interaction = gameInteractions?.find(
+        (interaction) => Number(interaction.gameId) === id,
+      );
+      setGameInteraction(interaction);
+      setIsPlayed(interaction?.played || false);
+    }, [gameInteractions, id]);
 
     useEffect(() => {
-      const gameInteraction = gameInteractions.find(interaction => Number(interaction.gameId) === id);
-      setIsPlayed(gameInteraction?.played || false);
-    }, [gameInteractions, gameInteraction]);
+      fetchGameInteraction();
+    }, [fetchGameInteraction]);
 
     return (
       <>
@@ -73,33 +68,23 @@ const Card = React.memo(
               isLarge={isLarge}
             />
           )}
-          <Link
-            as={{
-              pathname: `${BASE_URL}/profile/${id}`,
-              query: { name },
-            }}
-            href={{
-              pathname: `${BASE_URL}/profile/${id}`,
-              query: { name },
-            }}
+
+          <div
+            className={`relative w-full ${height} flex flex-row justify-center overflow-hidden rounded-[4px] border-2 border-[transparent]`}
           >
-            <div
-              className={`relative w-full ${height} flex flex-row justify-center overflow-hidden rounded-[4px] border-2 border-[transparent]`}
-            >
-              {imageUrl ? (
-                <Image
-                  src={imageUrl}
-                  alt={`${name}-thumb`}
-                  layout="fill"
-                  objectFit="cover"
-                  quality={100}
-                />
-              ) : (
-                <></>
-              )}
-              <ShadowEffect />
-            </div>
-          </Link>
+            {imageUrl ? (
+              <Image
+                src={imageUrl}
+                alt={`${name}-thumb`}
+                layout="fill"
+                objectFit="cover"
+                quality={100}
+              />
+            ) : (
+              <></>
+            )}
+            <ShadowEffect />
+          </div>
         </div>
       </>
     );

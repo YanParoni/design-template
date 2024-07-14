@@ -7,7 +7,10 @@ export class AuthMiddleware implements IAuthMiddleware {
     return localStorage.getItem("token");
   }
 
-  public apply(headers: Record<string, string>, addAuth: boolean): Record<string, string> {
+  public apply(
+    headers: Record<string, string>,
+    addAuth: boolean,
+  ): Record<string, string> {
     if (addAuth) {
       const token = this.getToken();
       if (token) {

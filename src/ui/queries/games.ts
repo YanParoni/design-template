@@ -8,8 +8,8 @@ import { useGameStore } from "client/store";
 export async function getGames(params: IQueryParams) {
   const gateway = iocContainer.get<IGamesGateway>("GamesGateway");
   const response = await gateway.searchGame(params);
-  useGameStore.getState().setGames(response.games);
-  return response.games;
+  useGameStore.getState().setGames(response.data);
+  return response.data;
 }
 
 export const useSearchGames = (name?: string) => {
@@ -50,7 +50,6 @@ export const useSearchGames = (name?: string) => {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
-
   return { data, isLoading, refetch };
 };
 

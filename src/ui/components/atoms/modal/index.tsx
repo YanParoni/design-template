@@ -1,7 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-
 interface ModalProps {
   isVisible: boolean;
   onClose: () => void;
@@ -19,14 +18,14 @@ const Modal: React.FC<ModalProps> = ({
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#745b85] bg-opacity-40"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="rounded-[3px] bg-[#574e72]"
-            style={{ padding: "22px 36px 26px", width: "350px" }}
+            className="rounded-[6px] bg-[#3f3549] shadow-light"
+            style={{ padding: "14px 13px 12px", width: "350px" }}
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0.8 }}
@@ -34,7 +33,7 @@ const Modal: React.FC<ModalProps> = ({
             <div className="mb-4 flex items-center justify-between">
               <h2 className="font-montserrat text-xl text-white">{title}</h2>
               <XMarkIcon
-                className="h-6 w-6 cursor-pointer fill-description stroke-description hover:fill-description hover:stroke-white"
+                className="h-5 w-5 scale-110 cursor-pointer fill-description stroke-description hover:fill-tertiary-bkg hover:stroke-white"
                 onClick={onClose}
               />
             </div>
