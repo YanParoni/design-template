@@ -15,11 +15,12 @@ export class AxiosHttpClient implements IHttpClient {
 
   private async thrower<T>(
     callback: () => Promise<AxiosResponse<T>>,
-  ): Promise<AxiosResponse<T>> {
+  ): Promise<HttpClientDTO.Output<T>> {
     try {
-      return await callback();
+      const response = await callback();
+      return { data: response.data, error: null };
     } catch (error: any) {
-      throw error;
+      return { data: null as any, error: error.message };
     }
   }
 
@@ -38,10 +39,9 @@ export class AxiosHttpClient implements IHttpClient {
     headers,
     params,
   }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
-    const result = await this.thrower(() =>
+    return await this.thrower(() =>
       this.axiosRequest<T>({ url, headers, params, method: "get" }),
     );
-    return { data: result.data };
   }
 
   async post<T>({
@@ -50,10 +50,9 @@ export class AxiosHttpClient implements IHttpClient {
     headers,
     params,
   }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
-    const result = await this.thrower(() =>
+    return await this.thrower(() =>
       this.axiosRequest<T>({ url, data, headers, params, method: "post" }),
     );
-    return { data: result.data };
   }
 
   async put<T>({
@@ -62,10 +61,9 @@ export class AxiosHttpClient implements IHttpClient {
     headers,
     params,
   }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
-    const result = await this.thrower(() =>
+    return await this.thrower(() =>
       this.axiosRequest<T>({ url, data, headers, params, method: "put" }),
     );
-    return { data: result.data };
   }
 
   async patch<T>({
@@ -74,10 +72,9 @@ export class AxiosHttpClient implements IHttpClient {
     headers,
     params,
   }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
-    const result = await this.thrower(() =>
+    return await this.thrower(() =>
       this.axiosRequest<T>({ url, data, headers, params, method: "patch" }),
     );
-    return { data: result.data };
   }
 
   async delete<T>({
@@ -85,9 +82,8 @@ export class AxiosHttpClient implements IHttpClient {
     headers,
     params,
   }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
-    const result = await this.thrower(() =>
+    return await this.thrower(() =>
       this.axiosRequest<T>({ url, headers, params, method: "delete" }),
     );
-    return { data: result.data };
   }
 }
