@@ -1,5 +1,4 @@
-import { useState, createRef, useEffect } from "react";
-import { useSearchChatGames } from "@ui/queries/games";
+import { useState, createRef } from "react";
 import { useClickOutside } from "@ui/hooks/use-click-outside";
 interface IName {
   name: string;

@@ -4,7 +4,6 @@ import {
   LoginUserDto,
 } from "../../infra/gateways/contracts/auth";
 import { useDeps } from "../hooks/use-deps";
-import { useAuthStore } from "client/store";
 
 export const useLogin = () => {
   const auth = useDeps<IAuthGateway>("AuthGateway");

@@ -40,6 +40,19 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
   } = useModalStore();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  const onCropComplete = useCallback(
+    (croppedArea, croppedAreaPixels) => {
+      setCroppedAreaPixels(croppedAreaPixels);
+    },
+    [setCroppedAreaPixels],
+  );
+  useEffect(() => {
+    if (usernameValue !== user?.username || bioValue !== user?.bio) {
+      setHasChanges();
+    }
+  }, [usernameValue, bioValue, user?.username, user?.bio]);
+
+
   if(!user) return
 
 
@@ -66,17 +79,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     }
   };
 
-  const onCropComplete = useCallback(
-    (croppedArea, croppedAreaPixels) => {
-      setCroppedAreaPixels(croppedAreaPixels);
-    },
-    [setCroppedAreaPixels],
-  );
-  useEffect(() => {
-    if (usernameValue !== user.username || bioValue !== user.bio) {
-      setHasChanges();
-    }
-  }, [usernameValue, bioValue, user.username, user.bio]);
 
   return (
     <div className="flex h-full flex-col items-center">

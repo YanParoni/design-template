@@ -26,6 +26,7 @@
       "@typescript-eslint/return-await": 0,
       "@typescript-eslint/consistent-type-imports": 0,
       "@typescript-eslint/ban-ts-comment": 0,
-      "@typescript-eslint/no-explicit-any": "off"
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars":"off"
    }
 }
