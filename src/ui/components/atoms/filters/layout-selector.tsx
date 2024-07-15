@@ -23,13 +23,20 @@ const LayoutSelector: React.FC = () => {
     }
   };
 
+  const setGrid = () => {
+    setLayout(layoutOptions.GRID);
+    togglePageSize();
+  };
+
+  const setList = () => {
+    setLayout(layoutOptions.LIST);
+    togglePageSize();
+  };
+
   return (
     <div className="flex items-center gap-1">
       <svg
-        onClick={() => {
-          setLayout(layoutOptions.GRID);
-          togglePageSize();
-        }}
+        onClick={setGrid}
         className={`cursor-pointer ${layout === layoutOptions.GRID ? "fill-comp-description stroke-comp-description" : "fill-comp-muted stroke-comp-muted"} hover:fill-comp-description hover:stroke-comp-description`}
         height="21"
         viewBox="0 0 21 21"
@@ -42,10 +49,7 @@ const LayoutSelector: React.FC = () => {
         />
       </svg>
       <div
-        onClick={() => {
-          setLayout(layoutOptions.LIST);
-          togglePageSize();
-        }}
+        onClick={setList}
         className={`h-[15px] w-[13px] cursor-pointer rounded-[1px] ${layout === layoutOptions.LIST ? "bg-comp-description" : "bg-comp-muted"} hover:bg-comp-description`}
       ></div>
     </div>

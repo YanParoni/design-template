@@ -19,7 +19,7 @@
 }
 
 .dropdown-list {
-  @apply absolute top-[0] z-50 w-full rounded-[3px] bg-[#9188a8];
+  @apply absolute top-[-1px] z-50 w-full rounded-[3px] bg-[#9188a8];
   min-width: max-content;
 }
 

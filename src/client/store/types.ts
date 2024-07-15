@@ -3,6 +3,7 @@ export interface UserProfile {
   username: string;
   email: string;
   profileImage: string;
+  headerImage: string;
   bio: string;
   isPrivate: boolean;
   followers: string[];
@@ -46,13 +47,8 @@ export type GameResponse = {
   previous: null | string;
 };
 
-export type AuthState = {
-  isAuthenticated: boolean;
-  token: string | null;
-  user: UserProfile | null | any;
+export type NavState = {
   activeState: "default" | "login" | "signup" | "logged";
-  login: (token: string, user: UserProfile) => void;
-  logout: () => void;
   setActiveState: (state: "default" | "login" | "signup" | "logged") => void;
 };
 
@@ -101,3 +97,17 @@ export interface ModalStoreState {
   setEditMode: (mode: "profile" | "header") => void;
   resetState: () => void;
 }
+
+export type AuthState = {
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  user: UserProfile | null;
+  needsSetup: boolean;
+  oAuth: boolean;
+  setOauth: (needsSetup: boolean, oAuth:boolean) => void;
+  refetchProfile: () => any;
+  setAuth: (isAuthenticated: boolean) => void;
+  setLoading: (isLoading: boolean) => void;
+  setRefetchProfile: (refetch: () => void) => void;
+  setUser:(user: UserProfile) => void;
+};

@@ -2,7 +2,7 @@ import React from "react";
 import { usePaginationStore, useFilterStore } from "client/store";
 import { buildUrl } from "@ui/components/atoms/filters/links";
 import { useRouter } from "next/navigation";
-import Button from "@ui/components/atoms/button";
+import Button from "@ui/components/atoms/buttons/button";
 interface PaginationProps {
   next: string | null;
   previous: string | null;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { XMarkIcon, ArrowLeftIcon } from "@heroicons/react/24/solid";
-import Button from "../../../atoms/button";
+import Button from "../../../atoms/buttons/button";
 import { useModalStore, useAuthStore, useAlertStore } from "client/store";
 import { useUpdateUserDetails } from "@ui/queries/user";
 import ConfirmationModal from "@ui/components/molecules/modal/confirmation-modal";
@@ -44,7 +44,7 @@ const ProfileModal: React.FC = () => {
 
   const makeRequest = async (updateData: any ) => {
     try {
-      await updateUserDetails(updateData);
+      updateUserDetails(updateData);
       showAlert('Profile updated successfully','success')
       resetState();
       

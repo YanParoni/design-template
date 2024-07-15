@@ -1,21 +1,18 @@
-import { create } from "zustand";
-import { AuthState, UserProfile } from "../types";
+import {create} from 'zustand'
+import { AuthState } from '../types';
 
 const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: false,
-  token: null,
+  isLoading: false,
   user: null,
-  activeState: "default",
-  login: (token: string, user: UserProfile) =>
-    set({ isAuthenticated: true, token, user }),
-  logout: () =>
-    set({
-      isAuthenticated: false,
-      token: null,
-      user: null,
-      activeState: "default",
-    }),
-  setActiveState: (state) => set({ activeState: state }),
+  oAuth: false,
+  needsSetup: false,
+  setOauth: (needsSetup, oAuth) =>set({ oAuth, needsSetup}),
+  refetchProfile: () => {},
+  setAuth: (isAuthenticated) => set({ isAuthenticated }),
+  setLoading: (isLoading) => set({ isLoading }),
+  setRefetchProfile: (refetch) => set({ refetchProfile: refetch }),
+  setUser:(user) => set({ user })
 }));
 
-export default useAuthStore;
+export default useAuthStore

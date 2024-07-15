@@ -80,11 +80,6 @@ const mockedGenres = [
     alias: "racing",
   },
   {
-    label: "Sports",
-    value: "sports",
-    alias: "sports",
-  },
-  {
     label: "Family",
     value: "family",
     alias: "family",

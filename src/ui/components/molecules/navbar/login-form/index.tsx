@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Button from "@ui/components/atoms/button";
+import Button from "@ui/components/atoms/buttons/button";
 import Input from "@ui/components/atoms/inputs/input";
-import GoogleButton from "@ui/components/atoms/google-button";
+import GoogleButton from "@ui/components/atoms/buttons/google-button";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useLogin } from "@ui/queries/auth";
-import { useAuthStore } from "client/store";
+import { useAuthStore, useNavStore } from "client/store";
 import { useAlertStore } from "client/store";
+import { useGetProfile } from "@ui/queries/user";
 interface LoginFormProps {
   onCloseClick: () => void;
 }
@@ -14,16 +15,22 @@ interface LoginFormProps {
 const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
   const { mutateAsync } = useLogin();
-  const { activeState } = useAuthStore();
+  const { activeState, setActiveState } = useNavStore();
   const { showAlert } = useAlertStore();
+  const { setAuth } = useAuthStore();
+  const { refetch } = useGetProfile();
 
   const handleLogin = async () => {
     const response = await mutateAsync({ email, password });
     if (response.error) {
       showAlert("Failed to log in", "error");
     } else {
+      refetch();
       showAlert("Logged in successfully!", "success");
+      setActiveState("logged");
+      setAuth(true);
     }
   };
 

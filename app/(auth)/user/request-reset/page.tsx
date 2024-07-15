@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Input from "@ui/components/atoms/inputs/input";
-import Button from "@ui/components/atoms/button";
+import Button from "@ui/components/atoms/buttons/button";
 import ErrorMessage from "@ui/components/atoms/error-message";
 import { useRequestReset } from "@ui/queries/auth";
 import { useForm } from "react-hook-form";

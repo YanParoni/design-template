@@ -51,7 +51,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 isOpen ? "dropdown-button-open" : "dropdown-button-closed"
               }`}
             >
-              <p className="font-montserrat text-[11px] font-medium">
+              <p className="font-montserrat text-[11px] font-medium pb-[3px]">
                 {showValue?.toUpperCase()}
               </p>
               <ChevronDownIcon className="-mr-1 h-4 w-4" aria-hidden="true" />

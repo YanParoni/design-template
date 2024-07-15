@@ -1,6 +1,6 @@
 import React from "react";
 import Input from "@ui/components/atoms/inputs/input";
-import Button from "@ui/components/atoms/button";
+import Button from "@ui/components/atoms/buttons/button";
 import { useCreateUser } from "@ui/queries/user";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

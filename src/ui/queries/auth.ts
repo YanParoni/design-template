@@ -8,16 +8,11 @@ import { useAuthStore } from "client/store";
 
 export const useLogin = () => {
   const auth = useDeps<IAuthGateway>("AuthGateway");
-  const { login, setActiveState } = useAuthStore();
-
   const { mutateAsync, data, isError, error } = useMutation({
     mutationFn: async (data: LoginUserDto) => {
       const response = await auth.login(data);
       if (response && response.token) {
         localStorage.setItem("token", response.token);
-        const profile = await auth.getProfile();
-        login(response.token, profile);
-        setActiveState("logged");
       }
       return response;
     },

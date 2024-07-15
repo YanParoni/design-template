@@ -1,19 +1,15 @@
 import React from "react";
 import UserDropdown from "../../../organisms/navbar/user-dropdown";
-import { useAuthStore } from "client/store";
-import SplitButton from "@ui/components/atoms/split-button";
+import { useNavStore, useAuthStore } from "client/store";
 
 export default function LoggedNavbar() {
-  const { activeState } = useAuthStore();
+  const { activeState } = useNavStore();
+  const {user} = useAuthStore()
   return (
     <>
       {activeState === "logged" && (
         <div className="flex items-center space-x-2">
           <UserDropdown />
-          <SplitButton
-            onMainClick={()=>{}}
-            onSecondaryClick={() => {}}
-          />
         </div>
       )}
     </>

@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import Button from "@ui/components/atoms/button";
+import Button from "@ui/components/atoms/buttons/button";
 
 interface ConfirmationModalProps {
   onConfirm: () => void;

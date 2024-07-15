@@ -2,9 +2,9 @@ import React, { useState, useRef, useCallback, useEffect } from "react";
 import Cropper from "react-easy-crop";
 import CharacterCountInput from "@ui/components/atoms/inputs/char-count-input";
 import ErrorMessage from "@ui/components/atoms/error-message";
-import { useAuthStore, useModalStore } from "client/store";
+import {  useModalStore } from "client/store";
 import { CameraIcon } from "@heroicons/react/24/solid";
-
+import {useAuthStore} from "client/store";
 const ASPECT_RATIO_PROFILE = 1;
 const ASPECT_RATIO_HEADER = 3 / 1;
 
@@ -39,6 +39,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     startCropping,
   } = useModalStore();
 
+  if(!user) return
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const onCropComplete = useCallback(
@@ -168,7 +169,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
             </div>
           </>
         )}
-      </div>
+      </div> 
     </div>
   );
 };

@@ -2,11 +2,11 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LoginForm from "@ui/components/molecules/navbar/login-form";
 import SignUpModal from "@ui/components/molecules/navbar/sign-up-modal";
-import { useAuthStore } from "client/store";
+import { useNavStore } from "client/store";
 import useDeviceDetect from "@ui/hooks/use-device-detect";
 
 const ExpandedContent: React.FC = () => {
-  const { activeState, setActiveState } = useAuthStore();
+  const { activeState, setActiveState } = useNavStore();
   const { isMobile } = useDeviceDetect();
 
   const handleCloseClick = () => {
@@ -21,7 +21,7 @@ const ExpandedContent: React.FC = () => {
     <AnimatePresence>
       {isMobile && activeState !== "default" && (
         <motion.div
-          className="flex w-full flex-col items-center justify-start bg-dark-background pb-5"
+          className="z-50 flex w-full flex-col items-center justify-start bg-dark-background pb-5"
           initial={{ height: 0 }}
           animate={{ height: "auto" }}
           exit={{ height: 0 }}

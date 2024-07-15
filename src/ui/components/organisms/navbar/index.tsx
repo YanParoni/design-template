@@ -10,7 +10,7 @@ import ResetPasswordModal from "@ui/components/molecules/navbar/reset-password-m
 
 const Navbar: React.FC = () => {
   const { isMobile } = useDeviceDetect();
-
+  
   return (
     <header className="flex flex-col items-center bg-dark-background text-primary-color">
       <nav className="flex h-[40px] w-full max-w-[960px] items-center bg-dark-background px-4 md:px-0 lg:h-[72px]">

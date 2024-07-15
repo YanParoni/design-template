@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useSearchGames } from "@ui/queries/games";
 import Card from "@ui/components/organisms/card/card";
-import Spinner from "@ui/components/atoms/spinner";
 import Pagination from "@ui/components/molecules/pagination";
 import { usePaginationStore } from "client/store";
 import useDeviceDetect from "@ui/hooks/use-device-detect";

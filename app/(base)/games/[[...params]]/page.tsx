@@ -4,7 +4,7 @@ import List from "@ui/components/organisms/list";
 import FiltersAndVisualization from "@ui/components/organisms/filters";
 import useUrlSync from "@ui/hooks/use-sync-url";
 import { useGameInteractions } from "@ui/queries/game-interaction";
-
+import { useGetProfile } from "@ui/queries/user";
 const GamesPage = () => {
   const loading = useUrlSync();
   useGameInteractions();

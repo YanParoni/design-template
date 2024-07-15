@@ -1,7 +1,7 @@
 import React, { useState, forwardRef } from "react";
 import Link from "next/link";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   variant: "primary" | "secondary";
   forgottenLabel?: boolean;

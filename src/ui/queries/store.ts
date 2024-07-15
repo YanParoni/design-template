@@ -7,7 +7,6 @@ export const useGetStores = (params?: IQueryParams) => {
   const storesGateway = useDeps<IStoreInfoGateway>("StoreInfoGateway");
 
   const { data, isLoading, isError, error, refetch, isSuccess } = useQuery({
-    suspense: true,
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

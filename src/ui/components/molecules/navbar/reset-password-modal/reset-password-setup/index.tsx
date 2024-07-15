@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Modal from "@ui/components/atoms/modal";
-import Button from "@ui/components/atoms/button";
+import Button from "@ui/components/atoms/buttons/button";
 import Input from "@ui/components/atoms/inputs/input";
 import { useModalStore, useAlertStore } from "client/store";
 import { useChangePassword } from "@ui/queries/auth";
@@ -41,13 +41,12 @@ const ResetPasswordSetup: React.FC = () => {
       showAlert("Failed to set password", "error");
     }
   };
-
+  const closeModal = () => {
+    handlePasswordModal(false);
+  };
+  
   return (
-    <Modal
-      title="Set Password"
-      isVisible={passwordModal}
-      onClose={() => handlePasswordModal(false)}
-    >
+    <Modal title="Set Password" isVisible={passwordModal} onClose={closeModal}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <Input

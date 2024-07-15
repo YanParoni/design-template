@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Modal from "@ui/components/atoms/modal";
-import Button from "@ui/components/atoms/button";
+import Button from "@ui/components/atoms/buttons/button";
 import Input from "@ui/components/atoms/inputs/input";
 import { useModalStore, useAlertStore } from "client/store";
 import { useChangePassword } from "@ui/queries/auth";
 import ErrorMessage from "@ui/components/atoms/error-message";
 
 const passwordChangeSchema = yup.object().shape({
-  currentPassword: yup.string().required("Current password is required"),
+  currentPassword: yup.string().required("Current password is required").min(8, "Password must be at least 8 characters"),
   newPassword: yup
     .string()
     .min(8, "Password must be at least 8 characters")
@@ -22,7 +22,6 @@ const passwordChangeSchema = yup.object().shape({
     .required("Please confirm your password"),
 });
 
-type PasswordChangeFormData = yup.InferType<typeof passwordChangeSchema>;
 
 const ResetPasswordChange: React.FC = () => {
   const { handlePasswordModal, passwordModal } = useModalStore();
@@ -33,11 +32,12 @@ const ResetPasswordChange: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<PasswordChangeFormData>({
+  } = useForm({
     resolver: yupResolver(passwordChangeSchema),
+    mode: 'onBlur'
   });
 
-  const onSubmit = async (data: PasswordChangeFormData) => {
+  const onSubmit = async (data: any) => {
     try {
       await mutateAsync(data);
       showAlert("Password changed successfully!", "success");
@@ -47,6 +47,7 @@ const ResetPasswordChange: React.FC = () => {
     }
   };
 
+
   return (
     <Modal
       title="Change Password"
@@ -54,7 +55,7 @@ const ResetPasswordChange: React.FC = () => {
       onClose={() => handlePasswordModal(false)}
     >
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-4">
+        <div className="relative mb-4">
           <Input
             variant="primary"
             label="Current Password"
@@ -64,8 +65,10 @@ const ResetPasswordChange: React.FC = () => {
           {errors.currentPassword && (
             <ErrorMessage message={errors.currentPassword.message as string} />
           )}
+     
+
         </div>
-        <div className="mb-4">
+        <div className="relative mb-4">
           <Input
             variant="primary"
             label="New Password"
@@ -76,7 +79,7 @@ const ResetPasswordChange: React.FC = () => {
             <ErrorMessage message={errors.newPassword.message as string} />
           )}
         </div>
-        <div className="mb-4">
+        <div className="relative mb-4">
           <Input
             variant="primary"
             label="Confirm New Password"

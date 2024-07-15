@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
-interface InputProps {
+export interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick: (e: React.MouseEvent<SVGSVGElement>) => void;
 }
@@ -21,6 +21,7 @@ const SearchInput: React.FC<InputProps> = ({ onChange, onClick }) => {
   return (
     <div className="relative w-full min-w-[140px]">
       <input
+        id='Search input'
         type="text"
         placeholder="Search here..."
         className="text-1rem border-b-secondary-border bg-dark-purple h-[24px] w-full rounded-full border-b-2 px-2 pl-4 pr-8 font-montserrat leading-[1.0625rem] text-description focus:border-white"

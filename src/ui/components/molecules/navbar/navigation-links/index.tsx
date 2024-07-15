@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useAuthStore } from "client/store";
+import { useNavStore } from "client/store";
 
 interface NavigationLinksProps {
   onSignInClick: () => void;
@@ -10,7 +10,7 @@ const NavigationLinks: React.FC<NavigationLinksProps> = ({
   onSignInClick,
   onCreateAccountClick,
 }) => {
-  const { activeState } = useAuthStore();
+  const { activeState } = useNavStore();
   return (
     <AnimatePresence>
       <motion.div

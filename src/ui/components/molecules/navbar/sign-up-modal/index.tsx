@@ -1,13 +1,13 @@
 import Modal from "@ui/components/atoms/modal";
 import SignUpForm from "@ui/components/molecules/navbar/sign-up-form";
-import { useAuthStore } from "client/store";
+import { useNavStore } from "client/store";
 
 interface SignUpModalProps {
   onClose: () => void;
 }
 
 const SignUpModal: React.FC<SignUpModalProps> = ({ onClose }) => {
-  const { activeState } = useAuthStore();
+  const { activeState } = useNavStore();
 
   return (
     <Modal

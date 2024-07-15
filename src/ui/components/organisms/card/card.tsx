@@ -3,8 +3,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import ShadowEffect from "../../atoms/shadow-effect";
 import CardActions from "@ui/components/molecules/card/card-actions";
-import { useAuthStore, useGameInteractionsStore } from "client/store";
+import {  useAuthStore, useGameInteractionsStore } from "client/store";
 import { GameInteraction } from "client/store/types";
+
 interface ICard {
   id: number;
   imageUrl: string;
@@ -18,12 +19,13 @@ interface ICard {
 const Card = React.memo(
   ({ id, imageUrl = "", name = "", height, dir, rating, isLarge }: ICard) => {
     const [hovered, setHovered] = useState(false);
-    const { isAuthenticated } = useAuthStore();
-    const { gameInteractions } = useGameInteractionsStore();
     const [isPlayed, setIsPlayed] = useState(false);
     const [gameInteraction, setGameInteraction] = useState<
       GameInteraction | undefined
     >(undefined);
+
+    const { gameInteractions } = useGameInteractionsStore();
+    const { isAuthenticated} = useAuthStore()
 
     const fetchGameInteraction = useCallback(() => {
       const interaction = gameInteractions?.find(
@@ -76,16 +78,19 @@ const Card = React.memo(
               <Image
                 src={imageUrl}
                 alt={`${name}-thumb`}
-                layout="fill"
-                objectFit="cover"
                 quality={100}
+                width={1000}
+                height={1000}
+                sizes="100%"
+                className="object-cover	"
+                priority
               />
             ) : (
               <></>
             )}
             <ShadowEffect />
           </div>
-        </div>
+        </div> 
       </>
     );
   },
