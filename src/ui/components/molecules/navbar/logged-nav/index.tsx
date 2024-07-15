@@ -1,10 +1,9 @@
 import React from "react";
 import UserDropdown from "../../../organisms/navbar/user-dropdown";
-import { useNavStore, useAuthStore } from "client/store";
+import { useNavStore } from "client/store";
 
 export default function LoggedNavbar() {
   const { activeState } = useNavStore();
-  const {user} = useAuthStore()
   return (
     <>
       {activeState === "logged" && (

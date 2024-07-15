@@ -1,5 +1,5 @@
 import React from "react";
-import { UserIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useNavStore } from "client/store";
 import UserLockIcon from "@ui/components/atoms/navbar/user-lock-icon";
 import { KeyIcon } from "@heroicons/react/24/solid";

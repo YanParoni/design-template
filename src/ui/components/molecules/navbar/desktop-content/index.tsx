@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import NavigationLinks from "@ui/components/molecules/navbar/navigation-links";
 import LoginForm from "@ui/components/molecules/navbar/login-form";
 import SignUpModal from "@ui/components/molecules/navbar/sign-up-modal";

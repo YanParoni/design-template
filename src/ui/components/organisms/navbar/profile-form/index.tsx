@@ -38,16 +38,11 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     setHasChanges,
     startCropping,
   } = useModalStore();
-
-  if(!user) return
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const onCropComplete = useCallback(
-    (croppedArea, croppedAreaPixels) => {
-      setCroppedAreaPixels(croppedAreaPixels);
-    },
-    [setCroppedAreaPixels],
-  );
+  if(!user) return
+
+
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -71,6 +66,12 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     }
   };
 
+  const onCropComplete = useCallback(
+    (croppedArea, croppedAreaPixels) => {
+      setCroppedAreaPixels(croppedAreaPixels);
+    },
+    [setCroppedAreaPixels],
+  );
   useEffect(() => {
     if (usernameValue !== user.username || bioValue !== user.bio) {
       setHasChanges();

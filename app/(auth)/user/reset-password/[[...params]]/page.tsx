@@ -50,7 +50,7 @@ const ResetPassword: React.FC = () => {
       }
     };
     validate();
-  }, [router, search, validateToken]);
+  }, [router, search, validateToken,]);
 
   const onSubmit = async (data: ResetPasswordFormValues) => {
     const tokenFromUrl = search.get("token");

@@ -6,27 +6,14 @@ interface IName {
 }
 
 const GameNameSpan = ({ name }: IName) => {
-  const { data, isSuccess } = useSearchChatGames({
-    search: name,
-    search_exact: true,
-    search_precise: true,
-    page_size: 3,
-  });
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [game, setGame] = useState<any>(null);
   const dialogRef = createRef<HTMLDivElement>();
 
   useClickOutside(dialogRef, () => {
     setIsOpen(false);
   });
 
-  useEffect(() => {
-    if (isSuccess && data) {
-      // const filtered = filterGamesByLevenshtein(data.results, name)
-      setGame("");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
 
   return (
     <>
