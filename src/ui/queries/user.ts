@@ -102,7 +102,6 @@ export const useUpdateUserDetails = () => {
     mutationFn: async (details) => {
       const response = await userGateway.updateUserDetails(details);
       const other = await refetchProfile();
-      console.log(other);
       return response;
     },
   });

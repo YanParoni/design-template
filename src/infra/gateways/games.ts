@@ -10,10 +10,11 @@ interface IRequestParams {
   data?: IQueryParams;
 }
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_REACT_APP === "production"
-    ? "https://design-template-ivory.vercel.app"
-    : "http://localhost:3001";
+const BASE_URL = process.env.NEXT_PUBLIC_RAWG_API;
+
+const KEY = process.env.NEXT_PUBLIC_RAWG_KEY;
+
+
 @injectable()
 export class GamesGateway implements IGamesGateway {
   constructor(
@@ -22,13 +23,15 @@ export class GamesGateway implements IGamesGateway {
   ) {}
 
   async searchGame(args: IQueryParams): Promise<any> {
-    const url = `${BASE_URL}/api/proxy/games/search`;
-    const requestParams: IRequestParams = { url, data: args };
-    try {
-      const response = await this.fetchHttpClient.put(requestParams);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
+    const url = `${BASE_URL}/games`;
+    const requestParams = {
+      url,
+      params: {
+        key: KEY,
+        ...args,
+      },
+    };
+    const response = await this.fetchHttpClient.get(requestParams);
+    return response.data;
   }
 }

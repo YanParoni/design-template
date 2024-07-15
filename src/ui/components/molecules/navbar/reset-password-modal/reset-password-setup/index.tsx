@@ -21,7 +21,7 @@ const passwordSetupSchema = yup.object().shape({
 const ResetPasswordSetup: React.FC = () => {
   const { handlePasswordModal, passwordModal } = useModalStore();
   const { showAlert } = useAlertStore();
-  const { mutateAsync } = useChangePassword();
+const { mutateAsync } = useChangePassword();
 
   const {
     register,

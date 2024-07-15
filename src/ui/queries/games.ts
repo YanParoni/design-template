@@ -9,7 +9,7 @@ export async function getGames(params: IQueryParams) {
   const gateway = iocContainer.get<IGamesGateway>("GamesGateway");
   const response = await gateway.searchGame(params);
   useGameStore.getState().setGames(response.data);
-  return response.data;
+  return response
 }
 
 export const useSearchGames = (name?: string) => {
