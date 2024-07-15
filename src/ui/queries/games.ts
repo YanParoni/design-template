@@ -49,6 +49,7 @@ export const useSearchGames = (name?: string) => {
     },
     refetchOnWindowFocus: false,
     refetchOnMount: false,
+    retry:true
   });
   return { data, isLoading, refetch };
 };

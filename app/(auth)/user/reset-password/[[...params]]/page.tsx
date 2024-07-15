@@ -68,7 +68,9 @@ const ResetPassword: React.FC = () => {
   return (
     <div className="flex h-full w-full items-center justify-center sm:items-center">
       <div className="grid h-full w-full grid-rows-[1fr_auto] gap-0 rounded-lg bg-auth-bkg sm:h-80 sm:w-[432px] sm:gap-4">
-        <div className="flex flex-col items-center justify-center gap-3 sm:gap-2 sm:p-2">
+        <div className="flex flex-col items-center pt-1 justify-center gap-3 sm:gap-2 sm:p-2">
+        <img src='/alt-playboxd.svg'/>
+
           <h1 className="mb-2 text-center text-xl font-bold text-white sm:text-2xl">
             Reset password
           </h1>

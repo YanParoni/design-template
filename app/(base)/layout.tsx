@@ -7,6 +7,8 @@ import Providers from "@app/provider";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <Providers>
+            <link rel="icon" href="/favicon.ico" sizes="any" />
+
       <section className="bg-bkg">
         <Navbar />
         <LayoutContainer>{children}</LayoutContainer>

@@ -1,5 +1,5 @@
 const Logo: React.FC = () => (
-  <div className="cursor-pointer font-montserrat text-[24px] font-semibold tracking-wide text-white">
+  <div className="cursor-pointer">
     <img src='/playboxd.svg'/>
   </div>
 );
