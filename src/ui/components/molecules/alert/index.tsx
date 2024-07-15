@@ -18,7 +18,7 @@ const Alert: React.FC = () => {
 
   return (
     <div
-      className={`fixed left-4 top-4 z-50 rounded-lg p-4 shadow-lg ${type === "success" ? "border-green-600 bg-green-200 text-green-600" : "border-red-600 bg-red-200 text-red-600"}`}
+      className={`fixed left-4 top-4 z-[100] rounded-lg p-4 shadow-lg ${type === "success" ? "border-green-600 bg-green-200 text-green-600" : "border-red-600 bg-red-200 text-red-600"}`}
     >
       <p className="font-bold">{type === "success" ? "Success" : "Error"}</p>
       <p>{message}</p>

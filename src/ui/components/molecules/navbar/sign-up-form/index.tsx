@@ -11,6 +11,7 @@ interface SignUpFormValues {
   username: string;
   email: string;
   password: string;
+  at:string
 }
 
 interface SignUpForm{
@@ -38,7 +39,7 @@ const SignUpForm: React.FC<SignUpForm> = ({ onClose }) => {
       reset();
       onClose()
     } catch (error) {
-      console.error("Error creating user", error);
+      console.log("Error creating user", error);
       showAlert("Failed to create user", "error");
     }
   };
@@ -63,6 +64,12 @@ const SignUpForm: React.FC<SignUpForm> = ({ onClose }) => {
         )}
       </div>
 
+      <div className="relative mb-4 w-[140px]">
+        <Input variant="secondary" {...register("at")} label="@" />
+        {errors.at && (
+          <ErrorMessage message={errors.at.message as string} />
+        )}
+      </div>
       <div className="relative mb-4 w-[140px]">
         <Input
           variant="secondary"

@@ -14,7 +14,7 @@ const CharacterCountInput = forwardRef<
 >(({ label, maxLength, value, isTextArea = false, ...rest }, ref) => {
   const [isFocused, setIsFocused] = useState(false);
 
-  const baseStyles = `font-md pt-8 pb-2 min-h-[24px] w-full rounded border-b-2 border-b-[#574964] bg-light-purple px-2 pl-4 pr-8 font-montserrat leading-[1.0625rem] text-description relative`;
+  const baseStyles = `font-md pt-8 pb-2 min-h-[24px] w-full rounded border-b-2 border-b-secondary-border bg-dark-purple px-2 pl-4 pr-8 font-montserrat leading-[1.0625rem] text-description relative`;
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
@@ -43,7 +43,7 @@ const CharacterCountInput = forwardRef<
           {...rest}
         />
       )}
-      <label className="text-md absolute left-4 top-1 block text-accent-theme">
+      <label className="text-md font-medium absolute left-4 top-1 block text-accent-theme">
         {label}
       </label>
       {isFocused && (

@@ -99,7 +99,6 @@ const FiltersAndVisualization: React.FC = () => {
   return (
     <div
       className="w-full border-b border-b-tertiary-bkg pt-2"
-      style={{ borderBottomColor: "#624466" }}
     >
       <div className="flex flex-row justify-between">
         <p className="inline-block pt-2 align-baseline font-montserrat text-[13px] font-semibold text-description">

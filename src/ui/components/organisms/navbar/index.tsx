@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
       <nav className="flex h-[40px] w-full max-w-[960px] items-center bg-dark-background px-4 md:px-0 lg:h-[72px]">
         <div className="flex w-full items-center justify-between pt-2">
           <Logo />
-          <div className="flex space-x-4">
+          <div className="flex ">
             {isMobile ? <MobileContent /> : <DesktopContent />}
           </div>
         </div>

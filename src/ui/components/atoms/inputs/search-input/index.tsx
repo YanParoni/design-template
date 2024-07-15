@@ -23,7 +23,7 @@ const SearchInput: React.FC<InputProps> = ({ onChange, onClick }) => {
       <input
         type="text"
         placeholder="Search here..."
-        className="text-1rem h-[24px] w-full rounded-full border-b-2 border-b-[#574964] bg-light-purple px-2 pl-4 pr-8 font-montserrat leading-[1.0625rem] text-description"
+        className="text-1rem border-b-secondary-border bg-dark-purple h-[24px] w-full rounded-full border-b-2 px-2 pl-4 pr-8 font-montserrat leading-[1.0625rem] text-description focus:border-white"
         style={{ backgroundColor: isFocused ? "white" : "" }}
         onFocus={handleFocus}
         onBlur={handleBlur}

@@ -53,7 +53,7 @@ const ForgotPassword: React.FC = () => {
     if (state === "toSubmit") {
       return (
         <>
-          <p className="xs:text-xs text-balance px-2 text-center text-sm text-[#e7cbed] sm:text-base">
+          <p className="xs:text-xs text-balance px-2 text-center text-sm text-auth-primary sm:text-sm">
             Enter your email below, and we'll send you a message with your
             username and a link to reset your password.
           </p>
@@ -73,11 +73,11 @@ const ForgotPassword: React.FC = () => {
       return (
         <>
           {isSuccess ? (
-            <CheckCircleIcon className="h-12 w-12 justify-self-center text-[#e7cbed]" />
+            <CheckCircleIcon className="h-12 w-12 justify-self-center text-auth-primary" />
           ) : (
-            <XCircleIcon className="h-12 w-12 justify-self-center text-[#e7cbed]" />
+            <XCircleIcon className="h-12 w-12 justify-self-center text-auth-primary" />
           )}
-          <p className="xs:text-xs text-balance px-6 text-center text-sm text-[#e7cbed] sm:text-base">
+          <p className="xs:text-xs text-balance px-6 text-center text-sm text-auth-primary sm:text-base">
             {responseMessage}
           </p>
         </>
@@ -88,7 +88,7 @@ const ForgotPassword: React.FC = () => {
   return (
     <div className="flex h-full w-full items-center justify-center sm:items-center">
       <div
-        className={`grid h-full grid-rows-[1fr_auto] gap-0 rounded-lg bg-[#5a4466] sm:h-80 sm:w-[432px]`}
+        className={`grid h-full grid-rows-[1fr_auto] gap-0 rounded-lg bg-auth-bkg sm:h-80 sm:w-[432px]`}
       >
         <div className="flex flex-col items-center justify-center gap-0 sm:gap-2 sm:p-2">
           <h1 className="mb-2 text-center text-xl font-bold text-white sm:text-2xl">

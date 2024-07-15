@@ -14,9 +14,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const baseStyles = `w-full text-black font-montserrat text-1rem h-[1.6rem] leading-[1.0625rem] p-[0.3125rem_0.4375rem] h-[31px] rounded-[3px]`;
 
     const primaryStyles =
-      "bg-light-purple text-description border-b-[2px] border-[#574766]";
+      "bg-dark-purple text-description border-b-[2px] border-secondary-border";
     const secondaryStyles =
-      "bg-[#d7c2ea] text-description border-b-[2px] border-[#574766]";
+      "bg-light-purple text-description border-b-[2px] border-secondary-border";
 
     const styles = variant === "primary" ? primaryStyles : secondaryStyles;
 
@@ -26,7 +26,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="w-full">
         <div className="flex w-full justify-between">
-          <label className="mb-1 text-[12px] text-[#cf9ad6]">{label}</label>
+          <label className="mb-1 text-[12px] text-label ">{label}</label>
           {type === "password" && forgottenLabel && (
             <Link
               className="text-[12px] font-semibold text-accent-theme hover:text-white"

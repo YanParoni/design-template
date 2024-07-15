@@ -1,5 +1,4 @@
 import "reflect-metadata";
-import "../../global.css";
 import React from "react";
 import LayoutContainer from "@ui/components/organisms/layout";
 import Navbar from "@ui/components/organisms/navbar";

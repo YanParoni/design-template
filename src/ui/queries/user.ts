@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { iocContainer } from "@ioc/index";
 import {
   CreateUserDTO,
@@ -6,6 +6,7 @@ import {
   IUserGateway,
 } from "../../infra/gateways/contracts/user";
 import { IAuthGateway } from "@infra/gateways/contracts/auth";
+import { useAuthStore } from "client/store";
 
 export async function getProfile() {
   const gateway = iocContainer.get<IAuthGateway>("AuthGateway");
@@ -93,19 +94,17 @@ export const useUpdateAt = () => {
 };
 
 export const useUpdateUserDetails = () => {
-  const queryClient = useQueryClient();
   const userGateway = iocContainer.get<IUserGateway>("UserGateway");
+  const auth = iocContainer.get<IAuthGateway>("AuthGateway");
+  const { login, token } = useAuthStore();
   const mutation = useMutation<any, Error, any>({
     mutationFn: async (details) => {
       const response = await userGateway.updateUserDetails(details);
-      if (!response) {
-        throw new Error("At update failed");
-      }
+      const profile = await auth.getProfile();
+      login(token!, profile);
       return response;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getProfile"] });
-    },
+
   });
 
   return mutation;

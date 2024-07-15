@@ -11,7 +11,7 @@ const UserProfileImage = ({ profileImage }) => {
       />
     );
   } else {
-    return <UserIcon className="h-6 w-6 p-1 text-[#7d6589] md:h-7 md:w-7" />;
+    return <UserIcon className="h-6 w-6 p-1 text-inherit md:h-7 md:w-7" />;
   }
 };
 

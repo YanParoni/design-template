@@ -19,6 +19,15 @@ const signUpSchema = yup.object().shape({
     .required("Password is required")
     .min(8, "Password must be at least 8 characters")
     .max(32, "Password cannot be longer than 32 characters"),
+  at: yup
+    .string()
+    .required("@ is required")
+    .matches(
+      /^[a-zA-Z0-9_]+$/,
+      "@ can only contain letters, numbers, and underscores",
+    )
+    .min(3, "@ must be at least 3 characters")
+    .max(14, "@ cannot be longer than 14 characters"),
 });
 
 export default signUpSchema;

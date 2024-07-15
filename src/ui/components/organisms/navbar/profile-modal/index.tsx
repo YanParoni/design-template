@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { XMarkIcon, ArrowLeftIcon } from "@heroicons/react/24/solid";
 import Button from "../../../atoms/button";
-import { useModalStore } from "client/store";
+import { useModalStore, useAuthStore, useAlertStore } from "client/store";
 import { useUpdateUserDetails } from "@ui/queries/user";
-import { useAuthStore } from "client/store";
 import ConfirmationModal from "@ui/components/molecules/modal/confirmation-modal";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -27,6 +26,7 @@ const ProfileModal: React.FC = () => {
   } = useModalStore();
 
   const { user } = useAuthStore();
+  const { showAlert } = useAlertStore();
   const { mutate: updateUserDetails } = useUpdateUserDetails();
   const {
     register,
@@ -42,30 +42,21 @@ const ProfileModal: React.FC = () => {
   const usernameValue = watch("at", user.username || "");
   const bioValue = watch("bio", user.bio || "");
 
+  const makeRequest = async (updateData: any ) => {
+    try {
+      await updateUserDetails(updateData);
+      showAlert('Profile updated successfully','success')
+      resetState();
+      
+    } catch (error) {
+      showAlert('Something went wrong.Try again later.','error')
+
+    }
+  };
+
   const handleSaveClick = async (data: any) => {
-    let base64HeaderImage;
-    let base64ProfileImage;
-
-    if (localHeaderImage) {
-      const response = await fetch(localHeaderImage);
-      const blob = await response.blob();
-      base64HeaderImage = await convertBlobToBase64(blob);
-    }
-
-    if (localProfileImage) {
-      const response = await fetch(localProfileImage);
-      const blob = await response.blob();
-      base64ProfileImage = await convertBlobToBase64(blob);
-    }
-
-    const updateData = {
-      at: data.at !== user.username ? data.at : undefined,
-      bio: data.bio !== user.bio ? data.bio : undefined,
-      header: base64HeaderImage,
-      avatar: base64ProfileImage,
-    };
-
-    updateUserDetails(updateData);
+    const updateData = await transformData(data, user, localHeaderImage, localProfileImage);
+    await makeRequest(updateData);
   };
 
   const handleCloseClick = () => {
@@ -78,17 +69,40 @@ const ProfileModal: React.FC = () => {
     resetState();
   };
 
+  const transformData = async (data: any, user: any, localHeaderImage: string | null, localProfileImage: string | null) => {
+    let base64HeaderImage;
+    let base64ProfileImage;
+  
+    if (localHeaderImage) {
+      const response = await fetch(localHeaderImage);
+      const blob = await response.blob();
+      base64HeaderImage = await convertBlobToBase64(blob);
+    }
+  
+    if (localProfileImage) {
+      const response = await fetch(localProfileImage);
+
+      const blob = await response.blob();
+      base64ProfileImage = await convertBlobToBase64(blob);
+    }
+    return {
+      at: data.at !== user.username ? data.at : undefined,
+      bio: data.bio !== user.bio ? data.bio : undefined,
+      header: base64HeaderImage,
+      avatar: base64ProfileImage,
+    };
+  };
   return (
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#745b85] bg-opacity-40"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-modal-backdrop bg-opacity-40"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="h-full w-full overflow-hidden rounded-[6px] bg-[#3f3549] shadow-light md:h-[500px] md:w-[583px]"
+            className="h-full w-full overflow-hidden rounded-[6px] bg-secondary-bkg shadow-light md:h-[500px] md:w-[583px]"
             style={{ padding: "14px 0px 12px" }}
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
@@ -142,5 +156,9 @@ const ProfileModal: React.FC = () => {
     </AnimatePresence>
   );
 };
+
+
+
+
 
 export default ProfileModal;

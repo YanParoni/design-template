@@ -34,7 +34,7 @@ export default function UserDropdown() {
               }`}
             >
               <div className="flex items-center gap-2">
-                <div className="rounded-full border-[.02rem] border-[#7d6589] bg-[#4b3756]">
+                <div className="rounded-full border-[.02rem] border-bkg-accent ">
                   <UserProfileImage profileImage={user?.profileImage} />
                 </div>
                 {user && (
@@ -53,7 +53,7 @@ export default function UserDropdown() {
                   }`}
                 >
                   <div className="flex items-center gap-2">
-                    <div className="rounded-full border-[.02rem] border-[#7d6589] bg-[#4b3756]">
+                    <div className="rounded-full border-[.02rem] border-white ">
                       <UserProfileImage profileImage={user?.profileImage} />
                     </div>
                     {user && (

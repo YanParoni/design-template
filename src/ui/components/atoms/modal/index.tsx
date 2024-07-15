@@ -18,13 +18,13 @@ const Modal: React.FC<ModalProps> = ({
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#745b85] bg-opacity-40"
+          className="fixed w-full inset-0  z-50 flex items-center justify-center bg-modal-backdrop bg-opacity-40"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="rounded-[6px] bg-[#3f3549] shadow-light"
+            className="rounded-[6px] bg-secondary-bkg shadow-light"
             style={{ padding: "14px 13px 12px", width: "350px" }}
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}

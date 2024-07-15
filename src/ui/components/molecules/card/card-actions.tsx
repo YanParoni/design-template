@@ -56,18 +56,18 @@ const CardActions = ({
             className={`h-6 w-6 ${isLarge ? "h-7 w-7" : ""} ${
               played
                 ? "fill-accent-theme"
-                : "fill-[#f1ddff] hover:fill-[#d8c7e2]"
+                : "fill-light-purple hover:fill-light-purple-hover"
             }`}
             onClick={handlePlay}
           />
           <HeartIcon
             className={`mt-[1px] h-5 w-5 ${isLarge ? "h-6 w-6" : ""} ${
-              isLiked ? "fill-[#FF9010]" : "fill-[#f1ddff] hover:fill-[#d8c7e2]"
+              isLiked ? "fill-alt-accent" : "fill-light-purple hover:fill-light-purple-hover"
             }`}
             onClick={handleLike}
           />
           <EllipsisIcon
-            className={`mt-[1px] h-5 w-5 ${isLarge ? "h-6 w-6" : ""} fill-[#f1ddff] hover:fill-[#d8c7e2]`}
+            className={`mt-[1px] h-5 w-5 ${isLarge ? "h-6 w-6" : ""} fill-light-purple hover:fill-light-purple-hover`}
           />
         </div>
       )}

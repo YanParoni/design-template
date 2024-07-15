@@ -47,7 +47,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     },
     [setCroppedAreaPixels],
   );
-
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -110,16 +109,17 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
             <div className="relative h-48 w-full">
               <img
                 src={
-                  localHeaderImage || user.headerImage || "default-header.png"
-                }
+                  localHeaderImage ||
+                  user.headerImage ||
+                  "/space-invaders.png"}
                 alt="Header"
-                className="h-full w-full object-cover"
+                className="h-full w-full bg-accent-theme object-cover"
               />
               <div
                 className="absolute inset-0 flex cursor-pointer items-center justify-center"
                 onClick={() => handleClick("header")}
               >
-                <div className="rounded-full bg-slate-500/10 p-2 backdrop-blur-[2px] hover:bg-slate-400/15">
+                <div className="rounded-full bg-slate-500/20 p-2 backdrop-blur-[3px] hover:bg-slate-400/25">
                   <CameraIcon className="h-5 w-5 text-white" />
                 </div>
               </div>
@@ -129,16 +129,16 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                 src={
                   localProfileImage ||
                   user.profileImage ||
-                  "default-profile.png"
+                  "/space-invaders.png"
                 }
                 alt="Profile"
-                className="mx-auto h-24 w-24 rounded-full border-4 border-[#3f3549] object-cover"
+                className="mx-auto h-24 w-24 rounded-full border-4 border-secondary-bkg bg-accent-theme object-cover"
               />
               <div
                 className="absolute inset-0 flex cursor-pointer items-center justify-center rounded-full bg-black bg-opacity-10"
                 onClick={() => handleClick("profile")}
               >
-                <div className="bg-slate-500/150 rounded-full p-2 backdrop-blur-[1px] hover:bg-slate-400/15">
+                <div className="bg-slate-500/20 rounded-full p-1 backdrop-blur-[1px] hover:bg-slate-400/25">
                   <CameraIcon className="h-5 w-5 text-white" />
                 </div>
               </div>
