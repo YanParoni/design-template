@@ -46,8 +46,14 @@ export const useResetPassword = () => {
   const auth = useDeps<IAuthGateway>("AuthGateway");
 
   const { mutateAsync, data, isPending } = useMutation({
-    mutationFn: async ({ token, newPassword }: { token:string, newPassword: string }) => {
-      const response = await auth.resetPassword(token,newPassword);
+    mutationFn: async ({
+      token,
+      newPassword,
+    }: {
+      token: string;
+      newPassword: string;
+    }) => {
+      const response = await auth.resetPassword(token, newPassword);
       return response;
     },
   });

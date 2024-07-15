@@ -14,7 +14,7 @@ export interface IAuthGateway {
   getProfile: () => Promise<UserProfile>;
   requestReset: (email: ResetRequestDTO) => Promise<any>;
   validateToken: (token: string) => Promise<any>;
-  resetPassword: (token:string, newPassword: string) => Promise<any>;
+  resetPassword: (token: string, newPassword: string) => Promise<any>;
   changePassword: (
     currentPassword: string | null,
     newPassword: string,

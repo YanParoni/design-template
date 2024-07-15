@@ -18,7 +18,7 @@ const Modal: React.FC<ModalProps> = ({
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed w-full inset-0  z-50 flex items-center justify-center bg-modal-backdrop bg-opacity-40"
+          className="fixed inset-0 z-50 flex w-full items-center justify-center bg-modal-backdrop bg-opacity-40"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

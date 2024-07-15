@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import ShadowEffect from "../../atoms/shadow-effect";
 import CardActions from "@ui/components/molecules/card/card-actions";
-import {  useAuthStore, useGameInteractionsStore } from "client/store";
+import { useAuthStore, useGameInteractionsStore } from "client/store";
 import { GameInteraction } from "client/store/types";
 
 interface ICard {
@@ -25,7 +25,7 @@ const Card = React.memo(
     >(undefined);
 
     const { gameInteractions } = useGameInteractionsStore();
-    const { isAuthenticated} = useAuthStore()
+    const { isAuthenticated } = useAuthStore();
 
     const fetchGameInteraction = useCallback(() => {
       const interaction = gameInteractions?.find(
@@ -82,7 +82,7 @@ const Card = React.memo(
                 width={1000}
                 height={1000}
                 sizes="100%"
-                className="object-cover	"
+                className="object-cover"
                 priority
               />
             ) : (
@@ -90,7 +90,7 @@ const Card = React.memo(
             )}
             <ShadowEffect />
           </div>
-        </div> 
+        </div>
       </>
     );
   },

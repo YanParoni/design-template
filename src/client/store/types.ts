@@ -104,10 +104,10 @@ export type AuthState = {
   user: UserProfile | null;
   needsSetup: boolean;
   oAuth: boolean;
-  setOauth: (needsSetup: boolean, oAuth:boolean) => void;
+  setOauth: (needsSetup: boolean, oAuth: boolean) => void;
   refetchProfile: () => any;
   setAuth: (isAuthenticated: boolean) => void;
   setLoading: (isLoading: boolean) => void;
   setRefetchProfile: (refetch: () => void) => void;
-  setUser:(user: UserProfile) => void;
+  setUser: (user: UserProfile) => void;
 };

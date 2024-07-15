@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import SearchInput, { InputProps } from '@ui/components/atoms/inputs/search-input';
+import React, { useState } from "react";
+import { Meta, StoryFn } from "@storybook/react";
+import SearchInput, {
+  InputProps,
+} from "@ui/components/atoms/inputs/search-input";
 
 export default {
-  title: 'Components/Inputs/SearchInput',
+  title: "Components/Inputs/SearchInput",
   component: SearchInput,
 } as Meta;
 
 const Template: StoryFn<InputProps> = (args) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
   return (
-    <div style={{ width: '300px' }}>
+    <div style={{ width: "300px" }}>
       <SearchInput
         {...args}
         onChange={(e) => {
@@ -27,9 +29,9 @@ const Template: StoryFn<InputProps> = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   onChange: (e) => {
-    console.log('Input changed:', e.target.value);
+    console.log("Input changed:", e.target.value);
   },
   onClick: () => {
-    console.log('Icon clicked');
+    console.log("Icon clicked");
   },
 };

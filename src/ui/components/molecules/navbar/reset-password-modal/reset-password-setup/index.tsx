@@ -44,7 +44,7 @@ const ResetPasswordSetup: React.FC = () => {
   const closeModal = () => {
     handlePasswordModal(false);
   };
-  
+
   return (
     <Modal title="Set Password" isVisible={passwordModal} onClose={closeModal}>
       <form onSubmit={handleSubmit(onSubmit)}>

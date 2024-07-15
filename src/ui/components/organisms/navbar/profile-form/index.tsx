@@ -2,9 +2,9 @@ import React, { useState, useRef, useCallback, useEffect } from "react";
 import Cropper from "react-easy-crop";
 import CharacterCountInput from "@ui/components/atoms/inputs/char-count-input";
 import ErrorMessage from "@ui/components/atoms/error-message";
-import {  useModalStore } from "client/store";
+import { useModalStore } from "client/store";
 import { CameraIcon } from "@heroicons/react/24/solid";
-import {useAuthStore} from "client/store";
+import { useAuthStore } from "client/store";
 const ASPECT_RATIO_PROFILE = 1;
 const ASPECT_RATIO_HEADER = 3 / 1;
 
@@ -52,9 +52,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     }
   }, [usernameValue, bioValue, user?.username, user?.bio]);
 
-
-  if(!user) return
-
+  if (!user) return;
 
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -78,7 +76,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
       fileInputRef.current.click();
     }
   };
-
 
   return (
     <div className="flex h-full flex-col items-center">
@@ -113,9 +110,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
             <div className="relative h-48 w-full">
               <img
                 src={
-                  localHeaderImage ||
-                  user.headerImage ||
-                  "/space-invaders.png"}
+                  localHeaderImage || user.headerImage || "/space-invaders.png"
+                }
                 alt="Header"
                 className="h-full w-full bg-accent-theme object-cover"
               />
@@ -142,7 +138,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                 className="absolute inset-0 flex cursor-pointer items-center justify-center rounded-full bg-black bg-opacity-10"
                 onClick={() => handleClick("profile")}
               >
-                <div className="bg-slate-500/20 rounded-full p-1 backdrop-blur-[1px] hover:bg-slate-400/25">
+                <div className="rounded-full bg-slate-500/20 p-1 backdrop-blur-[1px] hover:bg-slate-400/25">
                   <CameraIcon className="h-5 w-5 text-white" />
                 </div>
               </div>
@@ -172,7 +168,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
             </div>
           </>
         )}
-      </div> 
+      </div>
     </div>
   );
 };

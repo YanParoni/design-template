@@ -14,13 +14,13 @@ export async function getProfile() {
   return response;
 }
 
-export const useGetProfile = (token?:string ) => {
+export const useGetProfile = (token?: string) => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["getProfile"],
     queryFn: () => getProfile(),
     refetchOnWindowFocus: false,
     refetchOnMount: false,
-    enabled: !!token
+    enabled: !!token,
   });
 
   return { data, isLoading, refetch };
@@ -97,15 +97,14 @@ export const useUpdateAt = () => {
 export const useUpdateUserDetails = () => {
   const userGateway = iocContainer.get<IUserGateway>("UserGateway");
   const auth = iocContainer.get<IAuthGateway>("AuthGateway");
-  const {refetchProfile}=useAuthStore()
+  const { refetchProfile } = useAuthStore();
   const mutation = useMutation<any, Error, any>({
     mutationFn: async (details) => {
       const response = await userGateway.updateUserDetails(details);
-     const other =  await refetchProfile()
-     console.log(other)
+      const other = await refetchProfile();
+      console.log(other);
       return response;
     },
-
   });
 
   return mutation;

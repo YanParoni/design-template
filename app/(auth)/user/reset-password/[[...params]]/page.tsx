@@ -50,12 +50,15 @@ const ResetPassword: React.FC = () => {
       }
     };
     validate();
-  }, [router, search, validateToken,]);
+  }, [router, search, validateToken]);
 
   const onSubmit = async (data: ResetPasswordFormValues) => {
     const tokenFromUrl = search.get("token");
     try {
-      await resetPassword({token: tokenFromUrl!, newPassword: data.newPassword });
+      await resetPassword({
+        token: tokenFromUrl!,
+        newPassword: data.newPassword,
+      });
       showAlert("Password reset successfully", "success");
       reset();
       router.push("/sign-in");
@@ -68,8 +71,8 @@ const ResetPassword: React.FC = () => {
   return (
     <div className="flex h-full w-full items-center justify-center sm:items-center">
       <div className="grid h-full w-full grid-rows-[1fr_auto] gap-0 rounded-lg bg-auth-bkg sm:h-80 sm:w-[432px] sm:gap-4">
-        <div className="flex flex-col items-center pt-1 justify-center gap-3 sm:gap-2 sm:p-2">
-        <img src='/alt-playboxd.svg'/>
+        <div className="flex flex-col items-center justify-center gap-3 pt-1 sm:gap-2 sm:p-2">
+          <img src="/alt-playboxd.svg" />
 
           <h1 className="mb-2 text-center text-xl font-bold text-white sm:text-2xl">
             Reset password
@@ -82,7 +85,7 @@ const ResetPassword: React.FC = () => {
               label="New Password"
               variant="primary"
               {...register("newPassword")}
-              type='password'
+              type="password"
             />
             {errors.newPassword && (
               <ErrorMessage message={errors.newPassword.message as string} />
@@ -93,7 +96,7 @@ const ResetPassword: React.FC = () => {
               label="Confirm Password"
               variant="primary"
               {...register("confirmPassword")}
-              type='password'
+              type="password"
             />
             {errors.confirmPassword && (
               <ErrorMessage

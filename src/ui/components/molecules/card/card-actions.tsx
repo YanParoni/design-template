@@ -62,7 +62,9 @@ const CardActions = ({
           />
           <HeartIcon
             className={`mt-[1px] h-5 w-5 ${isLarge ? "h-6 w-6" : ""} ${
-              isLiked ? "fill-alt-accent" : "fill-light-purple hover:fill-light-purple-hover"
+              isLiked
+                ? "fill-alt-accent"
+                : "fill-light-purple hover:fill-light-purple-hover"
             }`}
             onClick={handleLike}
           />

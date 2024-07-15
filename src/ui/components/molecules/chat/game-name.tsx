@@ -5,14 +5,12 @@ interface IName {
 }
 
 const GameNameSpan = ({ name }: IName) => {
-
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dialogRef = createRef<HTMLDivElement>();
 
   useClickOutside(dialogRef, () => {
     setIsOpen(false);
   });
-
 
   return (
     <>

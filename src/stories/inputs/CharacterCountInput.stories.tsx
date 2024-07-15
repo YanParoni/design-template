@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import CharacterCountInput, { CharacterCountInputProps } from '@ui/components/atoms/inputs/char-count-input';
+import React, { useState } from "react";
+import { Meta, StoryFn } from "@storybook/react";
+import CharacterCountInput, {
+  CharacterCountInputProps,
+} from "@ui/components/atoms/inputs/char-count-input";
 
 export default {
-  title: 'Components/Inputs/CharacterCountInput',
+  title: "Components/Inputs/CharacterCountInput",
   component: CharacterCountInput,
 } as Meta;
 
 const Template: StoryFn<CharacterCountInputProps> = (args) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
   return (
-    <div style={{ width: '300px' }}>
+    <div style={{ width: "300px" }}>
       <CharacterCountInput
         {...args}
         value={value}
@@ -23,14 +25,14 @@ const Template: StoryFn<CharacterCountInputProps> = (args) => {
 
 export const TextInput = Template.bind({});
 TextInput.args = {
-  label: 'Name',
+  label: "Name",
   maxLength: 20,
   isTextArea: false,
 };
 
 export const TextAreaInput = Template.bind({});
 TextAreaInput.args = {
-  label: 'Description',
+  label: "Description",
   maxLength: 100,
   isTextArea: true,
 };

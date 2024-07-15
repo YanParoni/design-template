@@ -42,20 +42,23 @@ const ProfileModal: React.FC = () => {
   const usernameValue = watch("at", user.username || "");
   const bioValue = watch("bio", user.bio || "");
 
-  const makeRequest = async (updateData: any ) => {
+  const makeRequest = async (updateData: any) => {
     try {
       updateUserDetails(updateData);
-      showAlert('Profile updated successfully','success')
+      showAlert("Profile updated successfully", "success");
       resetState();
-      
     } catch (error) {
-      showAlert('Something went wrong.Try again later.','error')
-
+      showAlert("Something went wrong.Try again later.", "error");
     }
   };
 
   const handleSaveClick = async (data: any) => {
-    const updateData = await transformData(data, user, localHeaderImage, localProfileImage);
+    const updateData = await transformData(
+      data,
+      user,
+      localHeaderImage,
+      localProfileImage,
+    );
     await makeRequest(updateData);
   };
 
@@ -69,16 +72,21 @@ const ProfileModal: React.FC = () => {
     resetState();
   };
 
-  const transformData = async (data: any, user: any, localHeaderImage: string | null, localProfileImage: string | null) => {
+  const transformData = async (
+    data: any,
+    user: any,
+    localHeaderImage: string | null,
+    localProfileImage: string | null,
+  ) => {
     let base64HeaderImage;
     let base64ProfileImage;
-  
+
     if (localHeaderImage) {
       const response = await fetch(localHeaderImage);
       const blob = await response.blob();
       base64HeaderImage = await convertBlobToBase64(blob);
     }
-  
+
     if (localProfileImage) {
       const response = await fetch(localProfileImage);
 
@@ -156,9 +164,5 @@ const ProfileModal: React.FC = () => {
     </AnimatePresence>
   );
 };
-
-
-
-
 
 export default ProfileModal;

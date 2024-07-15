@@ -24,13 +24,15 @@ function List() {
     const skeletons = Array(pageSize).fill(null);
 
     return (
-      <div 
-      className={`grid w-full pt-2 gap-2 ${isMobile ? "grid-cols-4" : isLarge ? "grid-cols-5" : "grid-cols-8"}`}>
-      {skeletons.map((_, index) => (
-          <CardLoadingSkeleton key={index}
-          height={
-            isMobile ? "h-[101px]" : isLarge ? "h-[255px]" : "h-[150px]"
-          }
+      <div
+        className={`grid w-full gap-2 pt-2 ${isMobile ? "grid-cols-4" : isLarge ? "grid-cols-5" : "grid-cols-8"}`}
+      >
+        {skeletons.map((_, index) => (
+          <CardLoadingSkeleton
+            key={index}
+            height={
+              isMobile ? "h-[101px]" : isLarge ? "h-[255px]" : "h-[150px]"
+            }
           />
         ))}
       </div>

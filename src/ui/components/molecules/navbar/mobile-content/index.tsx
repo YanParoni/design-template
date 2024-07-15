@@ -6,7 +6,7 @@ import { KeyIcon } from "@heroicons/react/24/solid";
 import UserDropdown from "../../../organisms/navbar/user-dropdown";
 
 const MobileContent: React.FC = () => {
-  const { activeState, setActiveState,  } = useNavStore();
+  const { activeState, setActiveState } = useNavStore();
 
   const handleSignInClick = () => {
     setTimeout(() => setActiveState("login"), 200);

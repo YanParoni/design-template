@@ -15,5 +15,5 @@ export {
   useModalStore,
   useAlertStore,
   useGameInteractionsStore,
-  useAuthStore
+  useAuthStore,
 };

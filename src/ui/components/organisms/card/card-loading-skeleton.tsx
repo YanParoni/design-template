@@ -1,10 +1,10 @@
 import * as React from "react";
 
-interface CardLoadingSkeletonProps{
+interface CardLoadingSkeletonProps {
   height: string;
 }
 
-const CardLoadingSkeleton = ({height}:CardLoadingSkeletonProps) => {
+const CardLoadingSkeleton = ({ height }: CardLoadingSkeletonProps) => {
   return (
     <div className="animate-pulse flex-col gap-2">
       <div className={`${height} w-full rounded-md bg-gray-300`}></div>

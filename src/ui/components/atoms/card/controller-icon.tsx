@@ -1,5 +1,5 @@
 import * as React from "react";
-const ControllerIcon = (props:any)  => (
+const ControllerIcon = (props: any) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={32} height={32} {...props}>
     <path
       fillRule="evenodd"

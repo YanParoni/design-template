@@ -43,7 +43,7 @@ const CharacterCountInput = forwardRef<
           {...rest}
         />
       )}
-      <label className="text-md font-medium absolute left-4 top-1 block text-accent-theme">
+      <label className="text-md absolute left-4 top-1 block font-medium text-accent-theme">
         {label}
       </label>
       {isFocused && (

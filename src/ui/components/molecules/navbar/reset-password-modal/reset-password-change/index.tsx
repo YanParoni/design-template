@@ -10,7 +10,10 @@ import { useChangePassword } from "@ui/queries/auth";
 import ErrorMessage from "@ui/components/atoms/error-message";
 
 const passwordChangeSchema = yup.object().shape({
-  currentPassword: yup.string().required("Current password is required").min(8, "Password must be at least 8 characters"),
+  currentPassword: yup
+    .string()
+    .required("Current password is required")
+    .min(8, "Password must be at least 8 characters"),
   newPassword: yup
     .string()
     .min(8, "Password must be at least 8 characters")
@@ -21,7 +24,6 @@ const passwordChangeSchema = yup.object().shape({
     .oneOf([yup.ref("newPassword"), null], "Passwords must match")
     .required("Please confirm your password"),
 });
-
 
 const ResetPasswordChange: React.FC = () => {
   const { handlePasswordModal, passwordModal } = useModalStore();
@@ -34,7 +36,7 @@ const ResetPasswordChange: React.FC = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(passwordChangeSchema),
-    mode: 'onBlur'
+    mode: "onBlur",
   });
 
   const onSubmit = async (data: any) => {
@@ -46,7 +48,6 @@ const ResetPasswordChange: React.FC = () => {
       showAlert("Failed to change password", "error");
     }
   };
-
 
   return (
     <Modal
@@ -65,8 +66,6 @@ const ResetPasswordChange: React.FC = () => {
           {errors.currentPassword && (
             <ErrorMessage message={errors.currentPassword.message as string} />
           )}
-     
-
         </div>
         <div className="relative mb-4">
           <Input

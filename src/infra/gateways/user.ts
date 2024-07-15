@@ -134,6 +134,6 @@ export class UserGateway implements IUserGateway {
     if (details.at) {
       await this.updateAt(details.at);
     }
-    return true
+    return true;
   }
 }

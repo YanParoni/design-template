@@ -14,9 +14,7 @@ function Providers({ children }: React.PropsWithChildren) {
       <ReactQueryStreamedHydration>
         <ThemeProvider>
           <Alert />
-          <AuthWrapper>
-          {children}
-          </AuthWrapper>
+          <AuthWrapper>{children}</AuthWrapper>
         </ThemeProvider>
       </ReactQueryStreamedHydration>
     </QueryClientProvider>

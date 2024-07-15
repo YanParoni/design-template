@@ -1,5 +1,5 @@
-import {create} from 'zustand'
-import { AuthState } from '../types';
+import { create } from "zustand";
+import { AuthState } from "../types";
 
 const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: false,
@@ -7,12 +7,12 @@ const useAuthStore = create<AuthState>((set) => ({
   user: null,
   oAuth: false,
   needsSetup: false,
-  setOauth: (needsSetup, oAuth) =>set({ oAuth, needsSetup}),
+  setOauth: (needsSetup, oAuth) => set({ oAuth, needsSetup }),
   refetchProfile: () => {},
   setAuth: (isAuthenticated) => set({ isAuthenticated }),
   setLoading: (isLoading) => set({ isLoading }),
   setRefetchProfile: (refetch) => set({ refetchProfile: refetch }),
-  setUser:(user) => set({ user })
+  setUser: (user) => set({ user }),
 }));
 
-export default useAuthStore
+export default useAuthStore;

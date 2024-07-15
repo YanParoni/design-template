@@ -63,7 +63,7 @@ export class AuthGateway implements IAuthGateway {
     }
   }
 
-  async resetPassword(token:string ,newPassword: string): Promise<any> {
+  async resetPassword(token: string, newPassword: string): Promise<any> {
     const url = `${BASE_URL}/auth/reset-password`;
     try {
       const response = await this.fetchHttpClient.post({

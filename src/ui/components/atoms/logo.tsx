@@ -1,6 +1,6 @@
 const Logo: React.FC = () => (
   <div className="cursor-pointer">
-    <img src='/playboxd.svg'/>
+    <img src="/playboxd.svg" />
   </div>
 );
 

@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { useGetProfile } from '@ui/queries/user';
-import { useAuthStore, useNavStore } from 'client/store';
-import jwt from 'jsonwebtoken';
+import React, { useEffect, useState, useCallback } from "react";
+import { useGetProfile } from "@ui/queries/user";
+import { useAuthStore, useNavStore } from "client/store";
+import jwt from "jsonwebtoken";
 
 interface AuthProps {
   children: React.ReactNode;
@@ -10,14 +10,18 @@ interface AuthProps {
 const AuthWrapper: React.FC<AuthProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
   const { data, isLoading, refetch } = useGetProfile(token);
-  const { setAuth, setUser, setLoading, setRefetchProfile, setOauth } = useAuthStore();
+  const { setAuth, setUser, setLoading, setRefetchProfile, setOauth } =
+    useAuthStore();
   const { setActiveState } = useNavStore();
 
   const checkToken = useCallback(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       setLoading(true);
-      const decodedToken = jwt.decode(token) as { needsPasswordSetup: boolean, oauth: boolean };
+      const decodedToken = jwt.decode(token) as {
+        needsPasswordSetup: boolean;
+        oauth: boolean;
+      };
       setOauth(decodedToken.needsPasswordSetup, decodedToken.oauth);
       setToken(token);
       refetch();
@@ -27,15 +31,15 @@ const AuthWrapper: React.FC<AuthProps> = ({ children }) => {
   }, [refetch, setAuth, setLoading, setOauth]);
 
   useEffect(() => {
-    checkToken()
+    checkToken();
     const handleStorageChange = () => {
       checkToken();
     };
 
-    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
 
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener("storage", handleStorageChange);
     };
   }, [checkToken, refetch, setRefetchProfile]);
 
@@ -44,7 +48,7 @@ const AuthWrapper: React.FC<AuthProps> = ({ children }) => {
       setUser(data);
       setAuth(true);
       setLoading(false);
-      setActiveState('logged');
+      setActiveState("logged");
     }
   }, [data, setAuth, setLoading, setUser, setActiveState]);
 
@@ -55,8 +59,8 @@ const AuthWrapper: React.FC<AuthProps> = ({ children }) => {
   }, [isLoading, setLoading]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedToken = localStorage.getItem('token');
+    if (typeof window !== "undefined") {
+      const storedToken = localStorage.getItem("token");
       if (storedToken) {
         setToken(storedToken);
       }

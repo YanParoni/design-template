@@ -1,7 +1,8 @@
 import React, { useState, forwardRef } from "react";
 import Link from "next/link";
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   variant: "primary" | "secondary";
   forgottenLabel?: boolean;
@@ -26,7 +27,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="w-full">
         <div className="flex w-full justify-between">
-          <label className="mb-1 text-[12px] text-label ">{label}</label>
+          <label className="mb-1 text-[12px] text-label">{label}</label>
           {type === "password" && forgottenLabel && (
             <Link
               className="text-[12px] font-semibold text-accent-theme hover:text-white"

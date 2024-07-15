@@ -17,9 +17,9 @@ export function ChatVisibilityBtn({ open, setOpen }: IChatVisibilityBtn) {
   const { isMobile } = useDeviceDetect();
   const controls = useAnimation();
 
-  const handleOpen =()=>{
-    setOpen(!open)
-  }
+  const handleOpen = () => {
+    setOpen(!open);
+  };
   useEffect(() => {
     controls.start({
       rotate: open ? -180 : 180,
