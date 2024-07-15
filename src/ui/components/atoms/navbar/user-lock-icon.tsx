@@ -1,5 +1,5 @@
 import * as React from "react";
-const UserLockIcon = (props) => (
+const UserLockIcon = (props: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={266.667}

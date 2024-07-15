@@ -40,7 +40,7 @@ export const useGameInteractions = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["getUserInteractions"],
     queryFn: async () => {
-      if (!user) return;
+      if (!user) return null;
       const response = await getUserInteractions(user.id);
       setGameInteractions(response);
       return response;

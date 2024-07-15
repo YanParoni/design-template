@@ -14,7 +14,7 @@ export async function getProfile() {
   return response;
 }
 
-export const useGetProfile = (token?: string) => {
+export const useGetProfile = (token?: string | null) => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["getProfile"],
     queryFn: () => getProfile(),

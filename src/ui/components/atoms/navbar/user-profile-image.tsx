@@ -1,7 +1,11 @@
 import React from "react";
 import Image from "next/image";
 
-const UserProfileImage = ({ profileImage }) => {
+interface UserProfileImageProps{
+  profileImage: string | undefined;
+}
+
+const UserProfileImage = ({ profileImage }:UserProfileImageProps ) => {
   return profileImage ? (
     <div className="relative h-6 w-6 md:h-7 md:w-7">
       <Image

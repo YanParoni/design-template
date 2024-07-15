@@ -17,7 +17,6 @@ const passwordSetupSchema = yup.object().shape({
     .matches(/^\S*$/, "Password must not contain spaces"),
 });
 
-type PasswordSetupFormData = yup.InferType<typeof passwordSetupSchema>;
 
 const ResetPasswordSetup: React.FC = () => {
   const { handlePasswordModal, passwordModal } = useModalStore();
@@ -28,11 +27,11 @@ const ResetPasswordSetup: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<PasswordSetupFormData>({
+  } = useForm({
     resolver: yupResolver(passwordSetupSchema),
   });
 
-  const onSubmit = async (data: PasswordSetupFormData) => {
+  const onSubmit = async (data: any) => {
     try {
       await mutateAsync(data);
       showAlert("Password set successfully!", "success");

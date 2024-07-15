@@ -2,10 +2,16 @@ import mockedPlatforms from "@ui/utils/mock-platforms";
 import mockedGenres from "@ui/utils/mock-genres";
 import mockedStores from "@ui/utils/mock-stores";
 
-const getAliasByValue = (value, options) => {
+interface OptionInterface {
+  value:  string | number | null;
+  alias: string;
+}
+
+export const getAliasByValue = (value:  string | number | null, options: OptionInterface[]): string => {
   const option = options.find((option) => option.value === value);
   return option ? option.alias : "";
 };
+
 
 const buildUrl = (filters: any) => {
   const urlParts = [];

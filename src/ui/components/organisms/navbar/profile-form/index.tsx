@@ -41,7 +41,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const onCropComplete = useCallback(
-    (croppedArea, croppedAreaPixels) => {
+    (croppedArea:any, croppedAreaPixels:any) => {
       setCroppedAreaPixels(croppedAreaPixels);
     },
     [setCroppedAreaPixels],
@@ -52,7 +52,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     }
   }, [usernameValue, bioValue, user?.username, user?.bio]);
 
-  if (!user) return;
+  if (!user) return null;
 
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

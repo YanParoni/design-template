@@ -37,7 +37,7 @@ const ProfileModal: React.FC = () => {
     resolver: yupResolver(profileFormSchema),
     mode: "onChange",
   });
-  if (!user) return;
+  if (!user) return null;
 
   const usernameValue = watch("at", user.username || "");
   const bioValue = watch("bio", user.bio || "");

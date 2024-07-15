@@ -20,7 +20,7 @@ export default function UserDropdown() {
     return username.length > 10 ? username.substring(0, 10) + "..." : username;
   };
 
-  if (isLoading) return;
+  if (isLoading) return null;
   return (
     <>
       {isAuthenticated && (

@@ -49,7 +49,7 @@ function List() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
           >
-            {data.results.map((game) => (
+            {data.results.map((game:any) => (
               <Card
                 key={game.id}
                 id={game.id}

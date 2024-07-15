@@ -11,11 +11,8 @@ import SearchInput from "@ui/components/atoms/inputs/search-input";
 import useDeviceDetect from "@ui/hooks/use-device-detect";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
+import { getAliasByValue } from "@ui/components/atoms/filters/links";
 
-const getAliasByValue = (value, options) => {
-  const option = options.find((option) => option.value === value);
-  return option ? option.alias : "";
-};
 
 const FiltersAndVisualization: React.FC = () => {
   const {
