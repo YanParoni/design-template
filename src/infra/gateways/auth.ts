@@ -5,7 +5,7 @@ import { IAuthGateway, LoginUserDto, ResetRequestDTO } from "./contracts/auth";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_REACT_APP === "production"
-    ? ""
+    ?  process.env.NEXT_PUBLIC_API
     : "http://localhost:3000";
 @injectable()
 export class AuthGateway implements IAuthGateway {
