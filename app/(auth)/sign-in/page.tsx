@@ -7,6 +7,11 @@ import { useLogin } from "@ui/queries/auth";
 import GoogleButton from "@ui/components/atoms/buttons/google-button";
 import { useAuthStore } from "client/store";
 
+const BASE_URL =
+  process.env.NEXT_PUBLIC_REACT_APP === "production"
+    ? process.env.NEXT_PUBLIC_API
+    : "http://localhost:3000";
+
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +34,7 @@ const SignIn = () => {
 
   const handleGoogleLogin = () => {
     const authWindow = window.open(
-      "http://localhost:3000/auth/google",
+      `${BASE_URL}/auth/google`,
       "_blank",
       "width=500,height=600",
     );

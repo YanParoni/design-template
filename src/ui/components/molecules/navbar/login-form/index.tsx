@@ -12,6 +12,10 @@ interface LoginFormProps {
   onCloseClick: () => void;
 }
 
+const BASE_URL =
+  process.env.NEXT_PUBLIC_REACT_APP === "production"
+    ? process.env.NEXT_PUBLIC_API
+    : "http://localhost:3000";
 const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +40,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
 
   const handleGoogleLogin = () => {
     const authWindow = window.open(
-      "http://localhost:3000/auth/google",
+     `${BASE_URL}/auth/google`,
       "_blank",
       "width=500,height=600",
     );
