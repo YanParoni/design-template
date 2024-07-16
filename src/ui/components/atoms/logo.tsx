@@ -4,9 +4,9 @@ const Logo: React.FC = () => (
     <Image
       alt="logo"
       src="/playboxd.svg"
-      priority
-      quality={100}
-      sizes="100vw"
+        priority={true}
+      quality={50}
+      sizes=""
       className="object-cover"
       fill
     />

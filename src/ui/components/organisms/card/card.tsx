@@ -79,7 +79,7 @@ const Card = React.memo(
                 src={imageUrl}
                 alt={`${name}-thumb`}
                 quality={10}
-                sizes="100vw"
+                sizes="100%"
                 className="object-cover"
                 fill
               />

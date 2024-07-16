@@ -64,4 +64,9 @@
   .h-111 {
     height: 111px;
   }
+  .newbg{
+    background: rgb(57,47,65);
+    background: linear-gradient(180deg, rgba(57,47,65,1) 0%, rgba(31,25,36,1) 22%);
+  }
+  
 }

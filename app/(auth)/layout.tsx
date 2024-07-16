@@ -6,7 +6,7 @@ import React from "react";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <Providers>
-      <section className="h-screen w-screen bg-bkg">{children}</section>
+      <section className="h-screen w-screen">{children}</section>
     </Providers>
   );
 }
