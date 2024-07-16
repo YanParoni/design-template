@@ -20,18 +20,15 @@ export class AxiosHttpClient implements IHttpClient {
       const response = await callback();
       return { data: response.data, error: null };
     } catch (error: any) {
-      return { data: null as any, error: error.message };
+      console.log(error)
+      return { data: null as any, error: error.response?.data?.message || error.message };
     }
   }
 
   private async axiosRequest<T>(
     config: AxiosRequestConfig,
   ): Promise<AxiosResponse<T>> {
-    const response = await this.axiosInstance.request<T>(config);
-    if (response.status >= 400) {
-      throw new Error(`Axios request failed: ${response.status}`);
-    }
-    return response;
+    return this.axiosInstance.request<T>(config);
   }
 
   async get<T>({
@@ -39,7 +36,7 @@ export class AxiosHttpClient implements IHttpClient {
     headers,
     params,
   }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
-    return await this.thrower(() =>
+    return this.thrower(() =>
       this.axiosRequest<T>({ url, headers, params, method: "get" }),
     );
   }
@@ -50,7 +47,7 @@ export class AxiosHttpClient implements IHttpClient {
     headers,
     params,
   }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
-    return await this.thrower(() =>
+    return this.thrower(() =>
       this.axiosRequest<T>({ url, data, headers, params, method: "post" }),
     );
   }
@@ -61,7 +58,7 @@ export class AxiosHttpClient implements IHttpClient {
     headers,
     params,
   }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
-    return await this.thrower(() =>
+    return this.thrower(() =>
       this.axiosRequest<T>({ url, data, headers, params, method: "put" }),
     );
   }
@@ -72,7 +69,7 @@ export class AxiosHttpClient implements IHttpClient {
     headers,
     params,
   }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
-    return await this.thrower(() =>
+    return this.thrower(() =>
       this.axiosRequest<T>({ url, data, headers, params, method: "patch" }),
     );
   }
@@ -82,7 +79,7 @@ export class AxiosHttpClient implements IHttpClient {
     headers,
     params,
   }: HttpClientDTO.Input): Promise<HttpClientDTO.Output<T>> {
-    return await this.thrower(() =>
+    return this.thrower(() =>
       this.axiosRequest<T>({ url, headers, params, method: "delete" }),
     );
   }

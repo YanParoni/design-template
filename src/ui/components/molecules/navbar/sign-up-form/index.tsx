@@ -6,7 +6,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import signUpSchema from "@ui/validators/signup-schema";
 import ErrorMessage from "@ui/components/atoms/error-message";
-import { useAlertStore } from "client/store";
+import { useAlertStore, useAuthStore } from "client/store";
+import GoogleButton from "@ui/components/atoms/buttons/google-button";
+import { useRouter } from "next/navigation";
+
 interface SignUpFormValues {
   username: string;
   email: string;
@@ -18,7 +21,13 @@ interface SignUpForm {
   onClose: () => void;
 }
 
+const BASE_URL =
+  process.env.NEXT_PUBLIC_REACT_APP === "production"
+    ? process.env.NEXT_PUBLIC_API
+    : "http://localhost:3000";
+
 const SignUpForm: React.FC<SignUpForm> = ({ onClose }) => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -28,19 +37,40 @@ const SignUpForm: React.FC<SignUpForm> = ({ onClose }) => {
     resolver: yupResolver(signUpSchema),
     mode: "onBlur",
   });
+  const { setAuth } = useAuthStore();
+
   const createUser = useCreateUser();
   const { showAlert } = useAlertStore();
 
   const onSubmit = async (data: SignUpFormValues) => {
-    try {
-      await createUser.mutateAsync(data);
-      showAlert("User created successfully!", "success");
+    const response = await createUser.mutateAsync(data);
+    if (response.error) {
+      showAlert(response.error, "error");
+      reset();
+    } else {
+      showAlert("Account created!", "success");
       reset();
       onClose();
-    } catch (error) {
-      console.log("Error creating user", error);
-      showAlert("Failed to create user", "error");
     }
+  };
+
+  const handleGoogleLogin = () => {
+    const authWindow = window.open(
+      `${BASE_URL}/auth/google`,
+      "_blank",
+      "width=500,height=600",
+    );
+
+    const authInterval = setInterval(() => {
+      if (authWindow?.closed) {
+        clearInterval(authInterval);
+        const token = localStorage.getItem("token");
+        if (token) {
+          router.push("/games");
+          setAuth(true);
+        }
+      }
+    }, 1000);
   };
 
   return (
@@ -78,13 +108,18 @@ const SignUpForm: React.FC<SignUpForm> = ({ onClose }) => {
           <ErrorMessage message={errors.password.message as string} />
         )}
       </div>
-
-      <Button
-        label="Sign Up"
-        variant="primary"
-        type="submit"
-        disabled={!isValid}
-      />
+      <div className="flex flex-col items-center justify-center gap-2">
+        <Button
+          label="Sign Up"
+          variant="primary"
+          type="submit"
+          disabled={!isValid}
+        />
+        <p className="text-description text-lg"> ----- or -----</p>
+        <div className="w-full">
+          <GoogleButton onClick={handleGoogleLogin} variant="secondary" />
+        </div>
+      </div>
     </form>
   );
 };

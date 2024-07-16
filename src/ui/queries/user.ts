@@ -29,7 +29,7 @@ export const useGetProfile = (token?: string | null) => {
 export const useCreateUser = () => {
   const userGateway = iocContainer.get<IUserGateway>("UserGateway");
 
-  const mutation = useMutation<UserDTO | null, Error, CreateUserDTO>({
+  const mutation = useMutation<any, Error, CreateUserDTO>({
     mutationFn: async (user: CreateUserDTO) => {
       const response = await userGateway.createUser(user);
       if (!response) {
@@ -97,11 +97,12 @@ export const useUpdateAt = () => {
 export const useUpdateUserDetails = () => {
   const userGateway = iocContainer.get<IUserGateway>("UserGateway");
   const auth = iocContainer.get<IAuthGateway>("AuthGateway");
-  const { refetchProfile } = useAuthStore();
+  const { setUser } = useAuthStore();
   const mutation = useMutation<any, Error, any>({
     mutationFn: async (details) => {
       const response = await userGateway.updateUserDetails(details);
-      const other = await refetchProfile();
+      const userProfile = await auth.getProfile();
+      setUser(userProfile.data)
       return response;
     },
   });

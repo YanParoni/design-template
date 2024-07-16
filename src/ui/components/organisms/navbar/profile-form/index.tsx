@@ -47,10 +47,10 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
     [setCroppedAreaPixels],
   );
   useEffect(() => {
-    if (usernameValue !== user?.username || bioValue !== user?.bio) {
+    if (usernameValue !== user?.at || bioValue !== user?.bio) {
       setHasChanges();
     }
-  }, [usernameValue, bioValue, user?.username, user?.bio]);
+  }, [usernameValue, bioValue, user?.at, user?.bio]);
 
   if (!user) return null;
 
@@ -143,17 +143,17 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
                 </div>
               </div>
             </div>
-            <div className="w-full px-4 pt-4">
+            <div className=" relative w-full px-4 pt-4">
               <CharacterCountInput
                 label="@"
                 value={usernameValue}
                 maxLength={14}
                 {...register("at")}
               />
-              {errors.at && (
+       
+       {errors.at && (
                 <ErrorMessage message={errors.at.message as string} />
-              )}
-            </div>
+              )}            </div>
             <div className="mt-4 w-full px-4">
               <CharacterCountInput
                 label="Bio"

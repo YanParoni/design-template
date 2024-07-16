@@ -1,6 +1,7 @@
 export interface UserProfile {
   id: string;
   username: string;
+  at: string;
   email: string;
   profileImage: string;
   headerImage: string;

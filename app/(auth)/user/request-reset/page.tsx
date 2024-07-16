@@ -33,8 +33,8 @@ const ForgotPassword: React.FC = () => {
   const onSubmit = async (data: ForgotPasswordFormValues) => {
     try {
       const response = await requestReset(data);
-      setResponseMessage(response.message);
-      setIsSuccess(response.success);
+      setResponseMessage(response.data.message);
+      setIsSuccess(response.data.success);
       setPhases("submitted");
       reset();
     } catch (error) {

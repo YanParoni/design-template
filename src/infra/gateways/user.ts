@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify";
 import TYPES from "@infra/http/types";
-import type { IHttpClient } from "../http/contracts";
+import type { IHttpClient, HttpClientDTO } from "../http/contracts";
 import { CreateUserDTO, IUserGateway, UserDTO } from "./contracts/user";
 
 const BASE_URL =
@@ -15,105 +15,74 @@ export class UserGateway implements IUserGateway {
     private readonly fetchHttpClient: IHttpClient,
   ) {}
 
-  async getProfile(): Promise<any> {
-    const url = `${BASE_URL}/users/profile/`;
-    try {
-      const response = await this.fetchHttpClient.get({
-        url,
-        headers: {
-          Accept: "*/*",
-        },
-        addAuth: true,
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Error in UserGateway getProfile", error);
-    }
-  }
-
-  async changeAvatar(avatarUrl: string): Promise<any> {
-    const url = `${BASE_URL}/users/profile-image`;
-    try {
-      const response = await this.fetchHttpClient.patch({
-        url,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: { base64Image: avatarUrl },
-        addAuth: true,
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Error in UserGateway changeAvatar", error);
-    }
-  }
-
-  async updateHeader(headerUrl: string): Promise<any> {
-    const url = `${BASE_URL}/users/header-image`;
-    try {
-      const response = await this.fetchHttpClient.patch({
-        url,
-        headers: {
-          "Content-Type": "application/json",
-          addAuth: true,
-        },
-        data: { base64Image: headerUrl },
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Error in UserGateway updateHeader", error);
-    }
-  }
-
-  async updateBio(newBio: string): Promise<any> {
-    const url = `${BASE_URL}/users/bio`;
-    try {
-      const response = await this.fetchHttpClient.patch({
-        url,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: { newBio },
-        addAuth: true,
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Error in UserGateway updateBio", error);
-    }
-  }
-
-  async updateAt(newAt: string): Promise<any> {
-    const url = `${BASE_URL}/users/at`;
-    try {
-      const response = await this.fetchHttpClient.patch({
-        url,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: { newAt },
-        addAuth: true,
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Error in UserGateway updateAt", error);
-    }
-  }
-
-  async createUser(user: CreateUserDTO): Promise<UserDTO | null> {
+  async createUser(user: CreateUserDTO): Promise<HttpClientDTO.Output<UserDTO>> {
     const url = `${BASE_URL}/users/register`;
-    try {
-      const response = await this.fetchHttpClient.post({
-        url,
-        headers: {
-          Accept: "*/*",
-        },
-        data: user,
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Error in UserGateway createUser", error);
-      return null;
-    }
+    return this.fetchHttpClient.post({
+      url,
+      headers: {
+        Accept: "*/*",
+      },
+      data: user,
+    });
+  }
+
+  async getProfile(): Promise<HttpClientDTO.Output<any>> {
+    const url = `${BASE_URL}/users/profile/`;
+    return this.fetchHttpClient.get({
+      url,
+      headers: {
+        Accept: "*/*",
+      },
+      addAuth: true,
+    });
+  }
+
+  async changeAvatar(avatarUrl: string): Promise<HttpClientDTO.Output<any>> {
+    const url = `${BASE_URL}/users/profile-image`;
+    return this.fetchHttpClient.patch({
+      url,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: { base64Image: avatarUrl },
+      addAuth: true,
+    });
+  }
+
+  async updateHeader(headerUrl: string): Promise<HttpClientDTO.Output<any>> {
+    const url = `${BASE_URL}/users/header-image`;
+    return this.fetchHttpClient.patch({
+      url,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: { base64Image: headerUrl },
+      addAuth: true,
+    });
+  }
+
+  async updateBio(newBio: string): Promise<HttpClientDTO.Output<any>> {
+    const url = `${BASE_URL}/users/bio`;
+    return this.fetchHttpClient.patch({
+      url,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: { newBio },
+      addAuth: true,
+    });
+  }
+
+  async updateAt(newAt: string): Promise<HttpClientDTO.Output<any>> {
+    const url = `${BASE_URL}/users/at`;
+    return this.fetchHttpClient.patch({
+      url,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: { newAt },
+      addAuth: true,
+    });
   }
 
   async updateUserDetails(details: {
@@ -121,7 +90,7 @@ export class UserGateway implements IUserGateway {
     bio?: string;
     header?: string;
     avatar?: string;
-  }): Promise<any> {
+  }): Promise<HttpClientDTO.Output<any>> {
     if (details.avatar) {
       await this.changeAvatar(details.avatar);
     }
@@ -134,6 +103,6 @@ export class UserGateway implements IUserGateway {
     if (details.at) {
       await this.updateAt(details.at);
     }
-    return true;
+    return { data: true, error: null };
   }
 }

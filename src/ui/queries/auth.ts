@@ -10,8 +10,8 @@ export const useLogin = () => {
   const { mutateAsync, data, isError, error } = useMutation({
     mutationFn: async (data: LoginUserDto) => {
       const response = await auth.login(data);
-      if (response && response.token) {
-        localStorage.setItem("token", response.token);
+      if (response && response.data?.token) {
+        localStorage.setItem("token", response.data.token);
       }
       return response;
     },
@@ -70,7 +70,7 @@ export const useValidateToken = () => {
   const { mutateAsync, data, isPending, isError, error } = useMutation({
     mutationFn: async (token: string) => {
       const response = await auth.validateToken(token);
-      return response;
+      return response.data;
     },
   });
 

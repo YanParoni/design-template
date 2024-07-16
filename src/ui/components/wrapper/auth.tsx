@@ -45,7 +45,7 @@ const AuthWrapper: React.FC<AuthProps> = ({ children }) => {
 
   useEffect(() => {
     if (data) {
-      setUser(data);
+      setUser(data.data);
       setAuth(true);
       setLoading(false);
       setActiveState("logged");

@@ -17,9 +17,8 @@ export default function UserDropdown() {
   };
 
   const truncateUsername = (username: string) => {
-    return username.length > 10 ? username.substring(0, 10) + "..." : username;
+    return username?.length > 10 ? username.substring(0, 10) + "..." : username;
   };
-
   if (isLoading) return null;
   return (
     <>
@@ -64,7 +63,7 @@ export default function UserDropdown() {
                       </h1>
                     )}
                     <ChevronDownIcon
-                      className="-mr-1 h-4 w-4"
+                      className="-mr-1 h-5 w-5"
                       aria-hidden="true"
                     />
                   </div>

@@ -1,11 +1,11 @@
 import React, { useState, forwardRef } from "react";
-
 export interface CharacterCountInputProps
   extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   label: string;
   maxLength: number;
   isTextArea?: boolean;
   value: string;
+  error?:string
 }
 
 const CharacterCountInput = forwardRef<
@@ -18,9 +18,8 @@ const CharacterCountInput = forwardRef<
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
-
   return (
-    <div className="character-count-input relative mb-4">
+    <div className=" relative mb-4">
       {isTextArea ? (
         <textarea
           ref={ref as React.Ref<HTMLTextAreaElement>}
@@ -49,6 +48,8 @@ const CharacterCountInput = forwardRef<
       {isFocused && (
         <span className="absolute right-2 top-1 mt-4 text-xs text-gray-300">{`${value.length} / ${maxLength}`}</span>
       )}
+      <div>
+      </div>
     </div>
   );
 });

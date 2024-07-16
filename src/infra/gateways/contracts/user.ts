@@ -1,3 +1,4 @@
+import { HttpClientDTO } from "@infra/http/contracts";
 export interface CreateUserDTO {
   username: string;
   email: string;
@@ -21,10 +22,10 @@ export interface UserDTO {
   gameInteractions: string[];
 }
 export interface IUserGateway {
-  getProfile: () => Promise<any>;
-  createUser: (user: CreateUserDTO) => Promise<UserDTO | null>;
-  changeAvatar: (avatarUrl: string) => Promise<any>;
-  updateBio: (newBio: string) => Promise<any>;
-  updateAt: (newAt: string) => Promise<any>;
-  updateUserDetails: (newUserDetails: any) => Promise<any>;
+  getProfile: () => Promise<HttpClientDTO.Output<any>>;
+  createUser: (user: CreateUserDTO) => Promise<HttpClientDTO.Output<UserDTO>>;
+  changeAvatar: (avatarUrl: string) => Promise<HttpClientDTO.Output<any>>;
+  updateBio: (newBio: string) => Promise<HttpClientDTO.Output<any>>;
+  updateAt: (newAt: string) => Promise<HttpClientDTO.Output<any>>;
+  updateUserDetails: (newUserDetails: any) => Promise<HttpClientDTO.Output<any>>;
 }

@@ -32,6 +32,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             <Link
               className="text-[12px] font-semibold text-accent-theme hover:text-white"
               href="/user/request-reset"
+              tabIndex={3}
             >
               Forgotten?
             </Link>
@@ -45,6 +46,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           style={{ backgroundColor: isFocused ? "white" : "" }}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          autoComplete={type === "email" ? "email" : "off"}
+          tabIndex={1}
           {...rest}
         />
       </div>

@@ -5,9 +5,7 @@ import Input from "@ui/components/atoms/inputs/input";
 import GoogleButton from "@ui/components/atoms/buttons/google-button";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useLogin } from "@ui/queries/auth";
-import { useAuthStore, useNavStore } from "client/store";
-import { useAlertStore } from "client/store";
-import { useGetProfile } from "@ui/queries/user";
+import { useAuthStore, useNavStore, useAlertStore } from "client/store";
 interface LoginFormProps {
   onCloseClick: () => void;
 }
@@ -16,6 +14,7 @@ const BASE_URL =
   process.env.NEXT_PUBLIC_REACT_APP === "production"
     ? process.env.NEXT_PUBLIC_API
     : "http://localhost:3000";
+
 const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,14 +23,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
   const { activeState, setActiveState } = useNavStore();
   const { showAlert } = useAlertStore();
   const { setAuth } = useAuthStore();
-  const { refetch } = useGetProfile();
 
   const handleLogin = async () => {
     const response = await mutateAsync({ email, password });
     if (response.error) {
       showAlert("Failed to log in", "error");
     } else {
-      refetch();
       showAlert("Logged in successfully!", "success");
       setActiveState("logged");
       setAuth(true);
@@ -40,7 +37,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
 
   const handleGoogleLogin = () => {
     const authWindow = window.open(
-     `${BASE_URL}/auth/google`,
+      `${BASE_URL}/auth/google`,
       "_blank",
       "width=500,height=600",
     );
@@ -61,7 +58,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.1 }}
         >
           <XMarkIcon
             className="hidden h-5 w-5 cursor-pointer fill-description stroke-description hover:fill-description hover:stroke-white lg:block"
@@ -69,6 +66,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
           />
           <div className="w-screen pr-6 lg:w-[150px] lg:pr-0">
             <Input
+              type="email"
               label="Email"
               variant="primary"
               onChange={(e) => setEmail(e.target.value)}
@@ -92,7 +90,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
             <div className="flex items-center justify-center">
               <h1 className="text-center text-description">---or---</h1>
             </div>
-            <GoogleButton onClick={handleGoogleLogin} />
+            <div className='w-18'>
+            <GoogleButton  onClick={handleGoogleLogin} />
+            </div>
           </div>
         </motion.div>
       )}
