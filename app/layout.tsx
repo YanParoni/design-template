@@ -6,9 +6,22 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Playboxd Portfolio by Yan Paroni',
   description: 'A project inspired by Letterboxd and powered by RAWG API.',
-  metadataBase: new URL('https://design-template-ivory.vercel.app/'),
+  metadataBase: new URL('https://design-template-ivory.vercel.app'),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-US',
+      'pt-BR': '/pt-BR',
+    },
+    
+  },
+  openGraph: {
+    images: '/opengraph-image.png',
+  },
+
   twitter:{
-    card: 'summary_large_image'
+    card: 'summary_large_image',
+    images:'/twitter-image.png'
   }
 };
 interface RootLayoutProps {
@@ -23,8 +36,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <meta property="og:type" content="website"/>
       <meta property="og:title" content="Playboxd" />
       <meta property="og:description" content="Portfolio Project inspired by Letterboxd" />
-      <meta property="og:image" content="/opengraph-image.png" />
-      <meta property="twitter:image" content="/twitter-image.png" />
       <meta property="twitter:description" content="Portfolio Project inspired by Letterboxd" />
 
       </head>
