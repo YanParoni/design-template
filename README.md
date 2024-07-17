@@ -1,52 +1,98 @@
-# My Project
-npm run build && npm start to launch 
-## Preface
+# Playboxd Frontend Documentation
 
-I usually work on private repositories and don't get the chance to commit much of the stuff I'm learning. But here I am, unveiling this project to showcase some of the architectural models and techniques I've gained from my experience in the industry. This project is like a sandbox for me to try out a blend of technologies that are not entirely smooth in terms of integration—yet. 
+Welcome to the Playboxd frontend documentation. This document provides an overview of the project setup, key features, including Storybook, and instructions on how to set up and run the project.
 
-## Design Philosophy
+## Table of Contents
+- [Introduction](#introduction)
+- [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
+- [Key Features](#key-features)
+- [Running Storybook](#running-storybook)
+- [Running Tests](#running-tests)
+- [Deployment](#deployment)
+- [Contact](#contact)
 
-When it comes to design I've drawn inspiration from several architectural styles, such as Ports and Adapters, DDD (Domain-Driven Design), and so on. The idea is to keep the UI as pure as possible while the entities take care of the heavy lifting. 
+## Introduction
 
-## Tech Stack
+This is a portfolio project to showcase what I learned as a fullstack developer. The frontend is built with Next.js and is part of a larger application inspired by Letterboxd, featuring UI components, authentication, and various interactive elements. Later on I will provide the figma file for the logos.
 
-Here's what I'm working with:
+## Getting Started
 
-- **Inversify**: For dependency inversion.
-- **React Query**: To handle client-side caching.
-- **Next.js**: Mostly because  React, but also for its handy API proxy feature.
+### Prerequisites
+- Node.js (version 18.0 or later)
+- Yarn or npm
 
-## API
+### Installation
+0. Fork the repo
 
-I'm using the RAWG Games API for now. Currently, the project architecture is quite general and is gradually going to be spiced up with new features. Right now, there's just a simple "Get All Games" listing.
+1. Install dependencies:
+    ```sh
+    yarn install or npm install
+    ```
 
-## Why Proxy with Next.js?
+2. Create a `.env` file in the root directory and configure your environment variables as described in the [Environment Variables](#environment-variables) section.
 
-Good question. The RAWG Games API key is exposed on the client side, which is a no-go. So I've set up a Next.js API proxy to keep that safely tucked away.
+3. Start the development server:
+    ```sh
+    yarn dev or npm run dev
+    ```
 
-## Code Example: Simple UI Structuring with Hooks
+4. Open your browser and navigate to `http://localhost:3000` to access the application.
 
-Here's a snippet showing how hooks like `useMutableEntity` can be used to simplify UI structuring.
+## Environment Variables
 
-```jsx
-<Input
-  type="text"
-  value={name}
-  onChange={(e) => {
-    user.changeName(e.target.value);
-    mutate();
-  }}
-/>
+The following environment variables need to be configured in your `.env` file:
 
-In this example, path is an entity that has its tests separated from the UI layer.
+```plaintext
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-client-id
+NEXT_PUBLIC_GOOGLE_CLIENT_SECRET=google-client-secret
+```
+### Key Features
 
-## Testing
-The project structure is highly testable. I've made sure that everything from entities to UI components can be tested in isolation.
+**Storybook**
 
-## Deploy
+Storybook is a development environment for UI components. It allows you to browse a component library, excellent choice for coordination in a big team
 
-Currently facing some problems with Vercel, will probably deploy on linode or aws with docker later on 
-What's Next?
+**OAuth Authentication**
 
-I'll be incrementally adding more features.
+The application supports OAuth authentication with Google.
+
+**State Sync with URL**
+The application synchronizes the UI state with the URL, ensuring a consistent experience and easy sharing of application states.
+
+**UI Components and Design System*
+The project includes a comprehensive set of UI components and a design system, making it easy to build and maintain a cohesive interface. Still needs a lot of improvments
+
+
+### Running Storybook
+To run Storybook and view the component library:
+
+***Start Storybook:***
+
+```
+yarn storybook or npm run storybook
+```
+Open your browser and navigate to http://localhost:6006 to access Storybook.
+
+### Running Tests
+
+Currently only unit tests are available
+
+```
+yarn test or npm run test
+```
+### Deployment
+The frontend is deployed on Vercel for more details refer to their documentation.
+
+### Contact
+Hit me at:
+
+- **Email:** [paroniyan@gmail.com](mailto:your.email@example.com)
+- **GitHub Repository:** [Playboxd Backend](https://github.com/YanParoni/backend-portfolio)
+- **LinkedIn:** [Yan](https://www.linkedin.com/in/yan-paroni/)
+
+
+
+
 
