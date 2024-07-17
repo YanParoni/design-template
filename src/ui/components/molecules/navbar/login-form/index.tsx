@@ -83,15 +83,15 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
               value={password}
             />
           </div>
-          <div className="flex w-screen flex-row justify-between py-2 pr-4 lg:w-fit lg:gap-2 lg:py-0">
-            <div className="flex flex-col justify-end">
+          <div className="flex w-screen flex-row justify-between py-2  lg:w-fit lg:gap-2 lg:py-0">
+            <div className="flex flex-col justify-end w-fit">
               <Button label="sign in" variant="primary" onClick={handleLogin} />
             </div>
             <div className="flex items-center justify-center">
               <h1 className="text-center text-description">---or---</h1>
             </div>
-            <div className='w-18'>
-            <GoogleButton  onClick={handleGoogleLogin} />
+            <div className='w-fit'>
+            <GoogleButton variant='secondary' onClick={handleGoogleLogin} />
             </div>
           </div>
         </motion.div>

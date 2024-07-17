@@ -1,6 +1,6 @@
 import Image from "next/image";
 const Logo: React.FC = () => (
-  <div className="relative h-10 w-[18rem] cursor-pointer">
+  <div className="relative h-10 w-[16.4rem] cursor-pointer">
     <Image
       alt="logo"
       src="/playboxd.svg"

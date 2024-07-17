@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   pill = false,
 }) => {
-  const baseStyles = `font-montserrat font-semibold   w-full h-full ${pill ? "rounded-full text-xs min-h-[25px] min-w-[40px]" : "rounded-[3px] text-[13px] min-h-[31px] min-w-[57px]"} px-2 shadow-[inset_0_1px_0_hsla(0,0%,100%,.05)] `;
+  const baseStyles = `font-montserrat font-semibold   w-full h-full ${pill ? "rounded-full text-xs min-h-[25px] min-w-[40px]" : "rounded-[3px] text-[12px] min-h-[31px] min-w-[57px]"} px-2 shadow-[inset_0_1px_0_hsla(0,0%,100%,.05)] `;
 
   const primaryStyles =
     "border-t-[2px] border-t-primary-border-button bg-accent-theme hover:bg-accent-theme-comp  text-comp-description  px-4 tracking-wider";
