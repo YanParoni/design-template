@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Playboxd Portfolio by Yan Paroni',
   description: 'A project inspired by Letterboxd and powered by RAWG API.',
-  metadataBase: new URL('https://www.linkedin.com/in/yan-paroni/'),
+  metadataBase: new URL('https://design-template-ivory.vercel.app/'),
   twitter:{
     card: 'summary_large_image'
   }
