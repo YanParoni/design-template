@@ -23,8 +23,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <meta property="og:type" content="website"/>
       <meta property="og:title" content="Playboxd" />
       <meta property="og:description" content="Portfolio Project inspired by Letterboxd" />
-      <meta property="og:image" content="/opengraph-image.png" />
-      <meta property="twitter:image" content="/twitter-image.png" />
+      <meta property="og:image" content="opengraph-image.png" />
+      <meta property="twitter:image" content="twitter-image.png" />
       </head>
       <body className="newbg" suppressHydrationWarning={true}>
         {children}
