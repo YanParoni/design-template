@@ -83,7 +83,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onCloseClick }) => {
               value={password}
             />
           </div>
-          <div className="flex w-screen flex-row justify-between py-2  lg:w-fit lg:gap-2 lg:py-0">
+          <div className="flex w-screen flex-row justify-around  md:justify-between py-2  lg:w-fit lg:gap-2 lg:py-0">
             <div className="flex flex-col justify-end w-fit">
               <Button label="sign in" variant="primary" onClick={handleLogin} />
             </div>

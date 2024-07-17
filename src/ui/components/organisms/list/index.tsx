@@ -40,7 +40,7 @@ function List() {
   }
 
   return (
-    <div className="mt-[.76923077rem] flex min-h-screen flex-col">
+    <div className="mt-[.76923077rem] flex min-h-screen flex-col pb-4">
       {data?.results && data.results.length > 0 ? (
         <>
           <motion.div
@@ -57,7 +57,7 @@ function List() {
                 rating={game.rating}
                 name={game.name}
                 height={
-                  isMobile ? "h-[101px]" : isLarge ? "h-[255px]" : "h-[150px]"
+                  isMobile ? "h-[121px]" : isLarge ? "h-[255px]" : "h-[150px]"
                 }
                 dir="col"
                 isLarge={isLarge}

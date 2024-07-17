@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useFilterStore, usePaginationStore } from "client/store";
@@ -12,7 +11,6 @@ import useDeviceDetect from "@ui/hooks/use-device-detect";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import { getAliasByValue } from "@ui/components/atoms/filters/links";
-
 
 const FiltersAndVisualization: React.FC = () => {
   const {
@@ -28,7 +26,10 @@ const FiltersAndVisualization: React.FC = () => {
   } = useFilterStore();
   const { currentPage, pageSize, setCurrentPage, setPageSize } =
     usePaginationStore();
-  const [searchTerm, setSearchTerm] = useState(search);
+  
+  const cleanSearch = decodeURIComponent(search).trim();
+  const [searchTerm, setSearchTerm] = useState(cleanSearch);
+  
   const router = useRouter();
   const { isMobile } = useDeviceDetect();
   const [filtersVisible, setFiltersVisible] = useState(false);
@@ -56,11 +57,11 @@ const FiltersAndVisualization: React.FC = () => {
     ];
 
     if (search) {
-      parts.push("search", search);
+      parts.push("search", cleanSearch);
     }
 
     router.replace(`/${parts.join("/")}`);
-  }, [genre, platform, store, currentPage, pageSize, search, router]);
+  }, [genre, platform, store, currentPage, pageSize, cleanSearch, router]);
 
   const renderFilters = () => (
     <div className="flex flex-col gap-2 pt-2">
@@ -68,6 +69,9 @@ const FiltersAndVisualization: React.FC = () => {
         <SearchInput
           onChange={(evt) => setSearchTerm(evt.target.value)}
           onClick={handleSearch}
+          search={cleanSearch}
+          searchTerm={searchTerm}
+          setSearch={setSearch}
         />
       </div>
       <div className="flex flex-row">
@@ -112,6 +116,9 @@ const FiltersAndVisualization: React.FC = () => {
             <SearchInput
               onChange={(evt) => setSearchTerm(evt.target.value)}
               onClick={handleSearch}
+              search={cleanSearch}
+              searchTerm={searchTerm}
+              setSearch={setSearch}
             />
             <Dropdown
               label="GENRES"

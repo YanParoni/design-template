@@ -16,8 +16,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html>
       <meta name="keywords" content="portfolio, frontend, fullstack,nextjs, react,freelance" />
       <link rel="icon" href="/favicon.ico" sizes="any" />
-      <meta property="og:title" content="Title Here" />
-      <meta property="og:description" content="Description Here" />
+      <meta property="og:title" content="Playboxd" />
+      <meta property="og:description" content="Portfolio Project inspired by Letterboxd" />
       <meta property="og:image" content="/thumbnail.png" />
       <body className="newbg" suppressHydrationWarning={true}>
         {children}

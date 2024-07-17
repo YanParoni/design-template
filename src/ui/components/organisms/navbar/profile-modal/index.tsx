@@ -110,7 +110,7 @@ const ProfileModal: React.FC = () => {
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="h-full w-full overflowY-hidden rounded-[6px] bg-secondary-bkg shadow-light md:h-[500px] md:w-[583px]"
+            className="h-full w-full overflow-y-hidden rounded-[6px] bg-secondary-bkg shadow-light md:h-[500px] md:w-[583px]"
             style={{ padding: "14px 0px 12px" }}
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}

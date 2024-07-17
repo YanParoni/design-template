@@ -84,8 +84,14 @@ const Card = React.memo(
                 fill
               />
             ) : (
-              <></>
-            )}
+              <Image
+              src={'/not-found-thumb.jpg'}
+              alt={`${name}-thumb`}
+              quality={10}
+              sizes="100%"
+              className="object-cover"
+              fill
+            />            )}
             <ShadowEffect />
           </div>
         </div>

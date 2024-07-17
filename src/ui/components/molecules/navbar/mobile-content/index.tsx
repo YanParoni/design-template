@@ -21,7 +21,7 @@ const MobileContent: React.FC = () => {
   };
 
   return (
-    <div className="flex items-end space-x-4">
+    <div className="flex items-center space-x-4">
       {false ? (
         <UserDropdown />
       ) : (
@@ -34,13 +34,13 @@ const MobileContent: React.FC = () => {
           ) : (
             <>
               <UserLockIcon
-                className="h-w-7 w-7 cursor-pointer fill-white"
+                className="h-7 w-7 cursor-pointer fill-white"
                 onClick={handleSignInClick}
               />
             </>
           )}
           <KeyIcon
-            className="h-w-5 w-5 cursor-pointer fill-white"
+            className="h-6 w-6 cursor-pointer fill-white"
             onClick={handleCreateAccountClick}
           />
         </>

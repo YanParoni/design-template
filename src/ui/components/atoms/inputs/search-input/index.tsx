@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-
+import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { useFilterStore } from "client/store";
 export interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick: (e: React.MouseEvent<SVGSVGElement>) => void;
+  search: string;
+  searchTerm: string;
+  setSearch: (value: string) => void;
 }
 
-const SearchInput: React.FC<InputProps> = ({ onChange, onClick }) => {
-  const [isFocused, setIsFocused] = useState(false);
 
+const SearchInput: React.FC<InputProps> = ({ onChange, onClick, search, searchTerm, setSearch }) => {
+  const [isFocused, setIsFocused] = useState(false);
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
 
@@ -16,6 +19,10 @@ const SearchInput: React.FC<InputProps> = ({ onChange, onClick }) => {
     if (e.key === "Enter") {
       onClick(e as any);
     }
+  };
+
+  const handleClearSearch = () => {
+    setSearch('');
   };
 
   return (
@@ -30,11 +37,19 @@ const SearchInput: React.FC<InputProps> = ({ onChange, onClick }) => {
         onBlur={handleBlur}
         onChange={onChange}
         onKeyDown={handleKeyDown}
+        value={searchTerm}
       />
-      <MagnifyingGlassIcon
-        onClick={onClick}
-        className="absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 transform cursor-pointer text-description"
-      />
+      {searchTerm === search ? (
+        <XMarkIcon
+          onClick={handleClearSearch}
+          className="absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 transform cursor-pointer text-description"
+        />
+      ) : (
+        <MagnifyingGlassIcon
+          onClick={onClick}
+          className="absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 transform cursor-pointer text-description"
+        />
+      )}
     </div>
   );
 };

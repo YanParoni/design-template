@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -17,18 +17,18 @@ const passwordSetupSchema = yup.object().shape({
     .matches(/^\S*$/, "Password must not contain spaces"),
 });
 
-
 const ResetPasswordSetup: React.FC = () => {
   const { handlePasswordModal, passwordModal } = useModalStore();
   const { showAlert } = useAlertStore();
-const { mutateAsync } = useChangePassword();
+  const { mutateAsync } = useChangePassword();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm({
     resolver: yupResolver(passwordSetupSchema),
+    mode: "onBlur",
   });
 
   const onSubmit = async (data: any) => {
@@ -40,14 +40,22 @@ const { mutateAsync } = useChangePassword();
       showAlert("Failed to set password", "error");
     }
   };
+
   const closeModal = () => {
     handlePasswordModal(false);
   };
 
+  const isErrorsEmpty = useCallback(
+    (errors: Record<string, any>) => {
+      return Object.keys(errors).length === 0;
+    },
+    [errors]
+  );
+
   return (
     <Modal title="Set Password" isVisible={passwordModal} onClose={closeModal}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-4">
+        <div className="relative mb-4">
           <Input
             variant="primary"
             label="New Password"
@@ -58,7 +66,7 @@ const { mutateAsync } = useChangePassword();
             <ErrorMessage message={errors.newPassword.message as string} />
           )}
         </div>
-        <Button type="submit" label="Save" variant="primary" />
+        <Button type="submit" label="Save" variant="primary" disabled={!isDirty || !isErrorsEmpty(errors)} />
       </form>
     </Modal>
   );

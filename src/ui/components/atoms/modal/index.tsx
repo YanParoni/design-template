@@ -18,7 +18,7 @@ const Modal: React.FC<ModalProps> = ({
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed inset-0 z-50 flex w-full items-center justify-center bg-modal-backdrop bg-opacity-40 "
+          className="bg-modal-backdrop fixed inset-0 z-50 flex w-full items-center justify-center bg-opacity-40"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -31,6 +31,9 @@ const Modal: React.FC<ModalProps> = ({
             exit={{ scale: 0.8 }}
           >
             <div className="mb-4 flex items-center justify-between">
+              <div className="flex justify-center pb-2">
+                <img alt='playboxd logo' src="/alt-playboxd.svg" />
+              </div>
               <h2 className="font-montserrat text-xl text-white">{title}</h2>
               <XMarkIcon
                 className="h-5 w-5 scale-110 cursor-pointer fill-description stroke-description hover:fill-tertiary-bkg hover:stroke-white"
